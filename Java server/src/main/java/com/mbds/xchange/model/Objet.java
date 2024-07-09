@@ -1,6 +1,10 @@
 package com.mbds.xchange.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "Objet")
@@ -9,12 +13,17 @@ public class Objet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotBlank(message = "Le nom ne peut pas être vide")
+    @Size(max = 100, message = "Le nom ne peut pas dépasser {max} caractères")
     @Column(length = 100)
     private String nom;
 
+    @Size(max = 255, message = "La description ne peut pas dépasser {max} caractères")
     @Column(length = 255)
     private String description;
 
+    @NotNull(message = "La valeur ne peut pas être nulle")
+    @Min(value = 1, message = "La valeur doit être supérieure ou égale à 1")
     private int valeur;
 
     @ManyToOne
