@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface RatingRepository extends JpaRepository<Rating, Long> {
     List<Rating> findByUtilisateurEvalue(Utilisateur utilisateurEvalue);
+    Rating findByUtilisateurEvalueAndUtilisateurNotant(Utilisateur utilisateurEvalue, Utilisateur utilisateurNotant);
 }

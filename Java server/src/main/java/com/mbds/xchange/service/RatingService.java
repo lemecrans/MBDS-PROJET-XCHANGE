@@ -19,15 +19,24 @@ public class RatingService {
 
     public void noterUtilisateur(Long utilisateurEvalueId, Long utilisateurNotantId, int note) {
         Utilisateur utilisateurEvalue = utilisateurRepository.findById(utilisateurEvalueId)
-                .orElseThrow(() -> new ResourceNotFoundException("Utilisateur non trouvé"));
-        Utilisateur utilisateurNotant = utilisateurRepository.findById(utilisateurNotantId)
-                .orElseThrow(() -> new ResourceNotFoundException("Utilisateur non trouvé"));
+                .orElseThrow(() -> new ResourceNotFoundException("Utilisateur évalué non trouvé"));
 
-        Rating evaluation = new Rating();
-        evaluation.setUtilisateurEvalue(utilisateurEvalue);
-        evaluation.setUtilisateurNotant(utilisateurNotant);
-        evaluation.setNote(note);
-        ratingRepository.save(evaluation);
+        Utilisateur utilisateurNotant = utilisateurRepository.findById(utilisateurNotantId)
+                .orElseThrow(() -> new ResourceNotFoundException("Utilisateur notant non trouvé"));
+
+        // Vérification si l'utilisateur notant a déjà noté cet utilisateur
+        Rating existingEvaluation = ratingRepository.findByUtilisateurEvalueAndUtilisateurNotant(utilisateurEvalue, utilisateurNotant);
+
+        if (existingEvaluation != null) {
+            existingEvaluation.setNote(note);
+            ratingRepository.save(existingEvaluation);
+        } else {
+            Rating newEvaluation = new Rating();
+            newEvaluation.setUtilisateurEvalue(utilisateurEvalue);
+            newEvaluation.setUtilisateurNotant(utilisateurNotant);
+            newEvaluation.setNote(note);
+            ratingRepository.save(newEvaluation);
+        }
 
         mettreAJourNoteMoyenne(utilisateurEvalue);
     }
