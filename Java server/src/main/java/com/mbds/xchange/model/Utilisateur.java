@@ -21,4 +21,10 @@ public class Utilisateur {
     private String username;
 
     private String role;
+
+    @Column(name = "nombre_de_notes", nullable = false, columnDefinition = "integer default 0")
+    private int nombreDeNotes;
+    @Column(name = "noteMoyenne", nullable = false, columnDefinition = "integer default 0")
+    private double noteMoyenne = 0.0;
+
 }
