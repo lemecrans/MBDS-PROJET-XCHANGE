@@ -3,6 +3,7 @@ package com.mbds.xchange.controller;
 import com.mbds.xchange.configuration.JwtUtils;
 import com.mbds.xchange.model.Utilisateur;
 import com.mbds.xchange.repository.UtilisateurRepository;
+import com.mbds.xchange.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,7 @@ public class AuthentificationController {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
     private final AuthenticationManager authenticationManager;
+    private final EmailService emailService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Utilisateur utilisateur) {
@@ -34,6 +36,10 @@ public class AuthentificationController {
             return ResponseEntity.badRequest().body("Ce compte est déjà utilisé");
         }
         utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
+
+        // Envoyer l'email de bienvenue
+        emailService.sendSimpleMessage(utilisateur.getEmail(),utilisateur.getUsername());
+
         return ResponseEntity.ok().body(utilisateurRepository.save(utilisateur));
     }
     @PostMapping("/login")
