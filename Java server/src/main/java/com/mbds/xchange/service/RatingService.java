@@ -40,6 +40,21 @@ public class RatingService {
 
         mettreAJourNoteMoyenne(utilisateurEvalue);
     }
+    public void DeleteRate(Utilisateur ui) throws Exception{
+        if(ui!=null){
+            List<Rating> rate=ratingRepository.findByUtilisateurEvalue(ui);
+            for(int i = 0 ;i <rate.size();i++){
+                ratingRepository.deleteById(rate.get(i).getId());
+            }
+             rate=ratingRepository.findByUtilisateurNotant(ui);
+            for(int i = 0 ;i <rate.size();i++){
+                ratingRepository.deleteById(rate.get(i).getId());
+            }
+        }else{
+            throw new Exception("Merci de fournir l'Utilisateur");
+        }
+        
+    }
 
     private void mettreAJourNoteMoyenne(Utilisateur utilisateurEvalue) {
         List<Rating> ratignsUser = ratingRepository.findByUtilisateurEvalue(utilisateurEvalue);
