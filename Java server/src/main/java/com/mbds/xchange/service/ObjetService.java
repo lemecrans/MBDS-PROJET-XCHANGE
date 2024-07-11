@@ -55,4 +55,8 @@ public class ObjetService {
         // Sauvegarder et retourner l'objet mis à jour
         return objetRepository.save(objet);
     }
+    public List<Objet> getObjetsByProprietaire(long proprietaireId) {
+        Utilisateur proprietaire = utilisateurRepository.findById(proprietaireId);
+        return objetRepository.findByProprietaire(proprietaire);
+    }
 }

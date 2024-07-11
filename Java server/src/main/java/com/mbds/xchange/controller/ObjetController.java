@@ -38,4 +38,18 @@ public class ObjetController {
         Objet createdObjet = objetService.createObjet(objet);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdObjet);
     }
+
+    @GetMapping("/myThing")
+    public ResponseEntity<List<Objet>> getMyObjets(@RequestParam Long idUser) {
+        try {
+            List<Objet> objets = objetService.getObjetsByProprietaire(idUser);
+            if (objets.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return new ResponseEntity<>(objets, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
