@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/objet")
@@ -51,5 +52,16 @@ public class ObjetController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PutMapping
+    public ResponseEntity<Objet> updateObjet(@RequestBody Objet objetDetails) {
+        Objet updatedObjet = objetService.updateObjet(objetDetails);
+        return ResponseEntity.ok(updatedObjet);
+    }
 
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Objet> patchObjet(@PathVariable int id, @RequestBody Map<String, Object> updates) {
+        Objet patchedObjet = objetService.patchObjet(id, updates);
+        return ResponseEntity.ok(patchedObjet);
+    }
 }

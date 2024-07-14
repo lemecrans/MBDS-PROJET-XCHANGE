@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class ObjetService {
@@ -58,5 +60,63 @@ public class ObjetService {
     public List<Objet> getObjetsByProprietaire(long proprietaireId) {
         Utilisateur proprietaire = utilisateurRepository.findById(proprietaireId);
         return objetRepository.findByProprietaire(proprietaire);
+    }
+    public Objet updateObjet(Objet objetDetails) {
+        int id = objetDetails.getId();
+        Optional<Objet> objetOptional = objetRepository.findById(id);
+        if (objetOptional.isPresent()) {
+            Objet objet = objetOptional.get();
+            objet.setNom(objetDetails.getNom());
+            objet.setDescription(objetDetails.getDescription());
+            objet.setValeur(objetDetails.getValeur());
+            objet.setProprietaire(objetDetails.getProprietaire());
+            objet.setDisponible(objetDetails.isDisponible());
+            return objetRepository.save(objet);
+        } else {
+            throw new ResourceNotFoundException("Objet not found with id " + id);
+        }
+    }
+    public Objet patchObjet(int id, Map<String, Object> updates) {
+        Optional<Objet> objetOptional = objetRepository.findById(id);
+        if (objetOptional.isPresent()) {
+            Objet objet = objetOptional.get();
+            updates.forEach((key, value) -> {
+                switch (key) {
+                    case "nom":
+                        if (value instanceof String) {
+                            objet.setNom((String) value);
+                        }
+                        break;
+                    case "description":
+                        if (value instanceof String) {
+                            objet.setDescription((String) value);
+                        }
+                        break;
+                    case "valeur":
+                        if (value instanceof Integer) {
+                            objet.setValeur((Integer) value);
+                        } else if (value instanceof Number) {
+                            objet.setValeur(((Number) value).intValue());
+                        }
+                        break;
+                    case "proprietaire":
+                        if (value instanceof Utilisateur) {
+                            objet.setProprietaire((Utilisateur) value);
+                        }
+                        break;
+                    case "disponible":
+                        if (value instanceof Boolean) {
+                            objet.setDisponible((Boolean) value);
+                        }
+                        break;
+                    default:
+                        // Vous pouvez gérer des cas par défaut ici si nécessaire
+                        break;
+                }
+            });
+            return objetRepository.save(objet);
+        } else {
+            throw new ResourceNotFoundException("Objet not found with id " + id);
+        }
     }
 }
