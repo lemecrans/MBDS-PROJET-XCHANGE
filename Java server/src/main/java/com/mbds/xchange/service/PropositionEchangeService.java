@@ -1,20 +1,15 @@
 package com.mbds.xchange.service;
 
 import com.mbds.xchange.configuration.ResourceNotFoundException;
-import com.mbds.xchange.model.Objet;
-import com.mbds.xchange.model.ObjetEchange;
-import com.mbds.xchange.model.PropositionEchange;
-import com.mbds.xchange.model.Utilisateur;
-import com.mbds.xchange.repository.ObjetEchangeRepository;
-import com.mbds.xchange.repository.ObjetRepository;
-import com.mbds.xchange.repository.PropositionEchangeRepository;
-import com.mbds.xchange.repository.UtilisateurRepository;
+import com.mbds.xchange.model.*;
+import com.mbds.xchange.repository.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,6 +25,9 @@ public class PropositionEchangeService {
 
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+
+    @Autowired
+    private NotificationRepository notificationRepository;
 
     @Transactional
     public PropositionEchange createProposition(@Valid PropositionEchange propositionEchange, List<Integer> listeObjetIds, int destinataireId, int proposantId) {
@@ -55,6 +53,9 @@ public class PropositionEchangeService {
 
             objetEchangeRepository.save(objetEchange);
         }
+
+        Notification notif = new Notification(destinataire,new Date(),"Nouvelle proposition d'échange de la part de "+destinataire.getUsername(),false);
+        notificationRepository.save(notif);
 
         return toCreate;
     }
