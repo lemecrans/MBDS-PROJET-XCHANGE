@@ -1,0 +1,7 @@
+{
+  "name": "xchange-hybride",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
