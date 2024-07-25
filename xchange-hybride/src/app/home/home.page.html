@@ -1,20 +1,35 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" fill="clear">
+        <ion-icon name="list-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <ion-item lines="none" class="ion-margin-vertical">
+    <ion-label>
+      Bonjour
+      <p>
+        <ion-text color="dark">
+          Naina Matthieu
+        </ion-text>
+      </p>
+    </ion-label>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-thumbnail slot="end">
+      <img [src]="'assets/img/avatar.jpg'">
+    </ion-thumbnail>
+  </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-list-header>
+    Découvrir des objets à échanger
+  </ion-list-header>
+
+  <ion-row class="ion-margin">
+
+
+  </ion-row>
 </ion-content>
