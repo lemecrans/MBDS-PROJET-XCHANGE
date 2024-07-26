@@ -123,10 +123,51 @@ ion-searchbar{
 
   
 }
-.objet-list{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1rem;
+ion-row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+ion-col {
+  display: flex;
+  justify-content: center;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 576px) {
+  ion-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  ion-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 992px) {
+  ion-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 1200px) {
+  ion-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+.objet-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 
