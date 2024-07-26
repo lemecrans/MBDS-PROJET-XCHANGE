@@ -7,16 +7,21 @@ import {
   IonButtons,
   IonButton,
   IonIcon,
-  IonRow,
-  IonListHeader,
-  IonCol,
-  IonSearchbar,
-  IonCard,
   IonItem,
   IonLabel,
   IonText,
   IonThumbnail,
+  IonList,
+  IonListHeader,
+  IonRow,
+  IonCol,
+  IonCard,
+  IonSearchbar,
 } from '@ionic/angular/standalone';
+import { ObjetItemComponent } from '../page/objet-item/objet-item.component';
+import { Objet } from '../models/objet.model';
+import { ObjetService } from '../services/objet.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -24,24 +29,34 @@ import {
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [
-    IonItem,
-    IonLabel,
-    IonCard,
+    CommonModule,
     IonSearchbar,
+    IonCard,
     IonCol,
-    IonListHeader,
     IonRow,
+    IonListHeader,
+    IonList,
+    IonText,
+    IonLabel,
+    IonItem,
+    IonIcon,
+    IonButton,
+    IonButtons,
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
-    IonIcon,
-    IonButton,
-    IonButtons,
     IonThumbnail,
-    IonText,
+    IonListHeader,
+    IonSearchbar,
+    ObjetItemComponent,
   ],
 })
 export class HomePage {
-  constructor() {}
+  objets: Objet[] = [];
+
+  constructor(private objetservice: ObjetService) {}
+  ngOnInit(): void {
+    this.objets = this.objetservice.getAllObjet();
+  }
 }

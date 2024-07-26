@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 
-import {listOutline, scanOutline} from 'ionicons/icons';
+import {ellipsisHorizontalCircle, listOutline, scanOutline} from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +19,7 @@ export class AppComponent {
     addIcons({
       listOutline,
       scanOutline,
+      ellipsisHorizontalCircle,
     });
   }
 }

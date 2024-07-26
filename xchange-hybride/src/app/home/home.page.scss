@@ -67,16 +67,16 @@ ion-card, ion-thumbnail {
   align-items: center;
   justify-content: center;
 }
-/* Barre de recherche et boutton QR CODE*/
+
 .custom-card {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  height: 55px;
+  justify-content: flex-start; 
+  height: 55px; 
   padding: 0;
   box-shadow: none;
   border-radius: 1.2rem;
-  background-color: rgba(152, 152, 152, 0.2);
+  background-color: rgba(152, 152, 152, 0.2); 
 
   ion-thumbnail {
     width: 24px; 
@@ -92,19 +92,41 @@ ion-card, ion-thumbnail {
   }
 
   ion-label.custom-label {
-    font-size: 0.75rem; 
-    font-weight: 400; 
-    color: #6c757d;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #6c757d; 
     margin: 0;
-    margin-top: -11%;
+    margin-top: -11%; 
     display: flex;
     align-items: center;
-    white-space: nowrap;
+    white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: calc(100% - 32px);
+    max-width: calc(100% - 32px); 
   }
 }
 .color-of-button{
   color: #f97316;
 }
+
+h1{
+  font-size: 3rem;
+  font-weight: 600;
+  color : #515151;
+  margin:0;
+}
+ion-searchbar{
+  --box-shadow: none;
+  --background: #eaeaea;
+  --border-radius: 1.2rem;
+  --placeholder-opacity:0.2;
+
+  
+}
+.objet-list{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+
