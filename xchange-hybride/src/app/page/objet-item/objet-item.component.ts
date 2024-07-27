@@ -13,6 +13,8 @@ import { IonImg, IonButtons, IonButton, IonIcon } from "@ionic/angular/standalon
 export class ObjetItemComponent  {
   @Input()
   objet!: Objet;
+  @Output() clicked = new EventEmitter();
+  
   
   constructor() { }
 

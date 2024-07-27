@@ -22,6 +22,7 @@ import { ObjetItemComponent } from '../page/objet-item/objet-item.component';
 import { Objet } from '../models/objet.model';
 import { ObjetService } from '../services/objet.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -55,8 +56,11 @@ import { CommonModule } from '@angular/common';
 export class HomePage {
   objets: Objet[] = [];
 
-  constructor(private objetservice: ObjetService) {}
+  constructor(private objetservice: ObjetService,private router :Router) {}
   ngOnInit(): void {
     this.objets = this.objetservice.getAllObjet();
+  }
+  goToDetailPage(id: number) {
+    this.router.navigate(['detail',id]);
   }
 }
