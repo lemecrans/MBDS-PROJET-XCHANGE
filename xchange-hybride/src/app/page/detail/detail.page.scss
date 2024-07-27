@@ -71,8 +71,10 @@ ion-content {
       .rates {
         display: flex;
         align-items: center;
+        justify-content: center;
         margin-bottom: 3rem;
       }
+      
   
       .about {
         margin-bottom: 2.5rem;
@@ -90,3 +92,8 @@ ion-content {
     }
   }
   
+ion-button {
+    ion-icon {
+        font-size: 3rem;
+    }
+}

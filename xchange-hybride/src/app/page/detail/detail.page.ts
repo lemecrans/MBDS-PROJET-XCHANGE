@@ -7,7 +7,7 @@ import {
   IonTitle,
   IonToolbar,
   IonButtons,
-  IonButton, IonIcon, IonImg } from '@ionic/angular/standalone';
+  IonButton, IonIcon, IonImg, IonLabel, IonModal } from '@ionic/angular/standalone';
 import { Objet } from 'src/app/models/objet.model';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ObjetService } from 'src/app/services/objet.service';
@@ -18,7 +18,7 @@ import { BadgeComponent } from 'src/app/components/badge/badge.component';
   templateUrl: './detail.page.html',
   styleUrls: ['./detail.page.scss'],
   standalone: true,
-  imports: [IonImg, IonIcon, 
+  imports: [IonModal, IonLabel, IonImg, IonIcon, 
     IonButton,
     IonButtons,
     IonContent,
@@ -28,13 +28,14 @@ import { BadgeComponent } from 'src/app/components/badge/badge.component';
     CommonModule,
     FormsModule,
     RouterModule,
-    BadgeComponent
+    BadgeComponent,
+    IonLabel
   ],
 })
 export class DetailPage implements OnInit {
   id!: number;
   objet!: Objet;
-
+  showQrCode = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private objetService: ObjetService
@@ -48,5 +49,11 @@ export class DetailPage implements OnInit {
   ngOnInit() {
     const objet = this.objetService.getObjet(this.id);
     if (objet) this.objet = objet;
+  }
+  getQrcodeData(){
+    this.showQrCode = true;
+    setTimeout(() => {
+      // this.getBarcode(item.barcode); 
+    }, 500);
   }
 }

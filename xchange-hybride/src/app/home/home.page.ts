@@ -61,6 +61,6 @@ export class HomePage {
     this.objets = this.objetservice.getAllObjet();
   }
   goToDetailPage(id: number) {
-    this.router.navigate(['detail',id]);
+    this.router.navigate(['home/detail',id]);
   }
 }

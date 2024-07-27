@@ -22,14 +22,52 @@
 
     <div class="rates">
       @if( objet.disponible){
-        <app-badge icon="checkmark-circle-outline" texte="dispo" couleur="disponible"></app-badge>
+      <app-badge icon="checkmark-circle-outline" texte="dispo" couleur="disponible"></app-badge>
       }@else {
-        <app-badge icon="close-circle-outline" texte="pas dispo" couleur="non-disponible"></app-badge>
+      <app-badge icon="close-circle-outline" texte="pas dispo" couleur="non-disponible"></app-badge>
       }
+
+      <ion-button slot="end" fill="clear" color="dark" (click)="getQrcodeData()">
+        <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
+      </ion-button>
+
     </div>
     <div class="about">
       <h1>Description</h1>
       <p>{{objet.description}}</p>
     </div>
   </div>
+  <ion-modal
+    #qrcodeModal
+    [isOpen]="showQrCode"
+    (didDismiss)="showQrCode = false"
+    [breakpoints]="[0.3, 0.5, 0.9]"
+    [initialBreakpoint]="0.5"
+  >
+    <ng-template>
+
+      <ion-header class="ion-no-border">
+        <ion-toolbar>
+          <div class="card-title">
+            <h1 class="ion-no-margin">{{objet.nom}}</h1>
+          </div>
+          <ion-buttons slot="end">
+            <ion-button (click)="qrcodeModal.dismiss()" color="dark">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <!-- <ion-content>
+        <div class="ion-margin">
+          <ion-label>
+            Scan QR code
+          </ion-label>
+          <img id="barcode" class="ion-margin-top">
+        </div>
+      </ion-content> -->
+
+    </ng-template>
+  </ion-modal>
 </ion-content>
