@@ -92,8 +92,32 @@ ion-content {
     }
   }
   
-ion-button {
-    ion-icon {
-        font-size: 3rem;
+  ion-modal {
+    .modal-content {
+      --background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+  
+      .modal-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+  
+      ion-label {
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
     }
-}
+  }
+  
+  ion-button {
+    ion-icon {
+      font-size: 3rem;
+    }
+  }
+  

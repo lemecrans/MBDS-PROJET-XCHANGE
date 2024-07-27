@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Objet } from '../models/objet.model';
+import { CapacitorBarcodeScanner } from '@capacitor/barcode-scanner';
 
 @Injectable({
   providedIn: 'root'
@@ -57,4 +58,17 @@ export class ObjetService {
   getObjet(id:number):Objet | undefined{
     return this.getAllObjet().find((objet)=> objet.id === id);
   }
+  async startScan(val?: number) {
+    try {
+      const result = await CapacitorBarcodeScanner.scanBarcode({
+        hint: val || 17,
+        cameraDirection: 1,
+      });
+      console.log(result);
+      return result.ScanResult;
+    } catch (e) {
+      throw e;
+    }
+  }
+
 }

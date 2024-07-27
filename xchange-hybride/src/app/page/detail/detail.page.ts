@@ -12,6 +12,7 @@ import { Objet } from 'src/app/models/objet.model';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ObjetService } from 'src/app/services/objet.service';
 import { BadgeComponent } from 'src/app/components/badge/badge.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-detail',
@@ -29,7 +30,8 @@ import { BadgeComponent } from 'src/app/components/badge/badge.component';
     FormsModule,
     RouterModule,
     BadgeComponent,
-    IonLabel
+    IonLabel,
+    QRCodeModule
   ],
 })
 export class DetailPage implements OnInit {
