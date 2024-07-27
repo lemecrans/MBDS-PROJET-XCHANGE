@@ -16,8 +16,7 @@ import {
   IonRow,
   IonCol,
   IonCard,
-  IonSearchbar,
-} from '@ionic/angular/standalone';
+  IonSearchbar, IonImg } from '@ionic/angular/standalone';
 import { ObjetItemComponent } from '../page/objet-item/objet-item.component';
 import { Objet } from '../models/objet.model';
 import { ObjetService } from '../services/objet.service';
@@ -29,7 +28,7 @@ import { Router } from '@angular/router';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonImg, 
     CommonModule,
     IonSearchbar,
     IonCard,

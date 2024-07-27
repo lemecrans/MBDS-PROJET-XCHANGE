@@ -121,3 +121,99 @@ ion-content {
     }
   }
   
+  /* Media Queries for Responsiveness */
+  @media (min-width: 768px) {
+    ion-content {
+      .card {
+        padding: 3rem;
+  
+        .image {
+          top: -7.5rem;
+          ion-img {
+            width: 250px;
+            height: 250px;
+          }
+        }
+  
+        .card-title h1 {
+          font-size: 2.5rem;
+        }
+  
+        .about p {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  
+    ion-modal {
+      .modal-content {
+        .modal-container {
+          qrcode {
+            width: 300px;
+          }
+        }
+      }
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    ion-content {
+      .card {
+        padding: 4rem;
+  
+        .image {
+          top: -8.5rem;
+          ion-img {
+            width: 300px;
+            height: 300px;
+          }
+        }
+  
+        .card-title h1 {
+          font-size: 3rem;
+        }
+  
+        .about p {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  
+    ion-modal {
+      .modal-content {
+        .modal-container {
+          qrcode {
+            width: 350px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (min-width: 576px) {
+    .card .image {
+      max-width: 250px;
+    }
+  
+  }
+  
+  @media (min-width: 768px) {
+    .card .image {
+      max-width: 300px;
+    }
+  
+  }
+  
+  @media (min-width: 992px) {
+    .card .image {
+      max-width: 350px;
+    }
+  
+  }
+  
+  @media (min-width: 1200px) {
+    .card .image {
+      max-width: 400px;
+    }
+  
+  }

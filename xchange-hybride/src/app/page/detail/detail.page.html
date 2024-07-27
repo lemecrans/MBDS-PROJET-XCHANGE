@@ -8,7 +8,6 @@
   </div>
 
   <!-- Objet detail card  -->
-
   <div class="card">
     <div class="image">
       <ion-img [src]="'assets/img/' + objet.img"></ion-img>
@@ -21,16 +20,16 @@
     </div>
 
     <div class="rates">
-      @if( objet.disponible){
-      <app-badge icon="checkmark-circle-outline" texte="dispo" couleur="disponible"></app-badge>
-      }@else {
-      <app-badge icon="close-circle-outline" texte="pas dispo" couleur="non-disponible"></app-badge>
-      }
+      <ng-container *ngIf="objet.disponible; else notAvailable">
+        <app-badge icon="checkmark-circle-outline" texte="dispo" couleur="disponible"></app-badge>
+      </ng-container>
+      <ng-template #notAvailable>
+        <app-badge icon="close-circle-outline" texte="pas dispo" couleur="non-disponible"></app-badge>
+      </ng-template>
 
       <ion-button slot="end" fill="clear" color="dark" (click)="getQrcodeData()">
         <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
       </ion-button>
-
     </div>
     <div class="about">
       <h1>Description</h1>
@@ -41,8 +40,8 @@
     #qrcodeModal
     [isOpen]="showQrCode"
     (didDismiss)="showQrCode = false"
-    [breakpoints]="[0.3, 0.5, 0.9]"
     [initialBreakpoint]="0.5"
+    class="full-width-modal"
   >
     <ng-template>
       <ion-header class="ion-no-border">
