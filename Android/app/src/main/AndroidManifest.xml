@@ -12,13 +12,17 @@
         android:theme="@style/Theme.TPTAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".ObjectsListActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.Intro_activity"
             android:exported="false" />
-
-        <activity android:name=".Activities.Menu_activity"
+        <activity
+            android:name=".Activities.Menu_activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
