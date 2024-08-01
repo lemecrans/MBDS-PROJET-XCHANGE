@@ -10,9 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
-import com.bumptech.glide.Glide;
 
+import com.bumptech.glide.Glide;
 import com.mbds.tpt_android.Domains.ObjectsDomain;
 import com.mbds.tpt_android.R;
 import com.mbds.tpt_android.Util.HistoryItem;
@@ -21,29 +20,30 @@ import com.mbds.tpt_android.Util.HistoryManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObjectsAdapter extends RecyclerView.Adapter<ObjectsAdapter.ViewHolder> {
-    ArrayList<ObjectsDomain> items;
+public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
+    List<HistoryItem> items;
     Context context;
 
-    public ObjectsAdapter(ArrayList<ObjectsDomain> items){
+    public HistoryAdapter(List<HistoryItem> items){
         this.items = items;
     }
 
     @NonNull
     @Override
-    public ObjectsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflator = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_list,parent,false);
+    public HistoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View inflator = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_history,parent,false);
         context = parent.getContext();
         return new ViewHolder(inflator);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ObjectsAdapter.ViewHolder holder, int position) {
-        holder.title.setText(items.get(position).getNom());
+    public void onBindViewHolder(@NonNull HistoryAdapter.ViewHolder holder, int position) {
+        holder.title.setText(items.get(position).getObjectName());
         holder.proprietaire.setText(items.get(position).getProprietaire());
+        holder.timestamp.setText(items.get(position).getTimestamp());
 
         int drawableResourceId = holder.itemView.getResources()
-                .getIdentifier(items.get(position).getNom(),"drawable",holder.itemView.getContext().getPackageName());
+                .getIdentifier(items.get(position).getObjectName(),"drawable",holder.itemView.getContext().getPackageName());
         Glide.with(context)
                 .load(drawableResourceId)
                 .into(holder.pic);
@@ -74,22 +74,10 @@ public class ObjectsAdapter extends RecyclerView.Adapter<ObjectsAdapter.ViewHold
         // Configurez votre vue ici
         holder.itemView.setOnClickListener(v -> {
             // Obtenez les détails de l'objet
-            String objectId = items.get(position).getId();
-            String objectName = items.get(position).getNom();
+            String objectId = items.get(position).getObjectId();
+            String objectName = items.get(position).getObjectName();
             String proprietaire = items.get(position).getProprietaire();
-            // Enregistrez dans l'historique
-            HistoryManager historyManager = new HistoryManager(context);
-            historyManager.addToHistory(objectId, objectName,proprietaire);
 
-            List<HistoryItem> historyList = historyManager.getAllHistory();
-
-            for (HistoryItem item : historyList) {
-                System.out.println("Timestamp: " + item.getTimestamp());
-                System.out.println("Object ID: " + item.getObjectId());
-                System.out.println("Object Name: " + item.getObjectName());
-                System.out.println("Proprietaire: "+ item.getProprietaire());
-            }
-            // Autres actions pour le clic sur l'objet
         });
     }
 
@@ -99,7 +87,7 @@ public class ObjectsAdapter extends RecyclerView.Adapter<ObjectsAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView title, proprietaire;
+        TextView title, proprietaire,timestamp;
         ImageView pic, background_img;
         ConstraintLayout layout;
 
@@ -108,6 +96,7 @@ public class ObjectsAdapter extends RecyclerView.Adapter<ObjectsAdapter.ViewHold
             title = itemView.findViewById(R.id.titleTxt);
             proprietaire = itemView.findViewById(R.id.proprietaire);
             pic = itemView.findViewById(R.id.pic);
+            timestamp = itemView.findViewById(R.id.timestamp);
             background_img = itemView.findViewById(R.id.background_img);
             layout = itemView.findViewById(R.id.main_layout);
         }

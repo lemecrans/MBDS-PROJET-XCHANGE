@@ -37,6 +37,8 @@ public class ObjectsListActivity extends AppCompatActivity {
         initRecyclerView();
     }
 
+
+
     private void initRecyclerView(){
         ArrayList<ObjectsDomain> items = new ArrayList<ObjectsDomain>();
         String url = "http://192.168.88.7:8080/api/objet";
@@ -78,7 +80,7 @@ public class ObjectsListActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwb2x5cGhpYUB5b3BtYWlsLmNvbSIsImlhdCI6MTcyMjM2NzY3NywiZXhwIjoxNzIyMzY4NTc3fQ.ax8exDXrP9ToCXJNDxY6Y2XbsZMAXZGkLAuzUYvClt0");
+                headers.put("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwb2x5cGhpYUB5b3BtYWlsLmNvbSIsImlhdCI6MTcyMjUzNzc4OSwiZXhwIjoxNzIyNTM4Njg5fQ.J5lOSmIKKUL0ykji32GD7fqaqgJa46V-x5DoQco6p0c");
                 return headers;
             }
         };
@@ -90,4 +92,6 @@ public class ObjectsListActivity extends AppCompatActivity {
         recyclerViewObject.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
     }
+
+
 }
