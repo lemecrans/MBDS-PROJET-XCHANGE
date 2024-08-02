@@ -29,10 +29,10 @@
 
   <ion-row class="ion-margin">
     <ion-col size="8">
-      <ion-searchbar placeholder="Rechercher"></ion-searchbar>
+      <ion-searchbar placeholder="Rechercher" (ionInput)="filterObjects($event)"></ion-searchbar>
     </ion-col>
     <ion-col size="4" class="ion-text-center">
-      <ion-card color="light" class="custom-card">
+      <ion-card color="light" class="custom-card" (click)="filterObjectsByQR()">
         <ion-thumbnail>
           <ion-icon name="scan-outline" class="color-of-button"></ion-icon>
         </ion-thumbnail>

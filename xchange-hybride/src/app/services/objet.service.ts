@@ -55,8 +55,12 @@ export class ObjetService {
       },
     ];
   }
-  getObjet(id:number):Objet | undefined{
-    return this.getAllObjet().find((objet)=> objet.id === id);
+  getObjet(id: number): Objet {
+    const objet = this.getAllObjet().find((objet) => objet.id === id);
+    if (!objet) {
+      throw new Error(`Objet avec l' ID ${id} est introuvable`);
+    }
+    return objet;
   }
   async startScan(val?: number) {
     try {
@@ -70,5 +74,7 @@ export class ObjetService {
       throw e;
     }
   }
+  
+
 
 }
