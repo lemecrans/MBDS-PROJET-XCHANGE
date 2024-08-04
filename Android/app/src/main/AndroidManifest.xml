@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
@@ -15,13 +18,20 @@
         android:theme="@style/Theme.TPTAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.CaptureActivityPortrait"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme"
+            android:windowSoftInputMode="stateAlwaysHidden">
+        </activity>
+        <activity
             android:name=".Activities.Details_activity"
             android:exported="false" />
         <activity
             android:name=".Activities.HistoryListActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.ObjectsListActivity"
+            android:name=".Activities.Menu_activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +43,7 @@
             android:name=".Activities.Intro_activity"
             android:exported="false" />
         <activity
-            android:name=".Activities.Menu_activity"
+            android:name=".Activities.ObjectsListActivity"
             android:exported="true">
 
             <!--
