@@ -61,6 +61,12 @@ public class ObjetService {
         Utilisateur proprietaire = utilisateurRepository.findById(proprietaireId);
         return objetRepository.findByProprietaire(proprietaire);
     }
+
+    public Objet getObjectById(int idObjet) {
+        return objetRepository.findById(idObjet)
+                .orElseThrow(() -> new ResourceNotFoundException("Objet not found with id " + idObjet));
+    }
+
     public Objet updateObjet(Objet objetDetails) {
         int id = objetDetails.getId();
         Optional<Objet> objetOptional = objetRepository.findById(id);
