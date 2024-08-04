@@ -1,5 +1,6 @@
 package com.mbds.xchange.controller;
 
+import com.mbds.xchange.configuration.ResourceNotFoundException;
 import com.mbds.xchange.model.Objet;
 import com.mbds.xchange.service.ObjetService;
 import jakarta.validation.Valid;
@@ -52,6 +53,19 @@ public class ObjetController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/{idObjet}")
+    public ResponseEntity<Objet> getObjectById(@PathVariable int idObjet) {
+        try {
+            Objet objet = objetService.getObjectById(idObjet);
+            return new ResponseEntity<>(objet, HttpStatus.OK);
+        } catch (ResourceNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }  catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PutMapping
     public ResponseEntity<Objet> updateObjet(@RequestBody Objet objetDetails) {
         Objet updatedObjet = objetService.updateObjet(objetDetails);
