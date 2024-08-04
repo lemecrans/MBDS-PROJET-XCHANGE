@@ -1,6 +1,7 @@
 package com.mbds.tpt_android.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import com.bumptech.glide.Glide;
 
+import com.mbds.tpt_android.Activities.Details_activity;
 import com.mbds.tpt_android.Domains.ObjectsDomain;
 import com.mbds.tpt_android.R;
 import com.mbds.tpt_android.Util.HistoryItem;
@@ -71,15 +73,13 @@ public class ObjectsAdapter extends RecyclerView.Adapter<ObjectsAdapter.ViewHold
                 break;
         }
 
-        // Configurez votre vue ici
         holder.itemView.setOnClickListener(v -> {
-            // Obtenez les détails de l'objet
             String objectId = items.get(position).getId();
             String objectName = items.get(position).getNom();
             String proprietaire = items.get(position).getProprietaire();
-            // Enregistrez dans l'historique
+
             HistoryManager historyManager = new HistoryManager(context);
-            historyManager.addToHistory(objectId, objectName,proprietaire);
+            //historyManager.addToHistory(objectId, objectName,proprietaire);
 
             List<HistoryItem> historyList = historyManager.getAllHistory();
 
@@ -89,7 +89,10 @@ public class ObjectsAdapter extends RecyclerView.Adapter<ObjectsAdapter.ViewHold
                 System.out.println("Object Name: " + item.getObjectName());
                 System.out.println("Proprietaire: "+ item.getProprietaire());
             }
-            // Autres actions pour le clic sur l'objet
+
+            Intent intent = new Intent(context, Details_activity.class);
+            intent.putExtra("OBJECT_ID", objectId);
+            context.startActivity(intent);
         });
     }
 

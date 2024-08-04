@@ -80,7 +80,7 @@ public class ObjectsListActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwb2x5cGhpYUB5b3BtYWlsLmNvbSIsImlhdCI6MTcyMjUzNzc4OSwiZXhwIjoxNzIyNTM4Njg5fQ.J5lOSmIKKUL0ykji32GD7fqaqgJa46V-x5DoQco6p0c");
+                headers.put("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwb2x5cGhpYUB5b3BtYWlsLmNvbSIsImlhdCI6MTcyMjc4MDMyNywiZXhwIjoxNzIyNzgxMjI3fQ.euSVG8DaqGnbAwI-Lni6BD5ZdfJ5hdQ1K1_Vng4F3Dk");
                 return headers;
             }
         };

@@ -1,0 +1,109 @@
+package com.mbds.tpt_android.Activities;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.mbds.tpt_android.Adapters.ObjectsAdapter;
+import com.mbds.tpt_android.Domains.ObjectsDomain;
+import com.mbds.tpt_android.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Details_activity extends AppCompatActivity {
+
+    private TextView textViewTitre;
+    private TextView textViewProp;
+    private TextView description;
+    private ImageView img;
+    private ConstraintLayout btnBack;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_details);
+
+        textViewTitre = findViewById(R.id.titre);
+        textViewProp = findViewById(R.id.prop);
+        img = findViewById(R.id.img);
+        description = findViewById(R.id.description);
+        btnBack = findViewById(R.id.btnBack);
+
+        Intent intent = getIntent();
+        String objectId = intent.getStringExtra("OBJECT_ID");
+
+        fetchObjectDetails(objectId);
+
+        btnBack.setOnClickListener(v -> {
+            finish();
+        });
+    }
+
+    private void fetchObjectDetails(String objectId) {
+        String url = "http://192.168.88.7:8080/api/objet/"+objectId;
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject singleObject = new JSONObject(response);
+                            JSONObject proprietaireObject = singleObject.getJSONObject("proprietaire");
+                            String username = proprietaireObject.getString("username");
+                            ObjectsDomain p = new ObjectsDomain(
+                                    singleObject.getString("id"),
+                                    singleObject.getString("nom"),
+                                    singleObject.getString("description"),
+                                    singleObject.getString("valeur"),
+                                    username,
+                                    singleObject.getBoolean("disponible")
+                            );
+                            runOnUiThread(() -> {
+                                textViewTitre.setText(p.getNom());
+                                textViewProp.setText(p.getProprietaire());
+                                description.setText(p.getDescription());
+                                int drawableResourceId = getResources().getIdentifier("logo", "drawable", getPackageName());
+                                if (drawableResourceId != 0) {
+                                    Glide.with(Details_activity.this)
+                                            .load(drawableResourceId)
+                                            .into(img);
+                                }
+                            });
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("THIS DIDINT WORK"+error);
+                error.printStackTrace();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwb2x5cGhpYUB5b3BtYWlsLmNvbSIsImlhdCI6MTcyMjc4MDMyNywiZXhwIjoxNzIyNzgxMjI3fQ.euSVG8DaqGnbAwI-Lni6BD5ZdfJ5hdQ1K1_Vng4F3Dk");
+                return headers;
+            }
+        };
+        queue.add(stringRequest);
+    }
+}
