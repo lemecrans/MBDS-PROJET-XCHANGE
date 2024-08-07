@@ -3,7 +3,6 @@ C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\bi
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\bin\Debug\net8.0-windows\XChange.runtimeconfig.json
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\bin\Debug\net8.0-windows\XChange.dll
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\bin\Debug\net8.0-windows\XChange.pdb
-C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.Form1.resources
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.Properties.Resources.resources
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.csproj.GenerateResource.cache
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.GeneratedMSBuildEditorConfig.editorconfig
@@ -16,4 +15,6 @@ C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\ob
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.pdb
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.genruntimeconfig.cache
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\ref\XChange.dll
-C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.Form2.resources
+C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.Connexion.resources
+C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.Detail.resources
+C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.Home.resources

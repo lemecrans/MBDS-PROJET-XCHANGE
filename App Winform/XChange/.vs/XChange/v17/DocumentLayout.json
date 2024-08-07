@@ -3,114 +3,131 @@
   "WorkspaceRootPath": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|c:\\users\\vno\\documents\\github\\mbds-projet-xchange\\app winform\\xchange\\xchange\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|solutionrelative:xchange\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|c:\\users\\vno\\documents\\github\\mbds-projet-xchange\\app winform\\xchange\\xchange\\detail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|solutionrelative:xchange\\detail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|c:\\users\\vno\\documents\\github\\mbds-projet-xchange\\app winform\\xchange\\xchange\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|solutionrelative:xchange\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|c:\\users\\vno\\documents\\github\\mbds-projet-xchange\\app winform\\xchange\\xchange\\connexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|solutionrelative:xchange\\connexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|c:\\users\\vno\\documents\\github\\mbds-projet-xchange\\app winform\\xchange\\xchange\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|solutionrelative:xchange\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|c:\\users\\vno\\documents\\github\\mbds-projet-xchange\\app winform\\xchange\\xchange\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|solutionrelative:xchange\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|c:\\users\\vno\\documents\\github\\mbds-projet-xchange\\app winform\\xchange\\xchange\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|solutionrelative:xchange\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|c:\\users\\vno\\documents\\github\\mbds-projet-xchange\\app winform\\xchange\\xchange\\detail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|solutionrelative:xchange\\detail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|c:\\users\\vno\\documents\\github\\mbds-projet-xchange\\app winform\\xchange\\xchange\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|solutionrelative:xchange\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|c:\\users\\vno\\documents\\github\\mbds-projet-xchange\\app winform\\xchange\\xchange\\detail.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|solutionrelative:xchange\\detail.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|c:\\users\\vno\\documents\\github\\mbds-projet-xchange\\app winform\\xchange\\xchange\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|solutionrelative:xchange\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|c:\\users\\vno\\documents\\github\\mbds-projet-xchange\\app winform\\xchange\\xchange\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A115AF8C-5800-404D-9C13-711990E3369A}|XChange\\XChange.csproj|solutionrelative:xchange\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
     {
-      "Orientation": 0,
+      "Orientation": 1,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "DockedHeight": 366,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Program.cs",
-              "RelativeDocumentMoniker": "XChange\\Program.cs",
-              "ToolTip": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Program.cs",
-              "RelativeToolTip": "XChange\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAMAAAA",
+              "Title": "Home.cs",
+              "DocumentMoniker": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Home.cs",
+              "RelativeDocumentMoniker": "XChange\\Home.cs",
+              "ToolTip": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Home.cs",
+              "RelativeToolTip": "XChange\\Home.cs",
+              "ViewState": "AQIAAAMAAADAZmZmZmb+vxsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T12:53:55.364Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Form2.cs",
-              "DocumentMoniker": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Form2.cs",
-              "RelativeDocumentMoniker": "XChange\\Form2.cs",
-              "ToolTip": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Form2.cs",
-              "RelativeToolTip": "XChange\\Form2.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAACQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T11:24:02.075Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Form2.cs [Conception]",
-              "DocumentMoniker": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Form2.cs",
-              "RelativeDocumentMoniker": "XChange\\Form2.cs",
-              "ToolTip": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Form2.cs [Conception]",
-              "RelativeToolTip": "XChange\\Form2.cs [Conception]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T11:13:45.921Z",
-              "EditorCaption": " [Conception]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Form1.cs",
-              "RelativeDocumentMoniker": "XChange\\Form1.cs",
-              "ToolTip": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Form1.cs",
-              "RelativeToolTip": "XChange\\Form1.cs",
-              "ViewState": "AQIAAC8AAAAAAAAAAAAuwDoAAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T10:16:52.501Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Form1.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Form1.Designer.cs",
-              "RelativeDocumentMoniker": "XChange\\Form1.Designer.cs",
-              "ToolTip": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Form1.Designer.cs",
-              "RelativeToolTip": "XChange\\Form1.Designer.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAApwLAAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T10:04:57.695Z",
+              "WhenOpened": "2024-08-07T16:44:19.489Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Form1.cs [Conception]",
-              "DocumentMoniker": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Form1.cs",
-              "RelativeDocumentMoniker": "XChange\\Form1.cs",
-              "ToolTip": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Form1.cs [Conception]",
-              "RelativeToolTip": "XChange\\Form1.cs [Conception]",
+              "Title": "Detail.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Detail.Designer.cs",
+              "RelativeDocumentMoniker": "XChange\\Detail.Designer.cs",
+              "ToolTip": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Detail.Designer.cs",
+              "RelativeToolTip": "XChange\\Detail.Designer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-07T16:23:34.006Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Detail.cs",
+              "DocumentMoniker": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Detail.cs",
+              "RelativeDocumentMoniker": "XChange\\Detail.cs",
+              "ToolTip": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Detail.cs",
+              "RelativeToolTip": "XChange\\Detail.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-07T14:25:48.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Detail.cs [Conception]",
+              "DocumentMoniker": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Detail.cs",
+              "RelativeDocumentMoniker": "XChange\\Detail.cs",
+              "ToolTip": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Detail.cs [Conception]",
+              "RelativeToolTip": "XChange\\Detail.cs [Conception]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-07T14:20:59.94Z",
+              "EditorCaption": " [Conception]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Home.cs [Conception]",
+              "DocumentMoniker": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Home.cs",
+              "RelativeDocumentMoniker": "XChange\\Home.cs",
+              "ToolTip": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Home.cs [Conception]",
+              "RelativeToolTip": "XChange\\Home.cs [Conception]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-07T14:18:31.297Z",
+              "EditorCaption": " [Conception]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Connexion.cs [Conception]",
+              "DocumentMoniker": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Connexion.cs",
+              "RelativeDocumentMoniker": "XChange\\Connexion.cs",
+              "ToolTip": "C:\\Users\\VNO\\Documents\\GitHub\\MBDS-PROJET-XCHANGE\\App Winform\\XChange\\XChange\\Connexion.cs [Conception]",
+              "RelativeToolTip": "XChange\\Connexion.cs [Conception]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-30T08:39:36.932Z",
               "EditorCaption": " [Conception]"
+            }
+          ]
+        },
+        {
+          "DockedHeight": 34,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }

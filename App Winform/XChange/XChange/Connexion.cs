@@ -5,9 +5,9 @@ namespace XChange
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
-    public partial class Form1 : Form
+    public partial class Connexion : Form
     {
-        public Form1()
+        public Connexion()
         {
             InitializeComponent();
         }
@@ -55,7 +55,7 @@ namespace XChange
                     if (response.IsSuccessStatusCode)
                     {
                         string apiResponse = await response.Content.ReadAsStringAsync();
-                        Form2 form2 = new Form2();
+                        Home form2 = new Home();
                         form2.Show();
                         this.Hide();
                     }

@@ -1,6 +1,6 @@
 ﻿namespace XChange
 {
-    partial class Form1
+    partial class Connexion
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Connexion));
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
