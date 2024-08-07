@@ -1,13 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Objet } from '../models/objet.model';
 import { CapacitorBarcodeScanner } from '@capacitor/barcode-scanner';
+import { BehaviorSubject, map, Observable, of, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ObjetService {
-  getAllObjet():Objet[]{
-    return  [
+
+  private _listeObjets = new BehaviorSubject<Objet[]| null>(null);
+  private _objet  = new BehaviorSubject<Objet| null>(null);
+
+ 
+  constructor(){
+    this.getAllObjet();
+  }
+  get listeObjets() {
+    return this._listeObjets.asObservable();
+  }
+  getAllObjet(): Observable<Objet[] | null> {
+    const objets: Objet[] = [
       {
         id: 1,
         nom: 'Sac à main',
@@ -54,14 +66,22 @@ export class ObjetService {
         img: 'sunglass.jpg',
       },
     ];
+
+    this._listeObjets.next(objets);
+
+    return this._listeObjets.asObservable();
   }
-  getObjet(id: number): Objet {
-    const objet = this.getAllObjet().find((objet) => objet.id === id);
-    if (!objet) {
-      throw new Error(`Objet avec l' ID ${id} est introuvable`);
-    }
-    return objet;
+  getObjet(id: number): Observable<Objet | null> {
+    return this._listeObjets.pipe(
+      take(1),
+      map((objets: Objet[] | null) => {
+        const objet = objets?.find((o: Objet) => o.id === id) || null;
+        this._objet.next(objet);
+        return objet;
+      })
+    );
   }
+ 
   async startScan(val?: number) {
     try {
       const result = await CapacitorBarcodeScanner.scanBarcode({
@@ -74,6 +94,7 @@ export class ObjetService {
       throw e;
     }
   }
+  ajoutHistorique(){}
   
 
 

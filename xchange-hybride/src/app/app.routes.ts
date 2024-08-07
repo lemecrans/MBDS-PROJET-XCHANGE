@@ -20,5 +20,9 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'historique',
+    loadComponent: () => import('./page/historique/historique.page').then( m => m.HistoriquePage)
+  },
  
 ];

@@ -49,8 +49,11 @@ export class DetailPage implements OnInit {
   }
 
   ngOnInit() {
-    const objet = this.objetService.getObjet(this.id);
-    if (objet) this.objet = objet;
+    this.objetService.getObjet(Number(this.id)).subscribe({
+      next : (o)=>{
+        if(o)this.objet = o;
+      }
+    });
   }
   getQrcodeData(){
     this.showQrCode = true;

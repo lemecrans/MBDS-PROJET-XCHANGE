@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 
-import {arrowBack, checkmarkCircleOutline, closeCircleOutline, closeOutline, ellipsisHorizontalCircle, listOutline, qrCodeOutline, scanOutline} from 'ionicons/icons';
+import {arrowBack, checkmarkCircleOutline, closeCircleOutline, closeOutline, ellipsisHorizontalCircle, eyeOutline, listOutline, qrCodeOutline, remove, scanOutline, sparklesOutline} from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -24,8 +24,10 @@ export class AppComponent {
       checkmarkCircleOutline,
       closeCircleOutline,
       qrCodeOutline,
-      closeOutline
-      
+      closeOutline,
+      eyeOutline,
+      sparklesOutline,
+      remove,
     });
   }
 }
