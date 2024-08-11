@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/top_tight"
         tools:srcCompat="@drawable/top_tight" />
 
     <ImageView
@@ -20,6 +21,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/bottom_left"
         tools:srcCompat="@drawable/bottom_left" />
 
     <ImageView
@@ -33,12 +35,13 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="500dp"
+        android:layout_height="300dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        tools:srcCompat="@drawable/happy_people_exchanging_sharing_extra_260nw_1970867825" />
+        app:srcCompat="@drawable/happy_people_exchanging_sharing_extra_260nw_1970867825_9"
+        tools:srcCompat="@drawable/happy_people_exchanging_sharing_extra_260nw_1970867825_9" />
 
     <TextView
         android:id="@+id/textView"
@@ -52,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Commencer"

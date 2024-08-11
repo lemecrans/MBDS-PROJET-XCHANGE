@@ -1,6 +1,7 @@
 package com.mbds.tpt_android.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,18 +29,27 @@ public class ObjectsListActivity extends AppCompatActivity {
 
     private RecyclerView.Adapter adapterObjectListe;
     private RecyclerView recyclerViewObject;
+    private ConstraintLayout btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_objects_list);
 
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> onBackClicked());
+
         initRecyclerView();
     }
 
-
+    private void onBackClicked(){
+        finish();
+    }
 
     private void initRecyclerView(){
+        recyclerViewObject = findViewById(R.id.view);
+        recyclerViewObject.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+
         ArrayList<ObjectsDomain> items = new ArrayList<ObjectsDomain>();
         String url = "http://192.168.88.7:8080/api/objet";
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -85,12 +95,6 @@ public class ObjectsListActivity extends AppCompatActivity {
             }
         };
         queue.add(stringRequest);
-
-        System.out.println("----------------------------------------------------"+items.size());
-        //System.out.println("===================================================="+items.get(0).getNom());
-        recyclerViewObject = findViewById(R.id.view);
-        recyclerViewObject.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-
     }
 
 

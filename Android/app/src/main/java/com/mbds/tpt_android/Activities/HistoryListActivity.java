@@ -3,6 +3,7 @@ package com.mbds.tpt_android.Activities;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,16 +33,21 @@ public class HistoryListActivity extends AppCompatActivity {
 
     private RecyclerView.Adapter adapterObjectListe;
     private RecyclerView recyclerViewObject;
+    private ConstraintLayout btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_list);
 
+        btnBack = findViewById(R.id.btnBck);
+        btnBack.setOnClickListener(v->onBackClicked());
         initRecyclerView();
     }
 
-
+    private void onBackClicked(){
+        finish();
+    }
 
     private void initRecyclerView(){
         recyclerViewObject = findViewById(R.id.view);
