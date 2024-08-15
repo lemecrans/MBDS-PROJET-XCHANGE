@@ -18,3 +18,6 @@ C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\ob
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.Connexion.resources
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.Detail.resources
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.Home.resources
+C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.csproj.AssemblyReference.cache
+C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.csproj.Up2Date

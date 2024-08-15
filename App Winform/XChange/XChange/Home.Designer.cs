@@ -145,18 +145,6 @@ namespace XChange
             ListeObjet.Size = new Size(378, 154);
             ListeObjet.TabIndex = 5;
             ListeObjet.SelectedIndexChanged += listBox2_SelectedIndexChanged;
-            ListeObjet.Items.Add("Objet1");
-            ListeObjet.Items.Add("Objet2");
-            ListeObjet.Items.Add("Objet3");
-            ListeObjet.Items.Add("Objet1");
-            ListeObjet.Items.Add("Objet2");
-            ListeObjet.Items.Add("Objet3");
-            ListeObjet.Items.Add("Objet1");
-            ListeObjet.Items.Add("Objet2");
-            ListeObjet.Items.Add("Objet3");
-            ListeObjet.Items.Add("Objet1");
-            ListeObjet.Items.Add("Objet2");
-            ListeObjet.Items.Add("Objet3");
             // 
             // ListeUtilisateur
             // 
@@ -165,9 +153,6 @@ namespace XChange
             ListeUtilisateur.Name = "ListeUtilisateur";
             ListeUtilisateur.Size = new Size(377, 154);
             ListeUtilisateur.TabIndex = 6;
-            ListeUtilisateur.Items.Add("User1 | Rakoto | Admin");
-            ListeUtilisateur.Items.Add("User1 | Bera | MODO");
-            ListeUtilisateur.Items.Add("User1 | Berthe | MODO");
             // 
             // ListeEchange
             // 

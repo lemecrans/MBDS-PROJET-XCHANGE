@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("XChange")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bfaaa3e3141b284c0f5b59d1abf3bff6167ef579")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eb6728e00b0baa45615390b4eb8f527c40eb7f5c")]
 [assembly: System.Reflection.AssemblyProductAttribute("XChange")]
 [assembly: System.Reflection.AssemblyTitleAttribute("XChange")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
