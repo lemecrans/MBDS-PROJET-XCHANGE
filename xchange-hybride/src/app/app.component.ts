@@ -3,6 +3,7 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 
 import {arrowBack, checkmarkCircleOutline, closeCircleOutline, closeOutline, ellipsisHorizontalCircle, eyeOutline, listOutline, qrCodeOutline, remove, scanOutline, sparklesOutline} from 'ionicons/icons';
+import { DatabasesService } from './services/databases.service';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,9 @@ import {arrowBack, checkmarkCircleOutline, closeCircleOutline, closeOutline, ell
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
-  constructor() {
+  constructor(private database:DatabasesService) {
     this.addAllIcons();
+    this.initApp();
   }
 
   addAllIcons() {
@@ -29,5 +31,8 @@ export class AppComponent {
       sparklesOutline,
       remove,
     });
+  }
+  async initApp(){
+    await this.database.initialzPlugin();
   }
 }
