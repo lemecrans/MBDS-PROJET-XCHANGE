@@ -1,44 +1,37 @@
-package com.mbds.xchange.model;
+package com.mbds.xchange.dto;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import com.mbds.xchange.model.PropositionEchange;
+import com.mbds.xchange.model.Utilisateur;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Entity
-@Table(name = "PropositionEchange")
-public class PropositionEchange {
+public class PropositionEchangeDTO  {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @ManyToOne
-    @JoinColumn(name = "proposant_id", nullable = false)
     private Utilisateur proposant;
-
-    @ManyToOne
-    @JoinColumn(name = "destinataire_id", nullable = false)
     private Utilisateur destinataire;
-
-    @NotNull(message = "La date de proposition ne peut pas être nulle")
-    @Temporal(TemporalType.DATE)
-    @Column(name = "date_proposition")
     private Date dateProposition;
-
-    @NotNull(message = "La latitude ne peut pas être nulle")
     private Float latitude;
-
-    @NotNull(message = "La longitude ne peut pas être nulle")
     private Float longitude;
-
-    @NotBlank(message = "L'état ne peut pas être vide")
     private String etat;
+    private List<ObjetEchangeDTO> objetsEchanges;
 
-    @OneToMany(mappedBy = "proposition")
-    private List<ObjetEchange> objetsEchanges;
+    public PropositionEchangeDTO(PropositionEchange proposition) {
+        this.id = proposition.getId();
+        this.proposant = proposition.getProposant();
+        this.destinataire = proposition.getDestinataire();
+        this.dateProposition = proposition.getDateProposition();
+        this.latitude = proposition.getLatitude();
+        this.longitude = proposition.getLongitude();
+        this.etat = proposition.getEtat();
+        this.objetsEchanges = proposition.getObjetsEchanges().stream()
+                .map(ObjetEchangeDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    // Getters et Setters
 
     public int getId() {
         return id;
@@ -96,11 +89,11 @@ public class PropositionEchange {
         this.etat = etat;
     }
 
-    public List<ObjetEchange> getObjetsEchanges() {
+    public List<ObjetEchangeDTO> getObjetsEchanges() {
         return objetsEchanges;
     }
 
-    public void setObjetsEchanges(List<ObjetEchange> objetsEchanges) {
+    public void setObjetsEchanges(List<ObjetEchangeDTO> objetsEchanges) {
         this.objetsEchanges = objetsEchanges;
     }
 }
