@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PropositionEchangeService {
@@ -58,5 +58,13 @@ public class PropositionEchangeService {
         notificationRepository.save(notif);
 
         return toCreate;
+    }
+
+    public List<PropositionEchange> getAllEchange(){
+        return propositionEchangeRepository.findAll();
+    }
+
+    public Optional<PropositionEchange> getEchange(int id){
+        return propositionEchangeRepository.findById(id);
     }
 }

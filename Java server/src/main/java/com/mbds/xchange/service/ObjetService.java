@@ -8,10 +8,13 @@ import com.mbds.xchange.repository.UtilisateurRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -29,14 +32,27 @@ public class ObjetService {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     public List<Objet> getAllObjets() {
         return objetRepository.findAll();
     }
 
     @Transactional
-    public Objet createObjet(@Valid Objet objet) {
+    public int createObjet(Objet objet, MultipartFile file) {
         try {
-            return objetRepository.save(objet);
+            byte[] imageBytes = file.getBytes();
+            objetRepository.insertObjet(
+                    objet.getDescription(),
+                    objet.isDisponible(),
+                    imageBytes,
+                    objet.getNom(),
+                    objet.getProprietaire().getId(),
+                    objet.getValeur()
+            );
+            String sql = "SELECT currval(pg_get_serial_sequence('objet', 'id'))";
+            return jdbcTemplate.queryForObject(sql, Integer.class);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erreur lors de la création de l'objet", e);
         }

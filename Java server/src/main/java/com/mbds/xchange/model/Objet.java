@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.Base64;
+
 @Entity
 @Table(name = "Objet")
 public class Objet {
@@ -31,6 +33,9 @@ public class Objet {
     private Utilisateur proprietaire;
 
     private boolean disponible;
+
+    @Column(name = "image", columnDefinition = "BYTEA")
+    private byte[] image;
 
     public int getId() {
         return id;
@@ -78,5 +83,13 @@ public class Objet {
 
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }
