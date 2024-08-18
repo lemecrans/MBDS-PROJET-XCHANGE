@@ -20,6 +20,7 @@ import {
   IonItem,
   IonThumbnail, IonList } from '@ionic/angular/standalone';
 import { Subscription } from 'rxjs';
+import { DatabasesService } from 'src/app/services/databases.service';
 import { ObjetService } from 'src/app/services/objet.service';
 
 @Component({
@@ -52,24 +53,28 @@ import { ObjetService } from 'src/app/services/objet.service';
   ],
 })
 export class HistoriquePage implements OnInit, OnDestroy {
-  historique: any = null;
+ 
   historiqueSub!: Subscription;
   toastData: any = {};
 
   private objetService = inject(ObjetService);
-
+  private dbService = inject(DatabasesService);
+  historique: any = this.dbService.getHistorique();
   constructor() {}
 
   ngOnInit() {
-    this.historiqueSub = this.objetService.listeObjets.subscribe({
-      next: (liste) => {
-        // console.log(liste);
-        this.historique =liste;
-      },
-    });
+    // this.historiqueSub = this.objetService.listeObjets.subscribe({
+    //   next: (liste) => {
+    //     // console.log(liste);
+    //     this.historique =liste;
+    //   },
+    // });
   }
 
   ngOnDestroy(): void {
     if (this.historiqueSub) this.historiqueSub.unsubscribe();
+  }
+  deleteHistoriqueItem(id:number){
+    this.dbService.deleteHistorique(id);
   }
 }

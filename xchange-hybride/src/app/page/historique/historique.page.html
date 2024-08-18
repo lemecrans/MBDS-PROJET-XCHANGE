@@ -8,46 +8,51 @@
 </ion-header>
 
 <ion-content>
-  @if(historique){
-    @for(item of historique; track $index) {
-      <ion-card color="light" class="ion-padding-vertical">
-        <ion-item lines="none">
-          <ion-thumbnail slot="start">
-            <ion-img [src]="'assets/img/' + item.img"></ion-img>
-          </ion-thumbnail>
+  @if(historique() && historique().length > 0){
+  @for(item of historique(); track $index) {
+  <ion-card color="light" class="ion-padding-vertical">
+    <ion-item lines="none">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="'assets/img/' + item.img"></ion-img>
+      </ion-thumbnail>
 
-          <ion-label>
-            {{ item?.nom }}
-            <p class="price">
-              <ion-text color="primary">
-                <strong class="truncate">{{item.description}}</strong>
-              </ion-text>
-            </p>
-          </ion-label>
-          <ion-row slot="end">
-           
-            <ion-col>
-              <ion-button fill="clear" color="primary" routerLink="/home/detail/{{item.id}}" >
-                <ion-icon name="eye-outline"></ion-icon>
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-      </ion-card>
-    }
-    <ion-list lines="none" class="ion-margin">
-      <ion-item>
-        <ion-label color="dark"><strong>Total</strong></ion-label>
-        <ion-text slot="end" color="primary">
-          <strong>{{historique.length}} objet(s) </strong>
-        </ion-text>
-      </ion-item>
-    </ion-list>
+      <ion-label>
+        {{ item?.nom }}
+        <p class="price">
+          <ion-text color="primary">
+            <strong class="truncate">{{item.description}}</strong>
+          </ion-text>
+        </p>
+      </ion-label>
+      <ion-row slot="end">
+
+        <ion-col>
+          <ion-button fill="clear" color="primary" routerLink="/home/detail/{{item.id}}">
+            <ion-icon name="eye-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button fill="clear" color="primary" (click)="deleteHistoriqueItem(item.id)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-card>
+  }
+  <ion-list lines="none" class="ion-margin">
+    <ion-item>
+      <ion-label color="dark"><strong>Total</strong></ion-label>
+      <ion-text slot="end" color="primary">
+        <strong>{{historique().length}} objet(s) </strong>
+      </ion-text>
+    </ion-item>
+  </ion-list>
   }@else {
-    <div align="center" class="empty-screen">
-      <ion-icon name="sparkles-outline" color="danger"></ion-icon>
-      <p>Pas d'historique pour le moments.</p>
-    </div>
+  <div align="center" class="empty-screen">
+    <ion-icon name="sparkles-outline" color="danger"></ion-icon>
+    <p>Pas d'historique pour le moments.</p>
+  </div>
   }
 
 </ion-content>

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 
-import {arrowBack, checkmarkCircleOutline, closeCircleOutline, closeOutline, ellipsisHorizontalCircle, eyeOutline, listOutline, qrCodeOutline, remove, scanOutline, sparklesOutline} from 'ionicons/icons';
+import {arrowBack, checkmarkCircleOutline, closeCircleOutline, closeOutline, ellipsisHorizontalCircle, eyeOutline, listOutline, qrCodeOutline, remove, scanOutline, sparklesOutline, trashOutline} from 'ionicons/icons';
 import { DatabasesService } from './services/databases.service';
 
 @Component({
@@ -30,6 +30,7 @@ export class AppComponent {
       eyeOutline,
       sparklesOutline,
       remove,
+      trashOutline
     });
   }
   async initApp(){

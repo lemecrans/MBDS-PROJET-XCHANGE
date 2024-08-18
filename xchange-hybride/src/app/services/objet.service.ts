@@ -14,8 +14,8 @@ export class ObjetService {
   uri = "http://192.168.43.96:8080/"
  
   constructor(private http: HttpClient){
-    // this.getAllObjet();
-    this.getListObjet();
+    this.getAllObjet();
+    //this.getListObjet();
   }
   get listeObjets() {
     return this._listeObjets.asObservable();
@@ -84,7 +84,7 @@ export class ObjetService {
     return resultat;
   }
   //static
-  /*getAllObjet(): Observable<Objet[] | null> {
+  getAllObjet(): Observable<Objet[] | null> {
     const objets: Objet[] = [
       {
         id: 1,
@@ -136,5 +136,5 @@ export class ObjetService {
     this._listeObjets.next(objets);
 
     return this._listeObjets.asObservable();
-  }*/
+  }
 }
