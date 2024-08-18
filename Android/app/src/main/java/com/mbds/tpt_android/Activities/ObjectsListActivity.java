@@ -51,7 +51,7 @@ public class ObjectsListActivity extends AppCompatActivity {
         recyclerViewObject.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
         ArrayList<ObjectsDomain> items = new ArrayList<ObjectsDomain>();
-        String url = "http://192.168.88.7:8080/api/objet";
+        String url = "http://192.168.231.79:8080/api/objet";
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -64,13 +64,16 @@ public class ObjectsListActivity extends AppCompatActivity {
                                 JSONObject singleObject = array.getJSONObject(i);
                                 JSONObject proprietaireObject = singleObject.getJSONObject("proprietaire");
                                 String username = proprietaireObject.getString("username");
+                                String imageBase64 = singleObject.optString("image", null);
+
                                 ObjectsDomain p = new ObjectsDomain(
                                         singleObject.getString("id"),
                                         singleObject.getString("nom"),
                                         singleObject.getString("description"),
                                         singleObject.getString("valeur"),
                                         username,
-                                        singleObject.getBoolean("disponible")
+                                        singleObject.getBoolean("disponible"),
+                                        imageBase64
                                 );
                                 items.add(p);
                             }

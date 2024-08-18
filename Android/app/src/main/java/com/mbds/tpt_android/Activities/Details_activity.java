@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,7 +60,7 @@ public class Details_activity extends AppCompatActivity {
     }
 
     private void fetchObjectDetails(String objectId) {
-        String url = "http://192.168.88.7:8080/api/objet/"+objectId;
+        String url = "http://192.168.231.79:8080/api/objet/"+objectId;
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -67,22 +70,27 @@ public class Details_activity extends AppCompatActivity {
                             JSONObject singleObject = new JSONObject(response);
                             JSONObject proprietaireObject = singleObject.getJSONObject("proprietaire");
                             String username = proprietaireObject.getString("username");
+
+                            String imageBase64 = singleObject.optString("image", null);
+
                             ObjectsDomain p = new ObjectsDomain(
                                     singleObject.getString("id"),
                                     singleObject.getString("nom"),
                                     singleObject.getString("description"),
                                     singleObject.getString("valeur"),
                                     username,
-                                    singleObject.getBoolean("disponible")
+                                    singleObject.getBoolean("disponible"),
+                                    imageBase64
                             );
                             runOnUiThread(() -> {
                                 textViewTitre.setText(p.getNom());
                                 textViewProp.setText(p.getProprietaire());
                                 description.setText(p.getDescription());
-                                int drawableResourceId = getResources().getIdentifier("logo", "drawable", getPackageName());
-                                if (drawableResourceId != 0) {
+                                if (p.getImage() != null && !p.getImage().isEmpty()) {
+                                    byte[] decodedString = Base64.decode(p.getImage(), Base64.DEFAULT);
+                                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                                     Glide.with(Details_activity.this)
-                                            .load(drawableResourceId)
+                                            .load(decodedByte)
                                             .into(img);
                                 }
                             });

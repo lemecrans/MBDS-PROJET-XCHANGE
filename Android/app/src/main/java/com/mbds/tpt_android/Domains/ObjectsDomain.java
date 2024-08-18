@@ -7,6 +7,7 @@ public class ObjectsDomain {
     private String valeur;
     private String proprietaire;
     private Boolean disponible;
+    private String image;
 
     public ObjectsDomain(){
 
@@ -25,6 +26,16 @@ public class ObjectsDomain {
         this.valeur = valeur;
         this.proprietaire = proprietaire;
         this.disponible = disponible;
+    }
+
+    public ObjectsDomain(String id, String nom, String description, String valeur, String proprietaire, Boolean disponible, String image) {
+        this.id = id;
+        this.nom = nom;
+        this.description = description;
+        this.valeur = valeur;
+        this.proprietaire = proprietaire;
+        this.disponible = disponible;
+        this.image = image;
     }
 
     public String getId() {
@@ -73,5 +84,13 @@ public class ObjectsDomain {
 
     public void setDisponible(Boolean disponible) {
         this.disponible = disponible;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

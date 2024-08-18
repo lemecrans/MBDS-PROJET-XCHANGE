@@ -2,6 +2,9 @@ package com.mbds.tpt_android.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,11 +47,14 @@ public class ObjectsAdapter extends RecyclerView.Adapter<ObjectsAdapter.ViewHold
         holder.title.setText(items.get(position).getNom());
         holder.proprietaire.setText(items.get(position).getProprietaire());
 
-        int drawableResourceId = holder.itemView.getResources()
-                .getIdentifier(items.get(position).getNom(),"drawable",holder.itemView.getContext().getPackageName());
-        Glide.with(context)
-                .load(drawableResourceId)
-                .into(holder.pic);
+        String base64Image = items.get(position).getImage();
+        if (base64Image != null && !base64Image.isEmpty()) {
+            byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            Glide.with(context)
+                    .load(decodedByte)
+                    .into(holder.pic);
+        }
 
         switch(position){
             case 0:
