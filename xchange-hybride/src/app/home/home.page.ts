@@ -16,7 +16,7 @@ import {
   IonRow,
   IonCol,
   IonCard,
-  IonSearchbar, IonImg } from '@ionic/angular/standalone';
+  IonSearchbar, IonImg, IonBadge, IonSkeletonText } from '@ionic/angular/standalone';
 import { ObjetItemComponent } from '../page/objet-item/objet-item.component';
 import { Objet } from '../models/objet.model';
 import { ObjetService } from '../services/objet.service';
@@ -29,7 +29,7 @@ import { Subscription } from 'rxjs';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonImg, 
+  imports: [IonSkeletonText, IonBadge, IonImg, 
     CommonModule,
     IonSearchbar,
     IonCard,

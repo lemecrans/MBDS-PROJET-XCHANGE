@@ -46,7 +46,7 @@ export class DatabasesService {
     this.historiques.set(historiques.values || []);
   }
 
-  async addHistorique(objet: Objet) {
+  async addHistorique(objet: Objet) :Promise<any>{
     const query = `
     INSERT INTO historique (nom, valeur, description, disponible, proprietaire_id, img) 
     VALUES ('${objet.nom}', ${objet.valeur}, '${objet.description}', ${
@@ -62,7 +62,7 @@ export class DatabasesService {
       console.error("Erreur lors de l'ajout de l'historique :", error);
     }
   }
-  async deleteHistorique(objetId: number) {
+  async deleteHistorique(objetId: number):Promise<any> {
     const query = `DELETE FROM historique WHERE id = ${objetId};`;
   
     try {
