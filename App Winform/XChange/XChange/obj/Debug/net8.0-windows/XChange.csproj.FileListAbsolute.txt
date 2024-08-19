@@ -21,3 +21,4 @@ C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\ob
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.csproj.AssemblyReference.cache
 C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.csproj.Up2Date
+C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\obj\Debug\net8.0-windows\XChange.FormUtilisateur.resources

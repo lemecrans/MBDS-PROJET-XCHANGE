@@ -1,6 +1,6 @@
-﻿using System.Text;
-using System.Windows.Forms;
+﻿
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace XChange
 {
@@ -128,14 +128,12 @@ namespace XChange
             // Statistique
             // 
             Statistique.ItemHeight = 15;
+            Statistique.Items.AddRange(new object[] { "Bobo est là", "Bobo est là 2", "Bobo est là 3" });
             Statistique.Location = new Point(6, 6);
+            Statistique.MultiColumn = true;
             Statistique.Name = "Statistique";
             Statistique.Size = new Size(377, 154);
             Statistique.TabIndex = 4;
-            Statistique.MultiColumn = true;
-            Statistique.Items.Add("Bobo est là");
-            Statistique.Items.Add("Bobo est là 2");
-            Statistique.Items.Add("Bobo est là 3");
             // 
             // ListeObjet
             // 
@@ -153,15 +151,16 @@ namespace XChange
             ListeUtilisateur.Name = "ListeUtilisateur";
             ListeUtilisateur.Size = new Size(377, 154);
             ListeUtilisateur.TabIndex = 6;
+            ListeUtilisateur.SelectedIndexChanged += ListeUtilisateur_SelectedIndexChanged;
             // 
             // ListeEchange
             // 
             ListeEchange.ItemHeight = 15;
+            //ListeEchange.Items.AddRange(new object[] { "Transaction1 | Voiture | maison" });
             ListeEchange.Location = new Point(392, 176);
             ListeEchange.Name = "ListeEchange";
             ListeEchange.Size = new Size(378, 154);
             ListeEchange.TabIndex = 7;
-            ListeEchange.Items.Add("Transaction1 | Voiture | maison");
             // 
             // label3
             // 
@@ -191,14 +190,14 @@ namespace XChange
             label6.Size = new Size(100, 23);
             label6.TabIndex = 0;
             // 
-            // Form2
+            // Home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Name = "Form2";
+            Name = "Home";
             Text = "Form2";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -227,5 +226,8 @@ namespace XChange
         private ListBox ListeObjet;
         private ListBox ListeUtilisateur;
         private ListBox ListeEchange;
+        private Form dialog;
+        private System.Windows.Forms.Button oui;
+        private System.Windows.Forms.Button non;
     }
 }
