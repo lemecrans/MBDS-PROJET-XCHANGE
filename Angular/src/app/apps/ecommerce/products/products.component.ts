@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BreadcrumbItem } from 'src/app/shared/page-title/page-title.model';
 import { PRODUCTLIST } from '../shared/data';
 import { Product } from '../shared/ecommerce.model';
+import { ObjetService } from 'src/app/shared/services/objet.service';
+import { Objet } from 'src/app/shared/models/objet.model';
 
 @Component({
   selector: 'app-ecommerce-products',
@@ -15,14 +17,33 @@ export class ProductsComponent implements OnInit {
   searchTerm: string = '';
   page = 1;
   pageSize = 8;
+  
+  objets : Objet[] = []
 
-  constructor () { }
+  constructor (private objetService: ObjetService) { }
 
   ngOnInit(): void {
     this.pageTitle = [{ label: 'Ecommerce', path: '/' }, { label: 'Products', path: '/', active: true }];
     this._fetchData();
+    
+    this.getAllObjets();
   }
 
+  getAllObjets(){
+    this.objetService.getAllObject().subscribe(
+      (data: any) => {
+        this.objets = data
+        this.objets = data.map((item: any) => ({
+          ...item,
+          image: `data:image/png;base64,${item.image}`
+        }));
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des données', error);
+      }
+    );
+  }
+  
   /**
    * fetches product list
    */
@@ -30,22 +51,18 @@ export class ProductsComponent implements OnInit {
     this.products = PRODUCTLIST;
   }
 
-
-
   /**
    * Search Method
   */
   searchData(searchTerm: string): void {
     if (searchTerm === '') {
-      this._fetchData();
+      this.getAllObjets()
     }
     else {
-      let updatedData = PRODUCTLIST;
-      //  filter
-      updatedData = updatedData.filter(product => product.name?.toLowerCase().includes(searchTerm));
-      this.products = updatedData;
+      let updatedData = this.objets;
+      updatedData = updatedData.filter(objet => objet.nom?.toLowerCase().includes(searchTerm));
+      this.objets = updatedData;
     }
-
   }
 
 
