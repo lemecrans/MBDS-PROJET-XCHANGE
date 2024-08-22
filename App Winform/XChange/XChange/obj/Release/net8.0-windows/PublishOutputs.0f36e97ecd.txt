@@ -1,0 +1,6 @@
+C:\Users\VNO\Documents\7 - Projet\Nouveau dossier\XChange.exe
+C:\Users\VNO\Documents\7 - Projet\Nouveau dossier\XChange.dll
+C:\Users\VNO\Documents\7 - Projet\Nouveau dossier\XChange.deps.json
+C:\Users\VNO\Documents\7 - Projet\Nouveau dossier\XChange.runtimeconfig.json
+C:\Users\VNO\Documents\7 - Projet\Nouveau dossier\XChange.pdb
+C:\Users\VNO\Documents\7 - Projet\Nouveau dossier\Newtonsoft.Json.dll

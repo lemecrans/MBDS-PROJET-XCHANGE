@@ -12,31 +12,6 @@ namespace XChange
             InitializeComponent();
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private async void button1_Click(object sender, EventArgs e)
         {
             try
@@ -62,6 +37,7 @@ namespace XChange
                     else
                     {
                         label4.Text = "Identifiant ou Mot de passse incorrecte.";
+                        label4.ForeColor = Color.Red;
                         Console.WriteLine($"Erreur de l'API : {response.StatusCode}");
                     }
                 }

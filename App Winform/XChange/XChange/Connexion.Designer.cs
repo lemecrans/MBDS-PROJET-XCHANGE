@@ -42,7 +42,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(799, 79);
             panel1.TabIndex = 0;
-            panel1.Paint += panel1_Paint;
             // 
             // pictureBox1
             // 
@@ -54,7 +53,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // panel2
             // 
@@ -114,7 +112,6 @@
             label3.TabIndex = 2;
             label3.Text = "Connexion Admin";
             label3.TextAlign = ContentAlignment.TopCenter;
-            label3.Click += label3_Click;
             // 
             // label2
             // 
@@ -135,7 +132,6 @@
             label1.Size = new Size(87, 21);
             label1.TabIndex = 0;
             label1.Text = "Identifiant :";
-            label1.Click += label1_Click;
             // 
             // Form1
             // 

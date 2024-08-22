@@ -31,12 +31,13 @@ namespace XChange
             tableLayoutPanel1 = new TableLayoutPanel();
             Statistique = new ListBox();
             ListeObjet = new ListBox();
-            ListeUtilisateur = new ListBox();
             ListeEchange = new ListBox();
+            ListeUtilisateur = new ListBox();
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
+            label7 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -47,19 +48,20 @@ namespace XChange
             // panel1
             // 
             panel1.BackColor = SystemColors.ButtonHighlight;
+            panel1.Controls.Add(label7);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(pictureBox1);
             panel1.Location = new Point(12, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(776, 43);
+            panel1.Size = new Size(905, 43);
             panel1.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(682, 9);
+            label1.Location = new Point(738, 9);
             label1.Name = "label1";
             label1.Size = new Size(59, 21);
             label1.TabIndex = 2;
@@ -68,7 +70,7 @@ namespace XChange
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(643, 3);
+            pictureBox2.Location = new Point(699, 3);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(33, 30);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -92,7 +94,7 @@ namespace XChange
             panel2.Controls.Add(tableLayoutPanel1);
             panel2.Location = new Point(12, 49);
             panel2.Name = "panel2";
-            panel2.Size = new Size(776, 389);
+            panel2.Size = new Size(905, 478);
             panel2.TabIndex = 1;
             // 
             // label2
@@ -113,8 +115,8 @@ namespace XChange
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.Controls.Add(Statistique, 0, 0);
             tableLayoutPanel1.Controls.Add(ListeObjet, 1, 0);
-            tableLayoutPanel1.Controls.Add(ListeUtilisateur, 0, 1);
             tableLayoutPanel1.Controls.Add(ListeEchange, 1, 1);
+            tableLayoutPanel1.Controls.Add(ListeUtilisateur, 0, 1);
             tableLayoutPanel1.Location = new Point(0, 46);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
@@ -122,7 +124,7 @@ namespace XChange
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(776, 343);
+            tableLayoutPanel1.Size = new Size(905, 428);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // Statistique
@@ -132,35 +134,38 @@ namespace XChange
             Statistique.Location = new Point(6, 6);
             Statistique.MultiColumn = true;
             Statistique.Name = "Statistique";
-            Statistique.Size = new Size(377, 154);
+            Statistique.Size = new Size(442, 199);
             Statistique.TabIndex = 4;
             // 
             // ListeObjet
             // 
-            ListeObjet.ItemHeight = 15;
-            ListeObjet.Location = new Point(392, 6);
+            ListeObjet.Font = new Font("Segoe UI", 12F);
+            ListeObjet.ItemHeight = 21;
+            ListeObjet.Location = new Point(457, 6);
             ListeObjet.Name = "ListeObjet";
-            ListeObjet.Size = new Size(378, 154);
+            ListeObjet.Size = new Size(442, 193);
             ListeObjet.TabIndex = 5;
             ListeObjet.SelectedIndexChanged += listBox2_SelectedIndexChanged;
             // 
-            // ListeUtilisateur
-            // 
-            ListeUtilisateur.ItemHeight = 15;
-            ListeUtilisateur.Location = new Point(6, 176);
-            ListeUtilisateur.Name = "ListeUtilisateur";
-            ListeUtilisateur.Size = new Size(377, 154);
-            ListeUtilisateur.TabIndex = 6;
-            ListeUtilisateur.SelectedIndexChanged += ListeUtilisateur_SelectedIndexChanged;
-            // 
             // ListeEchange
             // 
-            ListeEchange.ItemHeight = 15;
-            //ListeEchange.Items.AddRange(new object[] { "Transaction1 | Voiture | maison" });
-            ListeEchange.Location = new Point(392, 176);
+            ListeEchange.Font = new Font("Segoe UI", 12F);
+            ListeEchange.ItemHeight = 21;
+            ListeEchange.Location = new Point(457, 218);
             ListeEchange.Name = "ListeEchange";
-            ListeEchange.Size = new Size(378, 154);
+            ListeEchange.Size = new Size(442, 193);
             ListeEchange.TabIndex = 7;
+            ListeEchange.SelectedIndexChanged += ListeEchange_SelectedIndexChanged;
+            // 
+            // ListeUtilisateur
+            // 
+            ListeUtilisateur.Font = new Font("Segoe UI", 12F);
+            ListeUtilisateur.ItemHeight = 21;
+            ListeUtilisateur.Location = new Point(6, 218);
+            ListeUtilisateur.Name = "ListeUtilisateur";
+            ListeUtilisateur.Size = new Size(442, 193);
+            ListeUtilisateur.TabIndex = 6;
+            ListeUtilisateur.SelectedIndexChanged += ListeUtilisateur_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -190,11 +195,22 @@ namespace XChange
             label6.Size = new Size(100, 23);
             label6.TabIndex = 0;
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.ForeColor = Color.Teal;
+            label7.Location = new Point(803, 14);
+            label7.Name = "label7";
+            label7.Size = new Size(88, 15);
+            label7.TabIndex = 3;
+            label7.Text = "Se deconnecter";
+            label7.Click += label7_Click;
+            // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(929, 526);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "Home";
@@ -229,5 +245,6 @@ namespace XChange
         private Form dialog;
         private System.Windows.Forms.Button oui;
         private System.Windows.Forms.Button non;
+        private Label label7;
     }
 }
