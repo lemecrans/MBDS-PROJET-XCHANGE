@@ -89,4 +89,18 @@ public class ObjetController {
         Objet patchedObjet = objetService.patchObjet(id, updates);
         return ResponseEntity.ok(patchedObjet);
     }
+    @DeleteMapping
+    public ResponseEntity<?> DeleteObjet(@RequestParam int id) {
+        try {
+            Boolean isdeleted = objetService.deleteObjetById(id);
+            if(isdeleted){
+                return ResponseEntity.ok("Objet Supprimé");
+            }else{
+                throw new ResourceNotFoundException("Aucun Objet trouvé");
+            }
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+        }
+    }
 }

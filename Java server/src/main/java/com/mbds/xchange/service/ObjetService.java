@@ -2,8 +2,12 @@ package com.mbds.xchange.service;
 
 import com.mbds.xchange.configuration.ResourceNotFoundException;
 import com.mbds.xchange.model.Objet;
+import com.mbds.xchange.model.ObjetEchange;
+import com.mbds.xchange.model.PropositionEchange;
 import com.mbds.xchange.model.Utilisateur;
+import com.mbds.xchange.repository.ObjetEchangeRepository;
 import com.mbds.xchange.repository.ObjetRepository;
+import com.mbds.xchange.repository.PropositionEchangeRepository;
 import com.mbds.xchange.repository.UtilisateurRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +26,14 @@ import java.util.Optional;
 @Service
 public class ObjetService {
     private final ObjetRepository objetRepository;
+    private final ObjetEchangeRepository objetEchangeRepository;
+    private final PropositionEchangeRepository propositionEchangeRepository;
 
     @Autowired
-    public ObjetService(ObjetRepository objetRepository,UtilisateurRepository utilisateurRepository) {
+    public ObjetService(ObjetRepository objetRepository, ObjetEchangeRepository objetEchangeRepository, PropositionEchangeRepository propositionEchangeRepository, UtilisateurRepository utilisateurRepository) {
         this.objetRepository = objetRepository;
+        this.objetEchangeRepository = objetEchangeRepository;
+        this.propositionEchangeRepository = propositionEchangeRepository;
         this.utilisateurRepository = utilisateurRepository;
     }
 
@@ -141,4 +149,35 @@ public class ObjetService {
             throw new ResourceNotFoundException("Objet not found with id " + id);
         }
     }
+    @Transactional
+    public boolean deleteObjetById(int id) {
+        try {
+            // Récupération de l'objet à supprimer
+            Objet objetToDelete = this.getObjectById(id);
+
+            // Vérification si l'objet existe
+            if (objetToDelete == null) {
+                throw new IllegalArgumentException("Objet introuvable avec l'ID : " + id);
+            }
+
+            // Récupération de la liste des ObjetEchange liés à cet objet
+            List<ObjetEchange> listObjetEchange = this.objetEchangeRepository.findByObjet_id(objetToDelete.getId());
+
+            // Suppression des ObjetEchange et PropositionEchange associés
+            for (ObjetEchange objetEchange : listObjetEchange) {
+                PropositionEchange propositionEchange = this.propositionEchangeRepository.findByPropositionId(objetEchange.getProposition().getId());
+                if (propositionEchange != null) {
+                    this.propositionEchangeRepository.delete(propositionEchange);
+                }
+                this.objetEchangeRepository.delete(objetEchange);
+            }
+            this.objetRepository.delete(objetToDelete);
+            return true;
+
+        } catch (Exception e) {
+            System.err.println("Erreur lors de la suppression de l'objet avec l'ID : " + id + " - " + e.getMessage());
+            throw e;
+        }
+    }
+
 }
