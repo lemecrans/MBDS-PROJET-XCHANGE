@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/app/environments/environment';
 
 const URL_BASE = environment.host + 'objet';
@@ -8,14 +9,47 @@ const URL_BASE = environment.host + 'objet';
   providedIn: 'root'
 })
 export class ObjetService {
+  
 
-  constructor(private http: HttpClient) { }
+  private _listeMesObjets = new BehaviorSubject<any[]| null>(null);
+  constructor(private http: HttpClient) { 
+
+  }
 
   getAllObject(){
 
     return this.http.get(URL_BASE);
     
   }
+  get listeMesObjets() {
+    return this._listeMesObjets.asObservable();
+  }
+  getListObjet(): Observable<any[] | null> {
+ 
+    const url = URL_BASE+'/objet';
+    console.log(url)
+    const headers = {'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaWFubWF0dGF4QGdtYWlsLmNvbSIsImlhdCI6MTcyMzk3MDM1NiwiZXhwIjoxNzIzOTczOTU2fQ.DZA5Mu1GaE2I_guwvImq_PlYYxNXa29V4h1MSr2r948'}
+    console.log(headers)
+    this.http.get<any[]>(url, { headers }).subscribe({
+      next: (response) => {
+        const objets = response.map((objet:any) => ({
+          id: objet.id,
+          nom: objet.nom,
+          description: objet.description,
+          valeur: objet.valeur,
+          disponible: objet.disponible,
+          proprietaire_id: objet.proprietaire.id,
+          img:`data:image/png;base64,${objet.image}`
+        }));
+        this._listeMesObjets.next(objets);
+      },
+      error: (error) => {
+        console.error('Une erreur est survenue : ', error);
+        this._listeMesObjets.next(null);
+      }
+    });
 
+    return this._listeMesObjets.asObservable();
+  }
 
 }
