@@ -28,6 +28,17 @@ public class ChatService {
         }
     }
 
+    public List<Chat> getAll(int user1) throws Exception {
+        try {
+            Utilisateur send= utilisateurRepository.findById(user1);
+            List<Chat> lista = reposi.findByDesti(send );
+            lista.addAll(reposi.findBySender(send));
+            return lista;
+        } catch (Exception e) {
+            throw new Exception("Une erreur s'est produite : " + e.getMessage());
+        }
+    }
+
     public Chat Start(int user1, int user2) throws Exception{
         try{
             Utilisateur desti= utilisateurRepository.findById(user2);

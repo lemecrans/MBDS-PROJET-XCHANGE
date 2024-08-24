@@ -1,5 +1,7 @@
 package com.mbds.xchange.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +38,20 @@ public class ChatController {
     public ResponseEntity<?> Get(@RequestParam int sender, @RequestParam int desti) {
         try {
             Chat currentChat = chatServ.get(sender,desti);
+            if(currentChat!=null){
+                return ResponseEntity.ok(currentChat);
+            }else{
+                throw new ResourceNotFoundException("Aucun Utilisateur trouvé");
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+        }
+    }
+    @PostMapping("/getall")
+    public ResponseEntity<?> Getall(@RequestParam int sender) {
+        try {
+            List<Chat> currentChat = chatServ.getAll(sender);
             if(currentChat!=null){
                 return ResponseEntity.ok(currentChat);
             }else{
