@@ -5,6 +5,10 @@ import { Column } from 'src/app/shared/advanced-table/advanced-table.component';
 import { BreadcrumbItem } from 'src/app/shared/page-title/page-title.model';
 import { ORDERSLIST } from '../shared/data';
 import { Order } from '../shared/ecommerce.model';
+import { Utilisateur } from 'src/app/shared/models/utilisateur.model';
+import { PropositionEchangeService } from 'src/app/shared/services/proposition-echange.service';
+import { PropositionEchange } from 'src/app/shared/models/propositionEchange.model';
+import { Objet } from 'src/app/shared/models/objet.model';
 
 @Component({
   selector: 'app-ecommerce-orders',
@@ -16,22 +20,23 @@ export class OrdersComponent implements OnInit {
   pageTitle: BreadcrumbItem[] = [];
   orderList: Order[] = [];
   selectAll: boolean = false;
-  OrderStatusGroup: string = "All";
+  propositionStatus: string = "All";
   loading: boolean = false;
   columns: Column[] = [];
-
+  currentUser! : Utilisateur
+  propositions : PropositionEchange[] = []
+  myPropositions : PropositionEchange[] = []
+  proposantObjet : Objet[] = []
+  destinataireObjet : Objet[] = []
+  objetEchanges : Objet[] = []
 
   @ViewChild('advancedTable') advancedTable: any;
 
-  constructor (private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer) { }
+  constructor (private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer,private propositionEchangeService: PropositionEchangeService) { }
   ngOnInit(): void {
-    this.pageTitle = [{ label: 'Ecommerce', path: '/' }, { label: 'Orders', path: '/', active: true }];
+    this.pageTitle = [{ label: 'Ecommerce', path: '/' }, { label: 'Liste des propositions', path: '/', active: true }];
 
-    // get order list
-    this._fetchData();
-
-    // initialize advance table 
-    this.initAdvancedTableData();
+    this.getAllPropositions()
   }
 
   /**
@@ -41,46 +46,66 @@ export class OrdersComponent implements OnInit {
     this.orderList = ORDERSLIST;
   }
 
+  getAllPropositions(){
+    this.currentUser = new Utilisateur(1,'polyphia@gmail.com','password','Tim henson','ADMIN',0,2)
 
-  ngAfterViewInit(): void {
+    this.propositionEchangeService.getAllProposition().subscribe({
+      next: (propositions) => {
+        this.propositions = propositions;
+        this.filterPropositions()
+
+      },
+      error: (err) => {
+        console.error('Erreur lors de la récupération des propositions:', err);
+      },
+      complete: () => {
+        this.initTableData()
+        console.log('La récupération des propositions est terminée.');
+      }
+    });
   }
 
-  // initialize advance table columns
-  initAdvancedTableData(): void {
+  private filterPropositions(): void {
+    if (this.currentUser.id === undefined) return;
+
+    this.myPropositions = this.propositions.filter(proposition =>
+      proposition.proposant.id === this.currentUser.id ||
+      proposition.destinataire.id === this.currentUser.id
+    );
+  }
+
+
+  initTableData(): void {
     this.columns = [
       {
-        name: 'order_id',
-        label: 'Order ID',
-        formatter: this.orderIDFormatter.bind(this)
+        name: 'Proposant',
+        label: 'Proposant',
+        formatter: this.proposantFormatter.bind(this)
       },
       {
-        name: 'products',
-        label: 'Products',
-        formatter: this.productsFormatter.bind(this),
+        name: 'Objets proposés',
+        label: 'Objets Proposés',
+        formatter: this.objetsEchangesFormatter.bind(this),
       },
       {
-        name: 'order_date',
+        name: 'Destinataire',
+        label: 'Destinataire',
+        formatter: this.destinataireFormatter.bind(this)
+      },
+      {
+        name: 'ObjetDestinataire',
+        label: 'Objets Destinataire',
+        formatter: this.objetsDestinataireFormatter.bind(this)
+      },
+      {
+        name: 'Statut',
+        label: 'Statut',
+        formatter: this.statutFormatter.bind(this)
+      },
+      {
+        name: 'Date',
         label: 'Date',
-        formatter: this.orderDateFormatter.bind(this)
-      },
-      {
-        name: 'payment_status',
-        label: 'Payment Status',
-        formatter: this.ordePaymentStatusFormatter.bind(this)
-      },
-      {
-        name: 'total',
-        label: 'Total',
-        formatter: (order: Order) => order.total
-      }, {
-        name: 'payment_method',
-        label: 'Payment Method',
-        formatter: (order: Order) => order.payment_method
-      },
-      {
-        name: 'order_status',
-        label: 'Order Status',
-        formatter: this.orderStatusFormatter.bind(this)
+        formatter: this.datePropositionFormatter.bind(this)
       },
       {
         name: 'Action',
@@ -88,7 +113,6 @@ export class OrdersComponent implements OnInit {
         sort: false,
         formatter: this.orderActionFormatter.bind(this)
       }];
-
   }
 
 
@@ -104,42 +128,53 @@ export class OrdersComponent implements OnInit {
     })
   }
 
-  // formats order ID cell
-  orderIDFormatter(order: Order): any {
+  proposantFormatter(proposition: PropositionEchange): any {
     return this.sanitizer.bypassSecurityTrustHtml(
-      `<a href="javascript:void(0)" class="order text-body fw-bold" id="${order.id}">#UB${order.order_id}</a> `
+      `<a href="javascript:void(0)" class="order text-body " id="${proposition.proposant.username}">${proposition.proposant.username}</a> `
     );
   }
 
-  //formats product cell
-  productsFormatter(order: Order): any {
-    let products: string = ``;
-    for (let i = 0; i < order.products.length; i++) {
-      products += `<a href="javascript:void(0)"><img src="${order.products[i]}" alt="product-img" height="32" /></a>`
+  destinataireFormatter(proposition: PropositionEchange): any {
+    return this.sanitizer.bypassSecurityTrustHtml(
+      `<a href="javascript:void(0)" class="order text-body " id="${proposition.destinataire.username}">${proposition.destinataire.username}</a> `
+    );
+  }
+
+  objetsEchangesFormatter(proposition: PropositionEchange): any {
+    let propositions: string = ``;
+    for (let i = 0; i < proposition.objetsEchanges.length; i++) {
+      if(proposition.proposant.id===proposition.objetsEchanges[i].objet.proprietaire.id){
+        propositions += `<p>${proposition.objetsEchanges[i].objet.nom}</p>`
+      }
+      //products += `<a href="javascript:void(0)"><img src="${proposition.objetsEchanges[i].nom}" alt="product-img" height="32" /></a>`
     }
-    return this.sanitizer.bypassSecurityTrustHtml(products);
+    return this.sanitizer.bypassSecurityTrustHtml(propositions);
   }
 
-  // formats order date cell
-  orderDateFormatter(order: Order): any {
-    return this.sanitizer.bypassSecurityTrustHtml(
-      `${order.order_date} <small class="text-muted">${order.order_time}</small>`
-    );
+  objetsDestinataireFormatter(proposition: PropositionEchange): any {
+    let propositions: string = ``;
+    for (let i = 0; i < proposition.objetsEchanges.length; i++) {
+      //products += `<a href="javascript:void(0)"><img src="${proposition.objetsEchanges[i].nom}" alt="product-img" height="32" /></a>`
+      if(proposition.destinataire.id===proposition.objetsEchanges[i].objet.proprietaire.id){
+        propositions += `<p>${proposition.objetsEchanges[i].objet.nom}</p>`
+      }
+    }
+    return this.sanitizer.bypassSecurityTrustHtml(propositions);
   }
 
   // formats payment status cell
-  ordePaymentStatusFormatter(order: Order): any {
-    if (order.payment_status == "Paid") {
+  statutFormatter(proposition: PropositionEchange): any {
+    if (proposition.etat == "Validé") {
       return this.sanitizer.bypassSecurityTrustHtml(
-        `<h5><span class="badge bg-soft-success text-success"><i class="mdi mdi-bitcoin"></i> Paid</span></h5>`
+        `<h5><span class="badge bg-soft-success text-success"><i class="mdi mdi-bitcoin"></i>Accepté</span></h5>`
       );
     }
-    else if (order.payment_status == "Awaiting Authorization") {
+    else if (proposition.etat == "En attente") {
       return this.sanitizer.bypassSecurityTrustHtml(
-        `<h5><span class="badge bg-soft-warning text-warning"><i class="mdi mdi-timer-sand"></i> Awaiting Authorization</span></h5>`
+        `<h5><span class="badge bg-soft-warning text-warning"><i class="mdi mdi-timer-sand"></i>En attente</span></h5>`
       );
     }
-    else if (order.payment_status == "Payment Failed") {
+    else if (proposition.etat == "Payment Failed") {
       return this.sanitizer.bypassSecurityTrustHtml(
         ` <h5><span class="badge bg-soft-danger text-danger"><i class="mdi mdi-cancel"></i> Payment Failed</span></h5>`
       );
@@ -152,30 +187,12 @@ export class OrdersComponent implements OnInit {
 
   }
 
-  // formats order status
-  orderStatusFormatter(order: Order): any {
-    if (order.order_status == "Processing") {
-      return this.sanitizer.bypassSecurityTrustHtml(
-        `<h5><span class="badge bg-warning">Processing</span></h5>`
-      );
-    }
-    else if (order.order_status == "Delivered") {
-      return this.sanitizer.bypassSecurityTrustHtml(
-        `<h5><span class="badge bg-success">Delivered</span></h5>`
-      );
-    }
-    else if (order.order_status == "Shipped") {
-      return this.sanitizer.bypassSecurityTrustHtml(
-        `<h5><span class="badge bg-info">Shipped</span></h5>`
-      );
-    }
-    else {
-      return this.sanitizer.bypassSecurityTrustHtml(
-        `<h5><span class="badge bg-danger">Cancelled</span></h5>`
-      );
-    }
-
+  datePropositionFormatter(proposition: PropositionEchange){
+    return this.sanitizer.bypassSecurityTrustHtml(
+      `${proposition.dateProposition}`
+    );
   }
+
 
   // action cell formatter
   orderActionFormatter(order: Order): any {
@@ -192,13 +209,9 @@ export class OrdersComponent implements OnInit {
  * @param row Table row
  * @param term Search the value
  */
-  matches(row: Order, term: string) {
-    return row.order_id?.toLowerCase().includes(term)
-      || row.order_date?.toLowerCase().includes(term)
-      || row.total?.toLowerCase().includes(term)
-      || row.payment_method?.toLowerCase().includes(term)
-      || row.payment_status?.toLowerCase().includes(term)
-      || row.order_status?.toLocaleLowerCase().includes(term);
+  matches(row: PropositionEchange, term: string) {
+    return row.etat?.toLowerCase().includes(term)
+      
   }
 
   /**
@@ -206,13 +219,13 @@ export class OrdersComponent implements OnInit {
   */
   searchData(searchTerm: string): void {
     if (searchTerm === '') {
-      this._fetchData();
+      this.getAllPropositions();
     }
     else {
-      let updatedData = ORDERSLIST;
+      let updatedData = this.propositions;
       //  filter
-      updatedData = updatedData.filter(product => this.matches(product, searchTerm));
-      this.orderList = updatedData;
+      updatedData = updatedData.filter(proposition => this.matches(proposition, searchTerm));
+      this.propositions = updatedData;
     }
 
   }
@@ -223,12 +236,15 @@ export class OrdersComponent implements OnInit {
    * change order status group
    * @param OrderStatusGroup order status
    */
-  changeOrderStatusGroup(OrderStatusGroup: string): void {
+  changePropositionStatus(propositionStatus: string): void {
     this.loading = true;
-    let updatedData = ORDERSLIST;
-    //  filter
-    updatedData = OrderStatusGroup === "All" ? ORDERSLIST : [...ORDERSLIST].filter((o) => o.payment_status?.includes(OrderStatusGroup))
-    this.orderList = updatedData;
+    let updatedData = this.propositions;
+
+    updatedData = propositionStatus === "All" ? this.propositions : [...this.propositions].filter((o) => o.etat?.includes(propositionStatus))
+    this.propositions = updatedData;
+    if(propositionStatus==='All'){
+      this.getAllPropositions()
+    }
     setTimeout(() => {
       this.loading = false;
     }, 400);

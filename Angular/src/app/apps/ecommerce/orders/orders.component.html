@@ -1,5 +1,5 @@
 <!-- page title -->
-<app-page-title [breadcrumbItems]="pageTitle" title="Orders"></app-page-title>
+<app-page-title [breadcrumbItems]="pageTitle" title="Liste des propositions"></app-page-title>
 
 <div class="row">
     <div class="col-12">
@@ -11,28 +11,20 @@
                             <label for="status-select" class="me-2">Status</label>
                             <div class="me-sm-3">
                                 <select class="form-select form-select my-1 my-lg-0" id="status-select" name="status"
-                                    [(ngModel)]="OrderStatusGroup" (change)="changeOrderStatusGroup(OrderStatusGroup)">
+                                    [(ngModel)]="propositionStatus" (change)="changePropositionStatus(propositionStatus)">
                                     <option value="All">All</option>
-                                    <option value="Paid">Paid</option>
-                                    <option value="Authorization">Awaiting Authorization</option>
-                                    <option value="Failed">Payment failed</option>
-                                    <option value="COD">Cash on Delivery</option>
+                                    <option value="Validé">Validé</option>
+                                    <option value="En attente">En attente</option>
+                                    <option value="Refusé">Refusé</option>
                                 </select>
                             </div>
                         </form>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="text-lg-end">
-                            <button type="button" class="btn btn-danger waves-effect waves-light mb-2 me-2"><i
-                                    class="mdi mdi-basket me-1"></i> Add New Order</button>
-                            <button type="button" class="btn btn-light waves-effect mb-2">Export</button>
-                        </div>
-                    </div><!-- end col-->
                 </div>
                 <app-ui-preloader [display]="loading"></app-ui-preloader>
                 <!-- order table -->
                 <!-- product table -->
-                <app-advanced-table #advancedTable (handleTableLoad)="handleTableLoad($event)" [tableData]="orderList"
+                <app-advanced-table #advancedTable (handleTableLoad)="handleTableLoad($event)" [tableData]="propositions"
                     [columns]="columns" [pagination]="true" [hasRowSelection]="true" [isSearchable]="true"
                     (search)="searchData($event)" [isSortable]="false" tableClasses="table-centered"
                     theadClasses="table-light">

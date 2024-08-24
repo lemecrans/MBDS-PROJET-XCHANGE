@@ -9,5 +9,5 @@ export interface PropositionEchange {
   latitude: number;      
   longitude: number;    
   etat: string;
-  objetsEchanges: Objet[];
+  objetsEchanges: any;
 }
