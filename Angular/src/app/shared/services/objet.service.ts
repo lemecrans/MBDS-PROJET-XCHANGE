@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/app/environments/environment';
+import { Objet } from 'src/app/shared/models/objet.model';
 
 const URL_BASE = environment.host + 'objet';
 
@@ -12,15 +13,21 @@ export class ObjetService {
   
 
   private _listeMesObjets = new BehaviorSubject<any[]| null>(null);
+
+  private _listeObjets = new BehaviorSubject<Objet[]| null>(null)
+  
   constructor(private http: HttpClient) { 
 
   }
 
-  getAllObject(){
-
-    return this.http.get(URL_BASE);
-    
+  getAllObject(): Observable<Objet[]> {
+    return this.http.get<Objet[]>(URL_BASE);
   }
+
+  getObjectById(id: any): Observable<Objet>{
+    return this.http.get<Objet>(URL_BASE+'/'+id)
+  }
+
   get listeMesObjets() {
     return this._listeMesObjets.asObservable();
   }

@@ -31,9 +31,9 @@ export class ProductsComponent implements OnInit {
 
   getAllObjets(){
     this.objetService.getAllObject().subscribe(
-      (data: any) => {
+      (data: Objet[]) => {
         this.objets = data
-        this.objets = data.map((item: any) => ({
+        this.objets = data.map((item: Objet) => ({
           ...item,
           image: `data:image/png;base64,${item.image}`
         }));

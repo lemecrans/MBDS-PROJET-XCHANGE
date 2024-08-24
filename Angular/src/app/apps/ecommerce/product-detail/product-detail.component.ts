@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BreadcrumbItem } from 'src/app/shared/page-title/page-title.model';
-import { PRODUCTLIST } from '../shared/data';
 import { Product } from '../shared/ecommerce.model';
+import { Objet } from 'src/app/shared/models/objet.model';
+import { ObjetService } from '../../../shared/services/objet.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-ecommerce-product-detail',
@@ -13,19 +15,23 @@ export class ProductDetailComponent implements OnInit {
 
   pageTitle: BreadcrumbItem[] = [];
   product: Product = {};
+  objet: Partial<Objet> = {};
 
-
-  constructor (private route: ActivatedRoute) { }
+  constructor (private route: ActivatedRoute,private objetService : ObjetService, private router: Router) { }
 
   ngOnInit(): void {
     this.pageTitle = [{ label: 'Ecommerce', path: '/' }, { label: 'Product Detail', path: '/', active: true }];
     // fetches product details
     this.route.queryParams.subscribe(params => {
-      if (params && params.hasOwnProperty('id')) {
-        this.product = PRODUCTLIST.filter(x => String(x.id) === params['id'])[0];
-      } else {
-        this.product = PRODUCTLIST[0];
-      }
+      this.objetService.getObjectById(params.id).subscribe({
+        next: (response: Objet) => {
+          this.objet = response;
+          this.objet.image = `data:image/png;base64,${response.image}`
+        },
+        error: (error) => {
+          this.router.navigate(['/apps/ecommerce/products'])
+        }
+      });
     });
   }
 

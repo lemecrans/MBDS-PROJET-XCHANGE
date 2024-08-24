@@ -1,5 +1,5 @@
 <!-- page title -->
-<app-page-title [breadcrumbItems]="pageTitle" title="Product Detail"></app-page-title>
+<app-page-title [breadcrumbItems]="pageTitle" title="Détails de l'objet"></app-page-title>
 
 <div class="row">
     <div class="col-12">
@@ -11,142 +11,54 @@
                         <ul ngbNav #nav="ngbNav" class="nav-pills nav-justified">
                             <li ngbNavItem>
                                 <ng-template ngbNavContent>
-                                    <img src="../assets/images/products/product-9.jpg" alt=""
+                                    <img [src]="objet.image" alt=""
                                         class="img-fluid mx-auto d-block rounded">
                                 </ng-template>
-                                <a ngbNavLink class="product-thumb">
-                                    <img src="../assets/images/products/product-9.jpg" alt=""
-                                        class="img-fluid mx-auto d-block rounded">
-                                </a>
-
                             </li>
-
-                            <li ngbNavItem>
-                                <ng-template ngbNavContent>
-                                    <img src="../assets/images/products/product-10.jpg" alt=""
-                                        class="img-fluid mx-auto d-block rounded">
-                                </ng-template>
-                                <a ngbNavLink class="product-thumb">
-                                    <img src="../assets/images/products/product-10.jpg" alt=""
-                                        class="img-fluid mx-auto d-block rounded">
-                                </a>
-
-                            </li>
-
-                            <li ngbNavItem>
-                                <ng-template ngbNavContent>
-                                    <img src="../assets/images/products/product-11.jpg" alt=""
-                                        class="img-fluid mx-auto d-block rounded">
-                                </ng-template>
-                                <a ngbNavLink class="product-thumb">
-                                    <img src="../assets/images/products/product-11.jpg" alt=""
-                                        class="img-fluid mx-auto d-block rounded">
-                                </a>
-
-                            </li>
-
-                            <li ngbNavItem>
-                                <ng-template ngbNavContent>
-                                    <img src="../assets/images/products/product-12.jpg" alt=""
-                                        class="img-fluid mx-auto d-block rounded">
-                                </ng-template>
-                                <a ngbNavLink class="product-thumb">
-                                    <img src="../assets/images/products/product-12.jpg" alt=""
-                                        class="img-fluid mx-auto d-block rounded">
-                                </a>
-
-                            </li>
-
                         </ul>
-
-
-
-
-
                     </div> <!-- end col -->
                     <div class="col-lg-7">
                         <div class="ps-xl-3 mt-3 mt-xl-0">
-                            <a href="javascript:void(0)" class="text-primary">{{product.companyName}}</a>
-                            <h4 class="mb-3">{{product.name}}</h4>
-                            <p class="text-muted float-start me-3">
-                                <span class="mdi mdi-star" *ngFor="let item of [1,2,3,4,5];let i=index"
-                                    [class.text-warning]="i<=product.rating!"></span>
-
-                            </p>
-                            <p class="mb-4"><a href="" class="text-muted">( 36 Customer Reviews )</a></p>
-                            <h6 class="text-danger text-uppercase">20 % Off</h6>
-                            <h4 class="mb-4">Price : <span class="text-muted me-2"><del>$80 USD</del></span>
-                                <b>${{product.price}}
-                                    USD</b>
-                            </h4>
-                            <h4><span class="badge bg-soft-success text-success mb-4">Instock</span></h4>
-                            <p class="text-muted mb-4">The languages only differ in their grammar, their pronunciation
-                                and their most common words. Everyone realizes why a new common language would be
-                                desirable: one could refuse to pay expensive translators.</p>
+                            <a href="javascript:void(0)" class="text-primary">{{objet.proprietaire?.username}}</a>
+                            <h4 class="mb-3"></h4>
+                            <h3 class="mb-4">{{objet.nom}}
+                            </h3>
+                            <h4><span 
+                                [ngClass]="{
+                                  'badge': true,
+                                  'bg-soft-success': objet.disponible,
+                                  'text-success': objet.disponible,
+                                  'bg-soft-danger': !objet.disponible,
+                                  'text-danger': !objet.disponible,
+                                  'mb-4': true
+                                }">
+                                {{ objet.disponible ? 'Disponible' : 'Non Disponible' }}
+                              </span></h4>
+                            <p class="text-muted mb-4">{{objet.description}}</p>
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div>
                                         <p class="text-muted"><i
                                                 class="mdi mdi-checkbox-marked-circle-outline h6 text-primary me-2"></i>
-                                            Sed ut perspiciatis unde</p>
+                                            Echange sécurisé</p>
                                         <p class="text-muted"><i
                                                 class="mdi mdi-checkbox-marked-circle-outline h6 text-primary me-2"></i>
-                                            Nemo enim ipsam voluptatem</p>
+                                            Discussion instantané entre echangeurs</p>
                                         <p class="text-muted"><i
                                                 class="mdi mdi-checkbox-marked-circle-outline h6 text-primary me-2"></i>
-                                            Temporibus autem quibusdam et</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div>
-                                        <p class="text-muted"><i
-                                                class="mdi mdi-checkbox-marked-circle-outline h6 text-primary me-2"></i>
-                                            Itaque earum rerum hic</p>
-                                        <p class="text-muted"><i
-                                                class="mdi mdi-checkbox-marked-circle-outline h6 text-primary me-2"></i>
-                                            Donec quam felis ultricies nec</p>
+                                            Satisfait ou retourné</p>
                                     </div>
                                 </div>
                             </div>
-                            <form class="d-flex flex-wrap align-items-center mb-4">
-                                <label class="my-1 me-2" for="quantityinput">Quantity</label>
-                                <div class="me-3">
-                                    <select class="form-select my-1" id="quantityinput">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                    </select>
-                                </div>
-
-                                <label class="my-1 me-2" for="sizeinput">Size</label>
-                                <div class="me-sm-3">
-                                    <select class="form-select my-1" id="sizeinput">
-                                        <option selected>Small</option>
-                                        <option value="1">Medium</option>
-                                        <option value="2">Large</option>
-                                        <option value="3">X-large</option>
-                                    </select>
-                                </div>
-                            </form>
-
-                            <div>
-                                <button type="button" class="btn btn-danger me-2"><i
-                                        class="mdi mdi-heart-outline"></i></button>
-                                <button type="button" class="btn btn-success waves-effect waves-light">
-                                    <span class="btn-label"><i class="mdi mdi-cart"></i></span>Add to cart
-                                </button>
-                            </div>
+                            <button type="button" class="btn btn-warning waves-effect waves-light">
+                                <span class="btn-label"><i class="mdi mdi-forum"></i></span>Discuter
+                            </button>
                         </div>
                     </div> <!-- end col -->
                 </div>
                 <!-- end row -->
-
-
                 <div class="table-responsive mt-4">
+                    <h4>Mes objets</h4>
                     <table class="table table-bordered table-centered mb-0">
                         <thead class="table-light">
                             <tr>
@@ -166,9 +78,7 @@
                                             <span class="me-2">27%</span>
                                         </div>
                                         <div class="col">
-                                            <ngb-progressbar type="danger" [value]="27" class="progress-sm">
-                                            </ngb-progressbar>
-
+                                            <ngb-progressbar type="danger" [value]="27" class="progress-sm"></ngb-progressbar>
                                         </div>
                                     </div>
                                 </td>
@@ -183,9 +93,7 @@
                                             <span class="me-2">71%</span>
                                         </div>
                                         <div class="col">
-                                            <ngb-progressbar type="success" [value]="71" class="progress-sm">
-                                            </ngb-progressbar>
-
+                                            <ngb-progressbar type="success" [value]="71" class="progress-sm"></ngb-progressbar>
                                         </div>
                                     </div>
                                 </td>
@@ -200,9 +108,7 @@
                                             <span class="me-2">82%</span>
                                         </div>
                                         <div class="col">
-                                            <ngb-progressbar type="success" [value]="82" class="progress-sm">
-                                            </ngb-progressbar>
-
+                                            <ngb-progressbar type="success" [value]="82" class="progress-sm"></ngb-progressbar>
                                         </div>
                                     </div>
                                 </td>
@@ -217,9 +123,7 @@
                                             <span class="me-2">42%</span>
                                         </div>
                                         <div class="col">
-                                            <ngb-progressbar type="warning" [value]="42" class="progress-sm">
-                                            </ngb-progressbar>
-
+                                            <ngb-progressbar type="warning" [value]="42" class="progress-sm"></ngb-progressbar>
                                         </div>
                                     </div>
                                 </td>
@@ -227,7 +131,14 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                    <hr>
+                    <div class="text-end mt-3">
+                        <button type="button" class="btn btn-danger me-2"><i class="mdi mdi-heart-outline"></i></button>
+                        <button type="button" class="btn btn-success waves-effect waves-light">
+                            <span class="btn-label"><i class="mdi mdi-swap-horizontal"></i></span>Proposer un échange
+                        </button>
+                    </div>
+                </div>                
             </div>
         </div> <!-- end card-->
     </div> <!-- end col-->
