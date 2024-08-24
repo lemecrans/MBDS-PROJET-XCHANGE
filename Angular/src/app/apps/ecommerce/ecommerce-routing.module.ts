@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
   { path: 'product/details', loadChildren: () => import('./product-detail/product-detail.module').then(m => m.ProductDetailModule) },
   { path: 'sellers', loadChildren: () => import('./seller/seller.module').then(m => m.SellerModule) },
-  { path: 'shopping-cart', loadChildren: () => import('./shopping-cart/shopping-cart.module').then(m => m.ShoppingCartModule) }
+  { path: 'shopping-cart', loadChildren: () => import('./shopping-cart/shopping-cart.module').then(m => m.ShoppingCartModule) },
+  { path: 'map', loadChildren: () => import('./map/map.module').then(m => m.MapModule) }
 ];
 
 @NgModule({
