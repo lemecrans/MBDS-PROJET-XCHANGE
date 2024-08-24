@@ -28,6 +28,18 @@ export class ObjetService {
     return this.http.get<Objet>(URL_BASE+'/'+id)
   }
 
+  createObjet(objet: any, file: File): Observable<number> {
+    const formData = new FormData();
+    formData.append('objet', JSON.stringify(objet));
+    formData.append('image', file);
+
+    return this.http.post<number>(URL_BASE, formData, {
+      headers: new HttpHeaders({
+      }),
+      observe: 'body'
+    });
+  }
+
   get listeMesObjets() {
     return this._listeMesObjets.asObservable();
   }

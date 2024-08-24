@@ -3,6 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Select2Data } from 'ng-select2-component';
 import { BreadcrumbItem } from 'src/app/shared/page-title/page-title.model';
+import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
+import { Objet } from '../../../shared/models/objet.model';
+import { Utilisateur } from '../../../shared/models/utilisateur.model';
+import { ObjetService } from '../../../shared/services/objet.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ecommerce-add-product',
@@ -12,78 +17,48 @@ import { BreadcrumbItem } from 'src/app/shared/page-title/page-title.model';
 export class AddProductComponent implements OnInit {
 
   pageTitle: BreadcrumbItem[] = [];
-  newProduct!: FormGroup;
+  newObjet!: FormGroup;
   files: File[] = [];
   category: Select2Data = [];
+  objet: Partial<Objet> = {};
+  proprietaire : Partial<Utilisateur> = {}
 
   constructor (
     private fb: FormBuilder,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private ObjetService : ObjetService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
     this.pageTitle = [{ label: 'Ecommerce', path: '/' }, { label: 'Add / Edit Product', path: '/', active: true }];
-    // product form
-    this.newProduct = this.fb.group({
-      name: ['', Validators.required],
-      reference: ['', Validators.required],
+    this.newObjet = this.fb.group({
+      nom: ['', Validators.required],
       description: ['', Validators.required],
-      summary: [''],
-      category: ['', Validators.required],
-      price: ['', Validators.required],
-      status: ['online', Validators.required],
-      comment: [''],
-      metaTitle: [''],
-      metaKeywords: [''],
-      metaDescription: ['']
+      valeur: ['', Validators.required],
+      disponible: ['', Validators.required]
     });
-
-    // product categories
-    this.category = [
-      {
-        label: 'Shopping',
-        options: [
-          { value: 'SH1', label: 'Shopping 1' },
-          { value: 'SH2', label: 'Shopping 2' },
-          { value: 'SH3', label: 'Shopping 3' },
-        ],
-      },
-      {
-        label: 'CRM',
-        options: [
-          { value: 'CRM1', label: 'Crm 1' },
-          { value: 'CRM2', label: 'Crm 2' },
-          { value: 'CRM3', label: 'Crm 3' },
-          { value: 'CRM4', label: 'Crm 4' },
-        ],
-      },
-      {
-        label: 'eCommerce',
-        options: [
-          { value: 'E1', label: 'eCommerce 1' },
-          { value: 'E2', label: 'eCommerce 2' },
-          { value: 'E3', label: 'eCommerce 3' },
-          { value: 'E4', label: 'eCommerce 4' },
-        ],
-      },
-    ];
   }
 
   // convenience getter for easy access to form fields
-  get form1() { return this.newProduct.controls; }
+  get form1() { return this.newObjet.controls; }
 
-  /**
-   *  adds new file in uploaded files
-   */
-  onSelect(event: any) {
-    this.files.push(...event.addedFiles);
+ // Gérer les fichiers sélectionnés
+ onSelect(event: NgxDropzoneChangeEvent): void {
+  // Si un fichier est déjà sélectionné, nous n'en ajoutons pas d'autres
+  if (this.files.length === 0) {
+    this.files = event.addedFiles;
+  } else {
+    alert('Une seule image est autorisée !')
   }
+}
 
   /**
    *   removes file from uploaded files
    */
   onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
+    this.files = []
   }
 
   /**
@@ -108,6 +83,29 @@ export class AddProductComponent implements OnInit {
    */
   getPreviewUrl(f: File) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(encodeURI(URL.createObjectURL(f)));
+  }
+
+  ajouterProduit(){
+    this.objet.nom = this.newObjet.value.nom
+    this.objet.description = this.newObjet.value.description
+    this.objet.valeur = this.newObjet.value.valeur
+    this.objet.disponible = this.newObjet.value.disponible
+
+    this.objet.proprietaire = new Utilisateur(1,'polyphia@yopmail.com','pass','scott','ADMIN',5,5) //provisoire
+
+    if (this.files.length>0 && this.newObjet.status!=='INVALID') {
+      this.ObjetService.createObjet(this.objet, this.files[0]).subscribe({
+        next: (id: number) => {
+          alert('Objet créé avec succès');
+          this.router.navigate(['/apps/ecommerce/product/details'], { queryParams: { id } });
+        },
+        error: (err) => {
+          alert('Erreur lors de la création de l\'objet: '+ err);
+        }
+      });
+    } else {
+      alert('Veuillez remplir tous les champs !')
+    }
   }
 
 }

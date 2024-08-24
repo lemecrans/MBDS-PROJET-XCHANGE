@@ -1,7 +1,7 @@
 import { Utilisateur } from './utilisateur.model';
 
 export class Objet {
-    id: number;
+    id?: number;
     nom: string;
     description: string;
     valeur: number;
