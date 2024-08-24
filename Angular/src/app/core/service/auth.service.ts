@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { User } from '../models/auth.models';
+import { environment } from 'src/app/environments/environment';
+import { throwError } from 'rxjs';
 
-
+const URL_BASE = environment.host + 'auth/';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    user: User | null = null;
+    user: any | null = null;
 
     constructor (private http: HttpClient) {
     }
@@ -28,18 +30,48 @@ export class AuthenticationService {
      * @param password password of user
      */
     login(email: string, password: string): any {
-
-        return this.http.post<any>(`/api/login`, { email, password })
-            .pipe(map(user => {
-                // login successful if there's a jwt token in the response
-                if (user && user.token) {
-                    this.user = user;
-                    // store user details and jwt in session
-                    sessionStorage.setItem('currentUser', JSON.stringify(user));
-                }
-                return user;
-            }));
+        const url = URL_BASE + 'login';
+        const body = {
+            "email": email,
+            "password": password
+        };
+        // console.log("=====================================================");
+        // console.log(body);
+    
+        return this.http.post<any>(url, body)
+            .pipe(
+                map(response => {
+                    if (response) {
+                        const user = {
+                            email: response.email,
+                            id: response.id,
+                            nombreDeNotes: response.nombreDeNotes,
+                            noteMoyenne: response.noteMoyenne,
+                            role: response.role,
+                            username: response.username,
+                            token: response.token 
+                        };
+                        this.user = user;
+                        this.user.token = response.token;
+                        sessionStorage.setItem('currentUser', JSON.stringify(this.user));
+                    }
+                    return response.user;
+                }),
+                // Interception et gestion des erreurs
+                catchError(error => {
+                    console.error('Erreur de login :', error);
+                    let errorMessage = 'Une erreur s\'est produite lors de la connexion.';
+                    if (error.status === 401) {
+                        errorMessage = 'Email ou mot de passe incorrect.';
+                    } else if (error.status === 500) {
+                        errorMessage = 'Erreur serveur, veuillez réessayer plus tard.';
+                    }
+                    // Vous pouvez renvoyer l'erreur ou afficher un message d'erreur à l'utilisateur
+                    return throwError(() => new Error(errorMessage));
+                })
+            );
     }
+    
 
     /**
      * Performs the signup auth

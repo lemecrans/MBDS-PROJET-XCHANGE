@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['ubold@coderthemes.com', [Validators.required, Validators.email]],
-      password: ['test', Validators.required]
+      email: ['andrianmattax@gmail.com', [Validators.required, Validators.email]],
+      password: ['1234', Validators.required]
     });
 
     // reset login status
@@ -51,21 +51,27 @@ export class LoginComponent implements OnInit {
   /**
    * On submit form
    */
-  onSubmit(): void {
+ onSubmit(): void {
     this.formSubmitted = true;
     if (this.loginForm.valid) {
-      this.loading = true;
-      this.authenticationService.login(this.formValues.email?.value, this.formValues.password?.value)
-        .pipe(first())
-        .subscribe(
-          (data: any) => {
-            this.router.navigate([this.returnUrl]);
-          },
-          (error: any) => {
-            this.error = error;
-            this.loading = false;
-          });
+        this.loading = true;
+        this.authenticationService.login(this.formValues.email?.value, this.formValues.password?.value)
+            .pipe(first())
+            .subscribe(
+                (data: any) => {
+                    console.log(data)
+                    console.log(this.returnUrl)
+                    this.loading = false;
+                    this.router.navigate([this.returnUrl]);
+                },
+                (error: any) => {
+                    this.error = error.message; 
+                    this.loading = false;
+                });
     }
-  }
+}
+navigateToSignUp(){
+  this.router.navigate(['/auth/register2']);
+}
 
 }
