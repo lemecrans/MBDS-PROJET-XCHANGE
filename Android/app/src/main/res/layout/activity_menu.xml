@@ -124,7 +124,7 @@
                     android:background="@drawable/btn_background_2">
 
                     <ImageView
-                        android:id="@+id/imageView6"
+                        android:id="@+id/imageView16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -132,7 +132,7 @@
                         app:srcCompat="@drawable/light_1" />
 
                     <ImageView
-                        android:id="@+id/imageView7"
+                        android:id="@+id/imageView27"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -142,7 +142,7 @@
                         app:srcCompat="@drawable/qr_code_icon" />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/textView14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -151,9 +151,9 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
 
-                        app:layout_constraintEnd_toEndOf="@+id/imageView7"
-                        app:layout_constraintStart_toStartOf="@+id/imageView7"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+                        app:layout_constraintEnd_toEndOf="@+id/imageView27"
+                        app:layout_constraintStart_toStartOf="@+id/imageView27"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView27" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
@@ -175,7 +175,7 @@
                     android:background="@drawable/btn_background_3">
 
                     <ImageView
-                        android:id="@+id/imageView6"
+                        android:id="@+id/imageView17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -183,7 +183,7 @@
                         app:srcCompat="@drawable/light_1" />
 
                     <ImageView
-                        android:id="@+id/imageView7"
+                        android:id="@+id/imageView28"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -193,7 +193,7 @@
                         app:srcCompat="@drawable/search_icon_2044x2048_psdrpqwp" />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/textView15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -202,9 +202,9 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
 
-                        app:layout_constraintEnd_toEndOf="@+id/imageView7"
-                        app:layout_constraintStart_toStartOf="@+id/imageView7"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+                        app:layout_constraintEnd_toEndOf="@+id/imageView28"
+                        app:layout_constraintStart_toStartOf="@+id/imageView28"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView28" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -216,7 +216,7 @@
                     android:background="@drawable/btn_background_1">
 
                     <ImageView
-                        android:id="@+id/imageView6"
+                        android:id="@+id/imageView18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -224,7 +224,7 @@
                         app:srcCompat="@drawable/light_1" />
 
                     <ImageView
-                        android:id="@+id/imageView7"
+                        android:id="@+id/imageView29"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -234,7 +234,7 @@
                         app:srcCompat="@drawable/clock_xxl" />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/textView16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -243,9 +243,9 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
 
-                        app:layout_constraintEnd_toEndOf="@+id/imageView7"
-                        app:layout_constraintStart_toStartOf="@+id/imageView7"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+                        app:layout_constraintEnd_toEndOf="@+id/imageView29"
+                        app:layout_constraintStart_toStartOf="@+id/imageView29"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView29" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
