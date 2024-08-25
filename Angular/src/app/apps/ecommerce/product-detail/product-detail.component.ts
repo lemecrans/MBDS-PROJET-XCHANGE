@@ -16,6 +16,7 @@ export class ProductDetailComponent implements OnInit {
   pageTitle: BreadcrumbItem[] = [];
   product: Product = {};
   objet: Partial<Objet> = {};
+  objetId:number | undefined;
 
   constructor (private route: ActivatedRoute,private objetService : ObjetService, private router: Router) { }
 
@@ -26,6 +27,7 @@ export class ProductDetailComponent implements OnInit {
       this.objetService.getObjectById(params.id).subscribe({
         next: (response: Objet) => {
           this.objet = response;
+          this.objetId = this.objet.id
           this.objet.image = `data:image/png;base64,${response.image}`
         },
         error: (error) => {

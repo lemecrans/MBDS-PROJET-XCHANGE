@@ -5,6 +5,7 @@ import { PageTitleModule } from 'src/app/shared/page-title/page-title.module';
 import { AdvancedTableModule } from 'src/app/shared/advanced-table/advanced-table.module';
 import { ProductDetailRoutingModule } from './product-detail-routing.module';
 import { ProductDetailComponent } from './product-detail.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ProductDetailComponent } from './product-detail.component';
     NgbNavModule,
     AdvancedTableModule,
     PageTitleModule,
-    ProductDetailRoutingModule
+    ProductDetailRoutingModule,
+    QRCodeModule
   ]
 })
 export class ProductDetailModule { }

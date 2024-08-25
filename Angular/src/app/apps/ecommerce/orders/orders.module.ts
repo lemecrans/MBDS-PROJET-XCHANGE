@@ -18,7 +18,7 @@ import { OrdersComponent } from './orders.component';
     AdvancedTableModule,
     WidgetModule,
     PageTitleModule,
-    OrdersRoutingModule
+    OrdersRoutingModule,
   ]
 })
 export class OrdersModule { }

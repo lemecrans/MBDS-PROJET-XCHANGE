@@ -18,10 +18,9 @@
                             <div class="me-sm-3">
                                 <select class="form-select my-1 my-lg-0" id="status-select">
                                     <option selected="">Tout</option>
-                                    <option value="1">Popular</option>
-                                    <option value="2">Price Low</option>
-                                    <option value="3">Price High</option>
-                                    <option value="4">Sold Out</option>
+                                    <option value="1">Disponible</option>
+                                    <option value="2">Indisponible</option>
+                                    <option value="3">Populaire</option>
                                 </select>
                             </div>
                         </form>
@@ -46,7 +45,8 @@
         <div class="card product-box">
             <div class="card-body">
                 <div class="product-action">
-                    <a href="javascript: void(0);" class="btn btn-success btn-xs waves-effect waves-light me-1"><i
+                    <a [routerLink]="['/apps/crm/contacts']"
+                    [queryParams]="{ id: objet.id}" class="btn btn-success btn-xs waves-effect waves-light me-1"><i
                             class="mdi mdi-pencil"></i></a>
                     <a href="javascript: void(0);" class="btn btn-danger btn-xs waves-effect waves-light"><i
                             class="mdi mdi-close"></i></a>
