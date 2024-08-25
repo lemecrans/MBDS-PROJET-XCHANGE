@@ -37,9 +37,6 @@ public class Menu_activity extends AppCompatActivity {
         btnSearch = findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(v -> onListClicked());
 
-        detailsText = findViewById(R.id.detailsText);
-        detailsText.setOnClickListener(v -> onDetailsClicked());
-
         voirText = findViewById(R.id.voirText);
         voirText.setOnClickListener(v -> onListClicked());
     }

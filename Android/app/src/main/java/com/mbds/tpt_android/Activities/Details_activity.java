@@ -27,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,7 +45,6 @@ public class Details_activity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         textViewTitre = findViewById(R.id.titre);
-        textViewProp = findViewById(R.id.prop);
         img = findViewById(R.id.img);
         description = findViewById(R.id.description);
         btnBack = findViewById(R.id.btnBack);
@@ -60,14 +60,15 @@ public class Details_activity extends AppCompatActivity {
     }
 
     private void fetchObjectDetails(String objectId) {
-        String url = "http://192.168.231.79:8080/api/objet/"+objectId;
+        String url = "http://192.168.88.7:8080/api/objet/"+objectId;
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONObject singleObject = new JSONObject(response);
+                            String decodedResponse = new String(response.getBytes("ISO-8859-1"), "UTF-8");
+                            JSONObject singleObject = new JSONObject(decodedResponse);
                             JSONObject proprietaireObject = singleObject.getJSONObject("proprietaire");
                             String username = proprietaireObject.getString("username");
 
@@ -77,6 +78,7 @@ public class Details_activity extends AppCompatActivity {
                                     singleObject.getString("id"),
                                     singleObject.getString("nom"),
                                     singleObject.getString("description"),
+
                                     singleObject.getString("valeur"),
                                     username,
                                     singleObject.getBoolean("disponible"),
@@ -84,7 +86,6 @@ public class Details_activity extends AppCompatActivity {
                             );
                             runOnUiThread(() -> {
                                 textViewTitre.setText(p.getNom());
-                                textViewProp.setText(p.getProprietaire());
                                 description.setText(p.getDescription());
                                 if (p.getImage() != null && !p.getImage().isEmpty()) {
                                     byte[] decodedString = Base64.decode(p.getImage(), Base64.DEFAULT);
@@ -95,6 +96,8 @@ public class Details_activity extends AppCompatActivity {
                                 }
                             });
                         } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        } catch (UnsupportedEncodingException e) {
                             throw new RuntimeException(e);
                         }
                     }
@@ -108,7 +111,7 @@ public class Details_activity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwb2x5cGhpYUB5b3BtYWlsLmNvbSIsImlhdCI6MTcyMjc4MjUzOSwiZXhwIjoxNzIyNzgzNDM5fQ.dmmgCJbzukFkc6Kb0JhKoOyxdBi6F8vyl3OuRPqpSl4");
+                headers.put("Content-Type", "application/json; charset=UTF-8");
                 return headers;
             }
         };

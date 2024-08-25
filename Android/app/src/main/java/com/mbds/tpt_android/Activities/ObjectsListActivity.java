@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -46,13 +48,14 @@ public class ObjectsListActivity extends AppCompatActivity {
         finish();
     }
 
-    private void initRecyclerView(){
+    private void initRecyclerView() {
         recyclerViewObject = findViewById(R.id.view);
-        recyclerViewObject.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-
-        ArrayList<ObjectsDomain> items = new ArrayList<ObjectsDomain>();
-        String url = "http://192.168.231.79:8080/api/objet";
+        recyclerViewObject.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        System.out.println("---------------------------------------------------JE SUIS ICI");
+        ArrayList<ObjectsDomain> items = new ArrayList<>();
+        String url = "http://192.168.88.7:8080/api/objet";
         RequestQueue queue = Volley.newRequestQueue(this);
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -60,7 +63,7 @@ public class ObjectsListActivity extends AppCompatActivity {
                         System.out.println("Response is: " + response);
                         try {
                             JSONArray array = new JSONArray(response);
-                            for(int i =0;i<array.length();i++){
+                            for (int i = 0; i < array.length(); i++) {
                                 JSONObject singleObject = array.getJSONObject(i);
                                 JSONObject proprietaireObject = singleObject.getJSONObject("proprietaire");
                                 String username = proprietaireObject.getString("username");
@@ -86,19 +89,28 @@ public class ObjectsListActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("THIS DIDINT WORK"+error);
+                System.out.println("THIS DIDN'T WORK: " + error);
                 error.printStackTrace();
             }
         }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwb2x5cGhpYUB5b3BtYWlsLmNvbSIsImlhdCI6MTcyMjc4MDMyNywiZXhwIjoxNzIyNzgxMjI3fQ.euSVG8DaqGnbAwI-Lni6BD5ZdfJ5hdQ1K1_Vng4F3Dk");
                 return headers;
             }
         };
+
+        int socketTimeout = 60 * 1000;
+        RetryPolicy policy = new DefaultRetryPolicy(
+                socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        );
+        stringRequest.setRetryPolicy(policy);
+
         queue.add(stringRequest);
     }
+
 
 
 }

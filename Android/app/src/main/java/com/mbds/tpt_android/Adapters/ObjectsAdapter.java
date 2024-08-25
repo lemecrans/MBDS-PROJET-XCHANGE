@@ -85,7 +85,7 @@ public class ObjectsAdapter extends RecyclerView.Adapter<ObjectsAdapter.ViewHold
             String proprietaire = items.get(position).getProprietaire();
 
             HistoryManager historyManager = new HistoryManager(context);
-            //historyManager.addToHistory(objectId, objectName,proprietaire);
+            historyManager.addToHistory(objectId, objectName,proprietaire);
 
             List<HistoryItem> historyList = historyManager.getAllHistory();
 
