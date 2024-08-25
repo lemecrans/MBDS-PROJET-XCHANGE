@@ -78,9 +78,15 @@ public class ObjetController {
     }
 
     @PutMapping
-    public ResponseEntity<Objet> updateObjet(@RequestBody Objet objetDetails) {
-        Objet updatedObjet = objetService.updateObjet(objetDetails);
-        return ResponseEntity.ok(updatedObjet);
+    public ResponseEntity<?> updateObjet(@RequestBody Objet objetDetails) {
+        try {
+            Objet updatedObjet = objetService.updateObjet(objetDetails);
+            return ResponseEntity.ok(updatedObjet);
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred.");
+        }
     }
 
 

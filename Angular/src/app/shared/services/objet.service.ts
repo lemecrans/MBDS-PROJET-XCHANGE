@@ -80,7 +80,10 @@ export class ObjetService {
   
     return this._listeMesObjets.asObservable();
   }
-  
+
+  updateObjet(objetToUpdate: Objet): Observable<Objet> {
+    return this.http.put<Objet>(URL_BASE, objetToUpdate);
+  }
   
 
 }
