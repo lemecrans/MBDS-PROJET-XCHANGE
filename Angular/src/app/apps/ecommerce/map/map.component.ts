@@ -4,10 +4,12 @@ import * as L from 'leaflet';
 import { PropositionEchangeService } from 'src/app/shared/services/proposition-echange.service';
 import { PropositionEchange } from 'src/app/shared/models/propositionEchange.model';
 import { Utilisateur } from 'src/app/shared/models/utilisateur.model';
+import { AuthenticationService } from 'src/app/core/service/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
-const iconRetinaUrl = 'src/assets/marker-icon-2x.png';
-const iconUrl = 'src/assets/marker-icon.png';
-const shadowUrl = 'src/assets/marker-shadow.png';
+const iconRetinaUrl = 'assets/leaflet/marker-icon-2x.png';
+const iconUrl = 'assets/leaflet/marker-icon.png';
+const shadowUrl = 'assets/leaflet/marker-shadow.png';
 const iconDefault = L.icon({
   iconRetinaUrl,
   iconUrl,
@@ -32,16 +34,26 @@ export class MapComponent implements OnInit {
 
   pageTitle: BreadcrumbItem[] = [];
 
-  currentUser! : Utilisateur;
+  currentUser! : Utilisateur | any;
 
-  constructor(private propositionEchangeService: PropositionEchangeService) { }
+  objetId! : string
+
+  constructor(private propositionEchangeService: PropositionEchangeService,private authenticationService:AuthenticationService, private router: Router, private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
     this.pageTitle = [{ label: 'Ecommerce', path: '/' }, { label: 'Add / Edit Product', path: '/', active: true }];
+
+    this.route.queryParams.subscribe(params => {
+      if(params['id']!==null){
+        this.objetId = params['id']
+      }
+    });
   }
 
   getAllEchange(){
-    this.currentUser = new Utilisateur(1,'polyphia@gmail.com','password','Tim henson','ADMIN',0,2)
+    if(this.authenticationService.currentUser()!==null){
+      this.currentUser = this.authenticationService.currentUser()
+    }
 
     this.propositionEchangeService.getAllProposition().subscribe({
       next: (propositions) => {
@@ -80,16 +92,41 @@ export class MapComponent implements OnInit {
     this.myPropositions.forEach((proposition) => {
       const marker = L.marker([proposition.latitude, proposition.longitude])
         .addTo(map)
-        .bindPopup(`Proposant: ${proposition.proposant.username}<br>Destinataire: ${proposition.destinataire.username}<br>Date: ${proposition.dateProposition}<br>État: ${proposition.etat}`)
-        .openPopup();
+        .bindPopup(`
+          Proposant: ${proposition.proposant.username}<br>
+          Destinataire: ${proposition.destinataire.username}<br>
+          Date: ${proposition.dateProposition}<br>
+          État: ${proposition.etat}<br>
+          <a class="navigate-button">Voir</a>
+        `)
+        if (this.objetId === proposition.id.toString()) {
+          marker.openPopup();
+          map.setView(marker.getLatLng(), 15); // Optionnel: centrer la carte sur le marqueur
+        }
     });
-  }
+    map.on('popupopen', (event: L.PopupEvent) => {
+      const popup = event.popup;
+      const popupElement = popup.getElement();
 
+      if (popupElement) {
+        const links = popupElement.getElementsByClassName('navigate-button');
+        Array.from(links).forEach(link => {
+          link.addEventListener('click', (e: Event) => {
+            e.preventDefault();
+            const target = e.target as HTMLAnchorElement;
+            this.navigateToOrders();
+          });
+        });
+      }
+    });
+    
+  }
+  navigateToOrders() {
+    this.router.navigate(['/apps/ecommerce/orders']);
+  }
   
   ngAfterViewInit(): void {
     this.getAllEchange()
   }
-
-  
 
 }

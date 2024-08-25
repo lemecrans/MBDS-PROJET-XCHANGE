@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbItem } from 'src/app/shared/page-title/page-title.model';
 import { ORDERSLIST } from '../shared/data';
 import { Order, OrderDetails } from '../shared/ecommerce.model';
@@ -41,7 +41,7 @@ export class OrderDetailComponent implements OnInit {
   currentUser! : any 
   idObjetDestinataire! : number
 
-  constructor (private route: ActivatedRoute, private ObjetService: ObjetService, private propositionService:PropositionEchangeService ,private authenticationService: AuthenticationService) { }
+  constructor (private route: ActivatedRoute, private ObjetService: ObjetService, private propositionService:PropositionEchangeService ,private authenticationService: AuthenticationService,private router:Router) { }
 
   ngOnInit(): void {
     this.getCurrentPosition()
@@ -200,6 +200,7 @@ export class OrderDetailComponent implements OnInit {
         next: (response: any) => {
           console.log('Proposition créée avec succès:', response);
           alert('Proposition créée avec succès!');
+          this.router.navigate(['/apps/ecommerce/orders']);
         },
         error: (err: any) => {
           console.error('Erreur lors de la création de la proposition:', err);

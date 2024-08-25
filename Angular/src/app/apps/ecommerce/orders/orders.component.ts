@@ -9,6 +9,7 @@ import { Utilisateur } from 'src/app/shared/models/utilisateur.model';
 import { PropositionEchangeService } from 'src/app/shared/services/proposition-echange.service';
 import { PropositionEchange } from 'src/app/shared/models/propositionEchange.model';
 import { Objet } from 'src/app/shared/models/objet.model';
+import { AuthenticationService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-ecommerce-orders',
@@ -23,7 +24,7 @@ export class OrdersComponent implements OnInit {
   propositionStatus: string = "All";
   loading: boolean = false;
   columns: Column[] = [];
-  currentUser! : Utilisateur
+  currentUser! : any
   propositions : PropositionEchange[] = []
   myPropositions : PropositionEchange[] = []
   proposantObjet : Objet[] = []
@@ -33,7 +34,7 @@ export class OrdersComponent implements OnInit {
   @ViewChild('advancedTable') advancedTable: any;
 
 
-  constructor (private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer,private propositionEchangeService: PropositionEchangeService) { }
+  constructor (private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer,private propositionEchangeService: PropositionEchangeService,private authenticationService: AuthenticationService) { }
   ngOnInit(): void {
     this.pageTitle = [{ label: 'Ecommerce', path: '/' }, { label: 'Liste des propositions', path: '/', active: true }];
 
@@ -48,8 +49,11 @@ export class OrdersComponent implements OnInit {
   }
 
   getAllPropositions(){
-    this.currentUser = new Utilisateur(2,'polyphia@gmail.com','password','Tim henson','ADMIN',0,2)
-
+    const currentUser = this.authenticationService.currentUser();
+    if(currentUser!=null){
+      this.currentUser = currentUser
+    }
+    
     this.propositionEchangeService.getAllProposition().subscribe({
       next: (propositions) => {
         this.propositions = propositions;
@@ -124,6 +128,11 @@ export class OrdersComponent implements OnInit {
     document.querySelectorAll('.validerButton').forEach((button) => {
       button.addEventListener('click', () => this.validerEchange(button));
     });
+
+    document.querySelectorAll('.voirProposition').forEach((button) => {
+      button.addEventListener('click', () => this.openMap(button));
+    });
+
     document.querySelectorAll('.propositions').forEach((e) => {
       e.addEventListener("click", () => {
         this.router.navigate(['../order/details'], { relativeTo: this.route, queryParams: { id: e.id } })
@@ -199,7 +208,7 @@ export class OrdersComponent implements OnInit {
 
   // action cell formatter
   orderActionFormatter(proposition: PropositionEchange): any {
-    let propositions: string = `<a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>`;
+    let propositions: string = `<a href="javascript:void(0);" class="action-see voirProposition" value="`+proposition.id+`"> <i class="mdi mdi-eye"></i></a>`;
     if(proposition.destinataire.id===this.currentUser.id && proposition.etat==='En attente'){
       propositions+=`<a href="javascript:void(0);"  value="`+proposition.id+`" class="action-icon validerButton"> <i class="mdi mdi-check-circle""></i></a>`
     }
@@ -219,6 +228,12 @@ export class OrdersComponent implements OnInit {
         window.location.reload()
       }
     });
+  }
+
+  openMap(idObjet:any){
+    let id = idObjet.getAttribute('value')
+
+    this.router.navigate(['/apps/ecommerce/map'], { queryParams: { id } });
   }
 
 
