@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Column } from 'src/app/shared/advanced-table/advanced-table.component';
@@ -32,6 +32,7 @@ export class OrdersComponent implements OnInit {
 
   @ViewChild('advancedTable') advancedTable: any;
 
+
   constructor (private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer,private propositionEchangeService: PropositionEchangeService) { }
   ngOnInit(): void {
     this.pageTitle = [{ label: 'Ecommerce', path: '/' }, { label: 'Liste des propositions', path: '/', active: true }];
@@ -47,7 +48,7 @@ export class OrdersComponent implements OnInit {
   }
 
   getAllPropositions(){
-    this.currentUser = new Utilisateur(1,'polyphia@gmail.com','password','Tim henson','ADMIN',0,2)
+    this.currentUser = new Utilisateur(2,'polyphia@gmail.com','password','Tim henson','ADMIN',0,2)
 
     this.propositionEchangeService.getAllProposition().subscribe({
       next: (propositions) => {
@@ -80,7 +81,7 @@ export class OrdersComponent implements OnInit {
       {
         name: 'Proposant',
         label: 'Proposant',
-        formatter: this.proposantFormatter.bind(this)
+        formatter: this.proposantFormatter.bind(this),
       },
       {
         name: 'Objets proposés',
@@ -120,8 +121,10 @@ export class OrdersComponent implements OnInit {
    *  handles operations that need to be performed after loading table
    */
   handleTableLoad(event: any): void {
-    // product cell
-    document.querySelectorAll('.order').forEach((e) => {
+    document.querySelectorAll('.validerButton').forEach((button) => {
+      button.addEventListener('click', () => this.validerEchange(button));
+    });
+    document.querySelectorAll('.propositions').forEach((e) => {
       e.addEventListener("click", () => {
         this.router.navigate(['../order/details'], { relativeTo: this.route, queryParams: { id: e.id } })
       });
@@ -195,12 +198,27 @@ export class OrdersComponent implements OnInit {
 
 
   // action cell formatter
-  orderActionFormatter(order: Order): any {
+  orderActionFormatter(proposition: PropositionEchange): any {
+    let propositions: string = `<a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>`;
+    if(proposition.destinataire.id===this.currentUser.id && proposition.etat==='En attente'){
+      propositions+=`<a href="javascript:void(0);"  value="`+proposition.id+`" class="action-icon validerButton"> <i class="mdi mdi-check-circle""></i></a>`
+    }
+    if(proposition.etat!=='Validé'){
+      propositions+=`<a href="javascript:void(0);" id="delete" class="action-icon"> <i class="mdi mdi-delete"></i></a>`
+    } 
     return this.sanitizer.bypassSecurityTrustHtml(
-      `<a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-           <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-           <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>`
+      propositions
     )
+
+  }
+
+  validerEchange(button:any){
+    this.propositionEchangeService.validerProposition(button.getAttribute('value')).subscribe({
+      next: (response:any) => {
+        alert('Échange validé avec succès!')
+        window.location.reload()
+      }
+    });
   }
 
 
@@ -249,6 +267,7 @@ export class OrdersComponent implements OnInit {
       this.loading = false;
     }, 400);
   }
+
 
 
 }

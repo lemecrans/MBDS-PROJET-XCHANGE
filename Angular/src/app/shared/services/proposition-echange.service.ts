@@ -15,4 +15,10 @@ export class PropositionEchangeService {
   getAllProposition(): Observable<PropositionEchange[]>{
     return this.http.get<PropositionEchange[]>(URL_BASE)
   }
+
+  validerProposition(id: string): Observable<string> {
+    return this.http.put<string>(`${URL_BASE}/${id}/valider`, null, {
+      responseType: 'text' as 'json'
+    });
+  }
 }
