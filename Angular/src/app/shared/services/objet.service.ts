@@ -1,6 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthenticationService } from 'src/app/core/service/auth.service';
 import { environment } from 'src/app/environments/environment';
 import { Objet } from 'src/app/shared/models/objet.model';
 
@@ -16,8 +17,8 @@ export class ObjetService {
 
   private _listeObjets = new BehaviorSubject<Objet[]| null>(null)
   
-  constructor(private http: HttpClient) { 
-
+  constructor(private http: HttpClient,private authenticationService: AuthenticationService) { 
+    this.getListMesObjet();
   }
 
   getAllObject(): Observable<Objet[]> {
@@ -43,32 +44,38 @@ export class ObjetService {
   get listeMesObjets() {
     return this._listeMesObjets.asObservable();
   }
-  getListObjet(): Observable<any[] | null> {
- 
-    const url = URL_BASE+'/objet';
-    console.log(url)
-    const headers = {'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaWFubWF0dGF4QGdtYWlsLmNvbSIsImlhdCI6MTcyMzk3MDM1NiwiZXhwIjoxNzIzOTczOTU2fQ.DZA5Mu1GaE2I_guwvImq_PlYYxNXa29V4h1MSr2r948'}
-    console.log(headers)
-    this.http.get<any[]>(url, { headers }).subscribe({
-      next: (response) => {
-        const objets = response.map((objet:any) => ({
-          id: objet.id,
-          nom: objet.nom,
-          description: objet.description,
-          valeur: objet.valeur,
-          disponible: objet.disponible,
-          proprietaire_id: objet.proprietaire.id,
-          img:`data:image/png;base64,${objet.image}`
-        }));
-        this._listeMesObjets.next(objets);
-      },
-      error: (error) => {
-        console.error('Une erreur est survenue : ', error);
-        this._listeMesObjets.next(null);
-      }
-    });
+  getListMesObjet(): Observable<any[] | null> {
 
+    const url = URL_BASE + '/myThing';
+    const currentUser = this.authenticationService.currentUser();
+    if (currentUser?.id !== undefined) {
+      const params = new HttpParams().set('idUser', currentUser.id.toString());
+      this.http.get<any[]>(url, { params }).subscribe({
+        next: (response) => {
+          const objets = response.map((objet: any) => ({
+            id: objet.id,
+            nom: objet.nom,
+            description: objet.description,
+            valeur: objet.valeur,
+            disponible: objet.disponible,
+            proprietaire: objet.proprietaire,
+            img: `data:image/png;base64,${objet.image}`
+          }));
+          this._listeMesObjets.next(objets);
+        },
+        error: (error) => {
+          console.error('Une erreur est survenue : ', error);
+          this._listeMesObjets.next(null);
+        }
+      });
+    } else {
+      console.error('Erreur : idUser est indéfini');
+      this._listeMesObjets.next(null);
+    }
+  
     return this._listeMesObjets.asObservable();
   }
+  
+  
 
 }

@@ -1,22 +1,25 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ChartOptions } from 'src/app/pages/charts/apex/apex-chart.model';
 import { BreadcrumbItem } from 'src/app/shared/page-title/page-title.model';
 import { CompanyInfoItem } from '../shared/crm.model';
 import { COMPANYLIST } from '../shared/data';
+import { ObjetService } from 'src/app/shared/services/objet.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-crm-opportunities',
   templateUrl: './opportunities.component.html',
   styleUrls: ['./opportunities.component.scss']
 })
-export class OpportunitiesComponent implements OnInit {
+export class OpportunitiesComponent implements OnInit, OnDestroy {
 
 
   pageTitle: BreadcrumbItem[] = [];
   newOpportunity!: FormGroup;
-  companyList: CompanyInfoItem[] = [];
+  mesObjet: any[] = [];
+  objetsSub!: Subscription;
   searchTerm: string = '';
   sortCategory: string = 'All';
   staticsChart!: Partial<ChartOptions>;
@@ -25,12 +28,13 @@ export class OpportunitiesComponent implements OnInit {
 
   constructor (
     public activeModal: NgbModal,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private objetservice : ObjetService
   ) { }
 
 
   ngOnInit(): void {
-    this.pageTitle = [{ label: 'CRM', path: '/' }, { label: 'Opportunities', path: '/', active: true }];
+    this.pageTitle = [{ label: 'Mes Objets', path: '/' }, { label: 'liste', path: '/', active: true }];
     this.newOpportunity = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -49,7 +53,14 @@ export class OpportunitiesComponent implements OnInit {
    * fetches data
    */
   _fetchData(): void {
-    this.companyList = COMPANYLIST;
+    this.objetsSub = this.objetservice.listeMesObjets.subscribe({
+      next: (liste) => {
+        console.log(liste);
+        if(liste){
+         this.mesObjet = liste; 
+        }
+      },
+    });
   }
 
   /**
@@ -93,16 +104,14 @@ export class OpportunitiesComponent implements OnInit {
       this._fetchData();
     }
     else {
-      let updatedData = COMPANYLIST;
-      //  filter
-      updatedData = updatedData.filter(company => (company.name?.toLowerCase().includes(searchTerm) || company.location.toLowerCase().includes(searchTerm)));
-      this.companyList = updatedData;
+      let updatedData = this.mesObjet;
+      updatedData = updatedData.filter(mesObjet => (mesObjet.nom?.toLowerCase().includes(searchTerm)));
+      this.mesObjet = updatedData;
     }
   }
-
-  changeCategory(status: string): void {
-    this.sortCategory = status;
-    this.companyList = this.sortCategory === 'All' ? COMPANYLIST : COMPANYLIST.filter((company) => company.status.includes(this.sortCategory));
+  ngOnDestroy(): void {
+    if (this.objetsSub) this.objetsSub.unsubscribe();
   }
+
 
 }

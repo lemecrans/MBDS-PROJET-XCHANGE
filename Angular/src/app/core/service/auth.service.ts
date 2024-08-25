@@ -43,19 +43,18 @@ export class AuthenticationService {
                 map(response => {
                     if (response) {
                         const user = {
-                            email: response.email,
-                            id: response.id,
-                            nombreDeNotes: response.nombreDeNotes,
-                            noteMoyenne: response.noteMoyenne,
-                            role: response.role,
-                            username: response.username,
+                            email: response.user.email,
+                            id: response.user.id,
+                            nombreDeNotes: response.user.nombreDeNotes,
+                            noteMoyenne: response.user.noteMoyenne,
+                            role: response.user.role,
+                            username: response.user.username,
                             token: response.token 
                         };
                         this.user = user;
-                        this.user.token = response.token;
                         sessionStorage.setItem('currentUser', JSON.stringify(this.user));
                     }
-                    return response.user;
+                    return this.user;
                 }),
                 // Interception et gestion des erreurs
                 catchError(error => {
