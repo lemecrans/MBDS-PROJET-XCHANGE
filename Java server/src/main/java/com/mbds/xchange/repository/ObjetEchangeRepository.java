@@ -10,4 +10,5 @@ import java.util.List;
 public interface ObjetEchangeRepository extends JpaRepository<ObjetEchange, Integer> {
     List<ObjetEchange> findByProposition_IdAndObjet_Proprietaire_Id(int propositionId, long proposantId);
     List<ObjetEchange> findByPropositionId(int propositionId);
+    List<ObjetEchange> findByObjet_id(long objetId);
 }

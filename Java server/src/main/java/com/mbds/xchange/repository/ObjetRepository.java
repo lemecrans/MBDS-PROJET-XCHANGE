@@ -19,5 +19,6 @@ public interface ObjetRepository extends JpaRepository<Objet, Integer> {
     @Transactional
     @Query(value = "INSERT INTO objet (description, disponible, image, nom, proprietaire_id, valeur) VALUES (:description, :disponible, :image, :nom, :proprietaireId, :valeur)", nativeQuery = true)
     void insertObjet(String description, Boolean disponible, byte[] image, String nom, Long proprietaireId, Integer valeur);
+
 }
 

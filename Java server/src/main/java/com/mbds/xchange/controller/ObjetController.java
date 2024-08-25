@@ -78,9 +78,15 @@ public class ObjetController {
     }
 
     @PutMapping
-    public ResponseEntity<Objet> updateObjet(@RequestBody Objet objetDetails) {
-        Objet updatedObjet = objetService.updateObjet(objetDetails);
-        return ResponseEntity.ok(updatedObjet);
+    public ResponseEntity<?> updateObjet(@RequestBody Objet objetDetails) {
+        try {
+            Objet updatedObjet = objetService.updateObjet(objetDetails);
+            return ResponseEntity.ok(updatedObjet);
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred.");
+        }
     }
 
 
@@ -88,5 +94,19 @@ public class ObjetController {
     public ResponseEntity<Objet> patchObjet(@PathVariable int id, @RequestBody Map<String, Object> updates) {
         Objet patchedObjet = objetService.patchObjet(id, updates);
         return ResponseEntity.ok(patchedObjet);
+    }
+    @DeleteMapping
+    public ResponseEntity<?> DeleteObjet(@RequestParam int id) {
+        try {
+            Boolean isdeleted = objetService.deleteObjetById(id);
+            if(isdeleted){
+                return ResponseEntity.ok("Objet Supprimé");
+            }else{
+                throw new ResourceNotFoundException("Aucun Objet trouvé");
+            }
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+        }
     }
 }
