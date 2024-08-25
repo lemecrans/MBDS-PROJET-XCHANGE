@@ -18,23 +18,29 @@ export class ProductDetailComponent implements OnInit {
   objet: Partial<Objet> = {};
   objetId:number | undefined;
 
+  isLoading : boolean = true
+
   constructor (private route: ActivatedRoute,private objetService : ObjetService, private router: Router) { }
 
   ngOnInit(): void {
-    this.pageTitle = [{ label: 'Ecommerce', path: '/' }, { label: 'Product Detail', path: '/', active: true }];
-    // fetches product details
+    this.pageTitle = [{ label: 'Objets', path: '/' }, { label: 'Liste', path: '/', active: true }];
     this.route.queryParams.subscribe(params => {
       this.objetService.getObjectById(params.id).subscribe({
         next: (response: Objet) => {
           this.objet = response;
-          this.objetId = this.objet.id
-          this.objet.image = `data:image/png;base64,${response.image}`
+          this.objetId = this.objet.id;
+          this.objet.image = `data:image/png;base64,${response.image}`;
         },
         error: (error) => {
-          this.router.navigate(['/apps/ecommerce/products'])
+          console.error('Erreur lors de la récupération de l\'objet:', error);
+          this.router.navigate(['/apps/ecommerce/products']);
+        },
+        complete: () => {
+          this.isLoading = false
         }
       });
     });
+    
   }
 
 }

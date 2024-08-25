@@ -41,12 +41,15 @@ export class OrderDetailComponent implements OnInit {
   currentUser! : any 
   idObjetDestinataire! : number
 
+  isLoading : boolean = true
+  isLoadingMyObjet : boolean = true
+
   constructor (private route: ActivatedRoute, private ObjetService: ObjetService, private propositionService:PropositionEchangeService ,private authenticationService: AuthenticationService,private router:Router) { }
 
   ngOnInit(): void {
     this.getCurrentPosition()
     
-    this.pageTitle = [{ label: 'Ecommerce', path: '/' }, { label: 'Order Details', path: '/', active: true }];
+    this.pageTitle = [{ label: 'Proposition', path: '/' }, { label: 'Proposer un echange', path: '/', active: true }];
 
     this.route.queryParams.subscribe(params => {
       if (params && params.hasOwnProperty('id')) {
@@ -54,14 +57,8 @@ export class OrderDetailComponent implements OnInit {
         this.idObjetDestinataire = +params['id']
         this.idAEchanger.push(this.idObjetDestinataire)
         this.getObjetById(this.idObjetDestinataire)
-        this.selectedOrder = ORDERSLIST.filter(x => String(x.id) === params['id'])[0];
-      } else {
-        this.selectedOrder = ORDERSLIST[0];
       }
     });
- 
-    this._fetchData();
-    
   }
 
   getMyObjets(id:any){
@@ -78,6 +75,7 @@ export class OrderDetailComponent implements OnInit {
         console.error('Erreur lors de la récupération des objets:', err);
       },
       complete: () => {
+        this.isLoadingMyObjet = false
         console.log('Requête terminée.');
       }
     });
@@ -121,6 +119,7 @@ export class OrderDetailComponent implements OnInit {
         console.error('Erreur lors de la récupération des objets:', err);
       },
       complete: () => {
+        this.isLoading = false
         console.log('Requête terminée.');
       }
     });
@@ -136,6 +135,7 @@ export class OrderDetailComponent implements OnInit {
         console.error('Erreur lors de la récupération de l\'objet:', err);
       },
       complete: () => {
+        
         console.log('Requête de récupération d\'objet terminée.');
       }
     });
@@ -214,38 +214,4 @@ export class OrderDetailComponent implements OnInit {
 
   }
 
-
-
-  /**
-   * fetches order details
-   */
-  _fetchData(): void {
-    this.orderDetails = {
-      id: this.selectedOrder.order_id!,
-      order_status: this.selectedOrder.order_status,
-      tracking_id: '894152012012',
-      items: [
-        { id: 1, name: 'Polo Navy blue T-shirt', image: 'assets/images/products/product-1.png', quantity: 1, price: 39, total: 39 },
-        { id: 2, name: 'Red Hoodie for men', image: 'assets/images/products/product-2.png', quantity: 2, price: 46, total: 92 },
-        { id: 3, name: 'Red Hoodie for men', image: 'assets/images/products/product-3.png', quantity: 1, price: 46, total: 46 },
-      ],
-      shipping: {
-        provider: 'Stanley Jones',
-        address_1: '795 Folsom Ave, Suite 600',
-        address_2: 'San Francisco, CA 94107',
-        phone: '(123) 456-7890 ',
-        mobile: '(+01) 12345 67890',
-      },
-      billing: {
-        type: this.selectedOrder.payment_method!,
-        provider: 'Visa ending in 2851',
-        valid: '02/2020',
-      },
-      delivery: {
-        provider: 'UPS Delivery',
-        order_id: this.selectedOrder.order_id!,
-        payment_mode: this.selectedOrder.payment_method!,
-      },
-    };
-  }
 }

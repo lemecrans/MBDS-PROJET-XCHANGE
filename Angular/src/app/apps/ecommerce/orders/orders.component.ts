@@ -30,6 +30,7 @@ export class OrdersComponent implements OnInit {
   proposantObjet : Objet[] = []
   destinataireObjet : Objet[] = []
   objetEchanges : Objet[] = []
+  isLoading : boolean = true
 
   @ViewChild('advancedTable') advancedTable: any;
 
@@ -65,6 +66,7 @@ export class OrdersComponent implements OnInit {
       },
       complete: () => {
         this.initTableData()
+        this.isLoading = false
         console.log('La récupération des propositions est terminée.');
       }
     });

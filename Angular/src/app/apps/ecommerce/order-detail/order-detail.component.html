@@ -5,6 +5,11 @@
     <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
+                <div *ngIf="isLoading" class="col-12 d-flex justify-content-center align-items-center" style="height: 80vh;">
+                    <a href="javascript:void(0);" class="text-danger display-6">
+                        <i class="mdi mdi-spin mdi-loading me-1"></i>Chargement
+                    </a>
+                </div>
                 <h4 class="header-title mb-3">Objets à échanger</h4>
                 <div class="table-responsive">
                     <table class="table table-bordered table-centered mb-0">
@@ -38,6 +43,11 @@
     <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
+                <div *ngIf="isLoadingMyObjet" class="col-12 d-flex justify-content-center align-items-center" style="height: 80vh;">
+                    <a href="javascript:void(0);" class="text-danger display-6">
+                        <i class="mdi mdi-spin mdi-loading me-1"></i>Chargement
+                    </a>
+                </div>
                 <h4 class="header-title mb-3">Mes objets</h4>
                 <div class="table-responsive">
                     <table class="table table-bordered table-centered mb-0">

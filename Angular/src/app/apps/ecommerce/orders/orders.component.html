@@ -1,31 +1,25 @@
 <!-- page title -->
 <app-page-title [breadcrumbItems]="pageTitle" title="Liste des propositions"></app-page-title>
 
+<div *ngIf="isLoading" class="col-12 d-flex justify-content-center align-items-center" style="height: 80vh;">
+    <a href="javascript:void(0);" class="text-danger display-6">
+        <i class="mdi mdi-spin mdi-loading me-1"></i>Chargement
+    </a>
+</div>
+
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
                 <div class="row mb-2">
                     <div class="col-lg-8">
-                        <form class="d-flex flex-wrap align-items-center">
-                            <label for="status-select" class="me-2">Status</label>
-                            <div class="me-sm-3">
-                                <select class="form-select form-select my-1 my-lg-0" id="status-select" name="status"
-                                    [(ngModel)]="propositionStatus" (change)="changePropositionStatus(propositionStatus)">
-                                    <option value="All">All</option>
-                                    <option value="Validé">Validé</option>
-                                    <option value="En attente">En attente</option>
-                                    <option value="Refusé">Refusé</option>
-                                </select>
-                            </div>
-                        </form>
                     </div>
                 </div>
                 <app-ui-preloader [display]="loading"></app-ui-preloader>
                 <!-- order table -->
                 <!-- product table -->
                 <app-advanced-table #advancedTable (handleTableLoad)="handleTableLoad($event)" [tableData]="propositions"
-                    [columns]="columns" [pagination]="true" [hasRowSelection]="true" [isSearchable]="true"
+                    [columns]="columns" [pagination]="true" [hasRowSelection]="true" [isSearchable]="false"
                     (search)="searchData($event)" [isSortable]="false" tableClasses="table-centered"
                     theadClasses="table-light">
                 </app-advanced-table>

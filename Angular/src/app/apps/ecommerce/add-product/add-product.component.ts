@@ -8,6 +8,7 @@ import { Objet } from '../../../shared/models/objet.model';
 import { Utilisateur } from '../../../shared/models/utilisateur.model';
 import { ObjetService } from '../../../shared/services/objet.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-ecommerce-add-product',
@@ -22,22 +23,28 @@ export class AddProductComponent implements OnInit {
   category: Select2Data = [];
   objet: Partial<Objet> = {};
   proprietaire : Partial<Utilisateur> = {}
+  currentUser: any
 
   constructor (
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
     private ObjetService : ObjetService,
-    private router : Router
+    private router : Router,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
-    this.pageTitle = [{ label: 'Ecommerce', path: '/' }, { label: 'Add / Edit Product', path: '/', active: true }];
+    this.pageTitle = [{ label: 'Objet', path: '/' }, { label: 'Ajouter un objet', path: '/', active: true }];
     this.newObjet = this.fb.group({
       nom: ['', Validators.required],
       description: ['', Validators.required],
       valeur: ['', Validators.required],
       disponible: ['', Validators.required]
     });
+
+    const currentUser = this.authenticationService.currentUser();
+    if(currentUser)
+        this.currentUser = currentUser
   }
 
   // convenience getter for easy access to form fields
@@ -91,7 +98,7 @@ export class AddProductComponent implements OnInit {
     this.objet.valeur = this.newObjet.value.valeur
     this.objet.disponible = this.newObjet.value.disponible
 
-    this.objet.proprietaire = new Utilisateur(1,'polyphia@yopmail.com','pass','scott','ADMIN',5,5) //provisoire
+    this.objet.proprietaire = new Utilisateur(this.currentUser?.id,this.currentUser?.email,this.currentUser?.password,this.currentUser?.username,this.currentUser?.role,this.currentUser?.nombreDeNotes,this.currentUser?.noteMoyenne)
 
     if (this.files.length>0 && this.newObjet.status!=='INVALID') {
       this.ObjetService.createObjet(this.objet, this.files[0]).subscribe({

@@ -22,6 +22,8 @@ export class ProductsComponent implements OnInit {
   objetSelected: any;
   @ViewChild("content", { static: true }) content: any;
 
+  isLoading : boolean = true
+
   constructor(
     private objetService: ObjetService,
     public activeModal: NgbModal
@@ -39,15 +41,20 @@ export class ProductsComponent implements OnInit {
 
   getAllObjets() {
     this.objetService.getAllObject().subscribe(
-      (data: Objet[]) => {
-        this.objets = data;
-        this.objets = data.map((item: Objet) => ({
-          ...item,
-          image: `data:image/png;base64,${item.image}`,
-        }));
-      },
-      (error) => {
-        console.error("Erreur lors de la récupération des données", error);
+      {
+        next: (data: Objet[]) => {
+          this.objets = data;
+          this.objets = data.map((item: Objet) => ({
+            ...item,
+            image: `data:image/png;base64,${item.image}`,
+          }));
+        },
+        error: (error) => {
+          console.error("Erreur lors de la récupération des données", error);
+        },
+        complete: () => {
+          this.isLoading = false; 
+        }
       }
     );
   }
