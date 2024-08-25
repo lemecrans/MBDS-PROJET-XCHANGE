@@ -68,7 +68,10 @@
                         <div class="col-auto">
                             <div class="product-price-tag">
                                 {{ objet.disponible ? 'Disponible' : 'Non Disponible' }}
-                            </div>
+                            
+                            <button type="button" class="btn btn-warning waves-effect waves-light" *ngIf="objet.disponible" (click)="openQRModal(objet)">
+                            <span class="btn-label"><i [class]="'mdi mdi-qrcode'"></i></span>QR
+                         </button></div>
                         </div>
                     </div> <!-- end row -->
                 </div> <!-- end product info-->
@@ -87,3 +90,27 @@
     </div> <!-- end col-->
 </div>
 <!-- end row-->
+<ng-template #content let-modal>
+    <div class="modal-header bg-light">
+        <h4 class="modal-title" id="myCenterModalLabel">QR code</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('')"></button>
+    </div>
+    <div class="modal-body p-4">
+            <div class="text-center">
+                <div id="status-chart" *ngIf="objetSelected; else loadQR">
+                    <qrcode
+                    [qrdata]="(objetSelected.id).toString()"
+                    [width]="256"
+                    [errorCorrectionLevel]="'M'"
+                  ></qrcode>
+                  <h1 class="display-4">{{objetSelected.nom}}</h1>
+                </div>
+                <ng-template #loadQR>
+                    <div class="text-center my-4">
+                        <a href="javascript:void(0);" class="text-danger display-6"><i class="mdi mdi-spin mdi-loading me-1"></i>chargement
+                        </a>
+                    </div>  
+                </ng-template>
+            </div>
+    </div>
+</ng-template>
