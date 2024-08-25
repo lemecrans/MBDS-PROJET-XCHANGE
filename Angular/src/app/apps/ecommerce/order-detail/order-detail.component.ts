@@ -200,7 +200,7 @@ export class OrderDetailComponent implements OnInit {
         next: (response: any) => {
           console.log('Proposition créée avec succès:', response);
           alert('Proposition créée avec succès!');
-          this.router.navigate(['/apps/ecommerce/orders']);
+          this.router.navigate(['/apps/objet/proposition']);
         },
         error: (err: any) => {
           console.error('Erreur lors de la création de la proposition:', err);

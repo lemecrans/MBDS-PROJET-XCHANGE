@@ -34,7 +34,7 @@ export class AddProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.pageTitle = [{ label: 'Objet', path: '/' }, { label: 'Ajouter un objet', path: '/', active: true }];
+    this.pageTitle = [{ label: 'Objets', path: '/' }, { label: 'Ajouter un objet', path: '/', active: true }];
     this.newObjet = this.fb.group({
       nom: ['', Validators.required],
       description: ['', Validators.required],

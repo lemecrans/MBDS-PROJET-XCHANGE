@@ -31,8 +31,8 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.pageTitle = [
-      { label: "Ecommerce", path: "/" },
-      { label: "Products", path: "/", active: true },
+      { label: "Objets", path: "/" },
+      { label: "Liste", path: "/", active: true },
     ];
     this._fetchData();
 

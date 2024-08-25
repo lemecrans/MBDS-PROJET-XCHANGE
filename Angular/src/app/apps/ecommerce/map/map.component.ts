@@ -41,7 +41,7 @@ export class MapComponent implements OnInit {
   constructor(private propositionEchangeService: PropositionEchangeService,private authenticationService:AuthenticationService, private router: Router, private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
-    this.pageTitle = [{ label: 'Ecommerce', path: '/' }, { label: 'Add / Edit Product', path: '/', active: true }];
+    this.pageTitle = [{ label: 'Objet', path: '/' }, { label: 'Carte', path: '/', active: true }];
 
     this.route.queryParams.subscribe(params => {
       if(params['id']!==null){

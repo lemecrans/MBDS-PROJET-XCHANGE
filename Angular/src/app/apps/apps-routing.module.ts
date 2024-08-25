@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: 'calendar', loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule) },
   { path: 'chat', loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule) },
-  { path: 'ecommerce', loadChildren: () => import('./ecommerce/ecommerce.module').then(m => m.EcommerceModule) },
+  { path: 'objet', loadChildren: () => import('./ecommerce/ecommerce.module').then(m => m.EcommerceModule) },
   { path: 'crm', loadChildren: () => import('./crm/crm.module').then(m => m.CrmModule) },
   { path: 'email', loadChildren: () => import('./email/email.module').then(m => m.EmailModule) },
   { path: 'social-feed', loadChildren: () => import('./social-feed/social-feed.module').then(m => m.SocialFeedModule) },

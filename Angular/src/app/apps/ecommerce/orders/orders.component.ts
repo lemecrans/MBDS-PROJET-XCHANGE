@@ -137,7 +137,7 @@ export class OrdersComponent implements OnInit {
 
     document.querySelectorAll('.propositions').forEach((e) => {
       e.addEventListener("click", () => {
-        this.router.navigate(['../order/details'], { relativeTo: this.route, queryParams: { id: e.id } })
+        this.router.navigate(['../proposition/details'], { relativeTo: this.route, queryParams: { id: e.id } })
       });
     })
   }
@@ -235,7 +235,7 @@ export class OrdersComponent implements OnInit {
   openMap(idObjet:any){
     let id = idObjet.getAttribute('value')
 
-    this.router.navigate(['/apps/ecommerce/map'], { queryParams: { id } });
+    this.router.navigate(['/apps/objet/map'], { queryParams: { id } });
   }
 
 

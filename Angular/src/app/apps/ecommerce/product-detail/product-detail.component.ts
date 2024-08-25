@@ -23,7 +23,7 @@ export class ProductDetailComponent implements OnInit {
   constructor (private route: ActivatedRoute,private objetService : ObjetService, private router: Router) { }
 
   ngOnInit(): void {
-    this.pageTitle = [{ label: 'Objets', path: '/' }, { label: 'Liste', path: '/', active: true }];
+    this.pageTitle = [{ label: 'Objets', path: '/' }, { label: 'Détails', path: '/', active: true }];
     this.route.queryParams.subscribe(params => {
       this.objetService.getObjectById(params.id).subscribe({
         next: (response: Objet) => {
@@ -33,7 +33,7 @@ export class ProductDetailComponent implements OnInit {
         },
         error: (error) => {
           console.error('Erreur lors de la récupération de l\'objet:', error);
-          this.router.navigate(['/apps/ecommerce/products']);
+          this.router.navigate(['/apps/objet/liste-objets']);
         },
         complete: () => {
           this.isLoading = false
