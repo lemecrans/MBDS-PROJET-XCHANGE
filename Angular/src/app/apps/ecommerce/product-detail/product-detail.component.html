@@ -134,7 +134,8 @@
                     <hr>
                     <div class="text-end mt-3">
                         <button type="button" class="btn btn-danger me-2"><i class="mdi mdi-heart-outline"></i></button>
-                        <button type="button" class="btn btn-success waves-effect waves-light">
+                        <button type="button" class="btn btn-success waves-effect waves-light"  [routerLink]="['../../order/details']"
+                        [queryParams]="{ id: objet.id}">
                             <span class="btn-label"><i class="mdi mdi-swap-horizontal"></i></span>Proposer un échange
                         </button>
                     </div>

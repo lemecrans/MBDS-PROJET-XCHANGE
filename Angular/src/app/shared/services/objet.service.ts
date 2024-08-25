@@ -29,6 +29,11 @@ export class ObjetService {
     return this.http.get<Objet>(URL_BASE+'/'+id)
   }
 
+  getObjectByUser(id:any): Observable<Objet[]>{
+    const params = new HttpParams().set('idUser', id);
+    return this.http.get<Objet[]>(URL_BASE+'/myThing',{params})
+  }
+
   createObjet(objet: any, file: File): Observable<number> {
     const formData = new FormData();
     formData.append('objet', JSON.stringify(objet));
