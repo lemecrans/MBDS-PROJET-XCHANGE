@@ -2,20 +2,21 @@ import { ChatMessage, ChatUser } from "../chat.model";
 import { USERS } from "../data";
 
 //sender
-const defaultTo: ChatUser = {
-    id: 9,
-    name: 'Geneva Kennedy',
-    avatar: 'assets/images/users/user-1.jpg',
+/*const defaultTo: ChatUser = {
+    /*id: 9,
     email: 'support@coderthemes.com',
-    phone: '+1 456 9595 9594',
-    location: 'California, USA',
-    languages: 'English, German, Spanish',
-    groups: [{ id: 1, groupName: 'App Development', variant: 'success' }, { id: 2, groupName: 'Office Work', variant: 'warning' }]
-};
+    avatar: 'assets/images/users/user-1.jpg',
+    password: 'assets/images/users/user-1.jpg',
+    username: 'Geneva Kennedy',
+    role: 'Admin',
+    nombreDeNotes: 0,
+    noteMoyenne: 0
+    
+};*/
 
 // list of chat messages
 const MESSAGES: ChatMessage[] = [];
-for (const user of USERS) {
+/*for (const user of USERS) {
     MESSAGES.push(
         {
             id: 1,
@@ -116,6 +117,6 @@ for (const user of USERS) {
             sendOn: '10:05'
         }
     );
-}
+}*/
 
 export default MESSAGES;

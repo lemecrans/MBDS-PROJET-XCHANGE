@@ -3,10 +3,10 @@
         <div class="row justify-content-between py-1">
             <div class="col-sm-7">
                 <div class="d-flex align-items-start">
-                    <img [src]="selectedUser.avatar" class="me-2 rounded-circle" height="36" [alt]="selectedUser.name">
+                    <img src='../../../../assets/images/users/user-3.jpg' class="me-2 rounded-circle" height="36" [alt]="selectedDiscu.sender.username">
                     <div>
                         <h5 class="mt-0 mb-0 font-15">
-                            <a [routerLink]="['../contacts/profile']" class="text-reset">{{selectedUser.name}}</a>
+                            <a [routerLink]="['../contacts/profile']" class="text-reset">{{selectedDiscu.sender.username}}</a>
                         </h5>
                         <p class="mt-1 mb-0 text-muted font-12">
                             <small class="mdi mdi-circle text-success"></small> Online
@@ -16,18 +16,7 @@
             </div>
             <div class="col-auto">
                 <div id="tooltips-container">
-                    <a href="javascript: void(0);" class="text-reset font-19 py-1 px-2 d-inline-block">
-                        <i class="fe-phone-call" placement="top" ngbTooltip="Voice Call"></i>
-                    </a>
-                    <a href="javascript: void(0);" class="text-reset font-19 py-1 px-2 d-inline-block">
-                        <i class="fe-video" placement="top" ngbTooltip="Video Call"></i>
-                    </a>
-                    <a href="javascript: void(0);" class="text-reset font-19 py-1 px-2 d-inline-block">
-                        <i class="fe-user-plus" placement="top" ngbTooltip="Add Users"></i>
-                    </a>
-                    <a href="javascript: void(0);" class="text-reset font-19 py-1 px-2 d-inline-block">
-                        <i class="fe-trash-2" placement="top" ngbTooltip="Delete Chat"></i>
-                    </a>
+                    
                 </div>
             </div>
         </div>
@@ -38,47 +27,21 @@
             <!-- messages start -->
             <ul class="conversation-list">
                 <li class="clearfix" *ngFor="let message of messages"
-                    [ngClass]="{'odd': message.from.id === toUser.id}">
+                    [ngClass]="{'odd': message.sender?.id === toUser?.id}">
                     <div class="chat-avatar">
-                        <img [src]="message.from.avatar" class="rounded" [alt]="message.from.name" />
-                        <i>{{message.sendOn}}</i>
+                        <img *ngIf="message.sender?.id === toUser?.id" src="../../../../assets/images/users/user-3.jpg" class="rounded" [alt]="message.sender.username">
+                        <img *ngIf="message.sender?.id !== toUser?.id" src="../../../../assets/images/users/user-4.jpg" class="rounded" [alt]="message.sender.username">
+                        <i>{{message.event_date | date:'HH:mm dd/MM'}}</i>
                     </div>
                     <div class="conversation-text">
-                        <ng-container *ngFor="let item of message.message">
-                            <div class="ctext-wrap" *ngIf="item.type==='text'">
-                                <i>{{message.from.name}}</i>
-                                <p>
-                                    {{item.value}}
-                                </p>
-                            </div>
-
-                            <div class="card mt-2 mb-1 shadow-none border text-start" *ngIf="item.type==='file'">
-                                <div class="p-2">
-                                    <div class="row align-items-center">
-                                        <div class="col-auto">
-                                            <div class="avatar-sm">
-                                                <span class="avatar-title bg-primary rounded">
-                                                    .ZIP
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col ps-0">
-                                            <a href="javascript:void(0);"
-                                                class="text-muted fw-bold">{{item.value.file}}</a>
-                                            <p class="mb-0">{{item.value.size}}</p>
-                                        </div>
-                                        <div class="col-auto">
-                                            <!-- Button -->
-                                            <a href="javascript:void(0);" class="btn btn-link btn-lg text-muted">
-                                                <i class="dripicons-download"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-container>
+                        <div class="ctext-wrap">
+                            <i>{{message.sender.username}}</i>
+                            <p>
+                                {{message.message}}
+                            </p>
+                        </div>
                     </div>
-                    <ng-container *ngTemplateOutlet="ChatMessageDropdown;context:{message:message}"></ng-container>
+                    
                 </li>
             </ul>
             <!-- messages end -->
@@ -110,8 +73,8 @@
                                     <button type="submit" class="btn btn-success chat-send w-100"
                                         [disabled]="!chatForm.form.valid"><i class='fe-send'></i></button>
                                 </div>
-                            </div> <!-- end col -->
-                        </div> <!-- end row-->
+                            </div> 
+                        </div> 
                     </form>
                 </div>
             </div> <!-- end col-->
@@ -131,7 +94,7 @@
             <i class="mdi mdi-dots-vertical font-16"></i>
         </button>
         <div ngbDropdownMenu aria-labelledby="chatMessageDropdown"
-            [class]="message.from.id !== toUser.id ? 'dropdown-menu-end' : ''">
+            [class]="message.sender?.id !== toUser?.id ? 'dropdown-menu-end' : ''">
             <!-- item -->
             <a ngbDropdownItem [routerLink]="'.'">Copy Message</a>
             <!-- item-->

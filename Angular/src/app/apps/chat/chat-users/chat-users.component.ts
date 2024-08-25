@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthenticationService } from 'src/app/core/service/auth.service';
-import { ChatGroup } from 'src/app/shared/widget/chat-group/chat-group.model';
-import { ChatUser } from '../chat.model';
-import { USERS } from '../data';
+import {  Discussion } from '../chat.model';
+import { ChatService } from '../chat.service';
 
 @Component({
   selector: 'app-chat-users',
@@ -12,29 +11,15 @@ import { USERS } from '../data';
 export class ChatUsersComponent implements OnInit {
 
   loggedInUser: any = {};
-  userList: ChatUser[] = [];
-  @Input() selectedUser!: ChatUser;
-  chatGroups: ChatGroup[] = [];
+  discuList: Discussion[] = [];
+  @Input() selectedDiscu!: Discussion;
+  
+  @Output() selectDiscu: EventEmitter<Discussion> = new EventEmitter();
 
-  //On selecting new user
-  @Output() selectUser: EventEmitter<ChatUser> = new EventEmitter();
-
-  constructor (private authService: AuthenticationService) { }
+  constructor (private authService: AuthenticationService, private chatService: ChatService) { }
 
   ngOnInit(): void {
     this.loggedInUser = this.authService.currentUser();
-    this.chatGroups = [{
-      id: 1,
-      groupName: 'App Development',
-      variant: 'success'
-    },
-    {
-      id: 2,
-      groupName: 'Office Work',
-      variant: 'warning'
-    }];
-
-    // Get users for chat
     this._fetchUsers();
   }
 
@@ -42,16 +27,23 @@ export class ChatUsersComponent implements OnInit {
    *  Fetches users for chat
    */
   _fetchUsers(): void {
-    this.userList = USERS;
+    this.chatService.getAll().subscribe( {
+      next: (response: any) => {
+        this.discuList= response;
+        console.log(this.discuList)
+      },
+      error: (err: any) => {
+        console.error('Erreur lors de la récupération de l\'objet:', err);
+      },
+      complete: () => {
+        console.log('oke')
+      }
+    });
   }
 
-  /**
-   * changes active user
-   * @param user chat user
-   */
-  activateUser(user: ChatUser): void {
-    this.selectedUser = user;
-    this.selectUser.emit(this.selectedUser);
+  activateUser(discu: Discussion): void {
+    this.selectedDiscu = discu;
+    this.selectDiscu.emit(this.selectedDiscu);
   }
 
 }

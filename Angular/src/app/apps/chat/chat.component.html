@@ -2,15 +2,14 @@
 <app-page-title [breadcrumbItems]="pageTitle" title="Chat"></app-page-title>
 
 <div class="row">
-    <!-- start chat users-->
     <div class="col-xl-3 col-lg-4">
-        <app-chat-users [selectedUser]="selectedUser" (selectUser)="onSelectedUser($event)"></app-chat-users>
+        <app-chat-users [selectedDiscu]="selectedDiscu" (selectDiscu)="onSelectedDiscu($event)"></app-chat-users>
     </div>
     <!-- end chat users-->
 
     <!-- chat area -->
     <div class="col-xl-9 col-lg-8">
-        <app-chat-area [selectedUser]="selectedUser"></app-chat-area>
+        <app-chat-area [selectedDiscu]="selectedDiscu"></app-chat-area>
     </div>
     <!-- end chat area-->
 

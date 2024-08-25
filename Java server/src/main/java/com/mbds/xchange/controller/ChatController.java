@@ -63,7 +63,7 @@ public class ChatController {
         }
     }
     @PostMapping("/send")
-    public ResponseEntity<?> send(@RequestParam int sender, @RequestParam int desti, @RequestParam String message) {
+    public ResponseEntity<?> send(@RequestParam int sender, @RequestParam int desti, @RequestBody String message) {
         try {
             Chat currentChat = chatServ.send(sender,desti,message);
             if(currentChat!=null){

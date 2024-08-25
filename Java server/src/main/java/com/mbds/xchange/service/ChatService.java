@@ -57,7 +57,10 @@ public class ChatService {
             Utilisateur send= utilisateurRepository.findById(sender);
             currentChat = reposi.findBySenderAndDesti(send,desti );
             if (currentChat == null) {
-                currentChat = this.Start(sender, recepient);
+                currentChat = reposi.findBySenderAndDesti(desti,send );
+                if (currentChat == null) {
+                    currentChat = this.Start(sender, recepient);
+                }
             }
             Message newMessage = new Message(send, message);
             List<Message> current = currentChat.getDiscussion();

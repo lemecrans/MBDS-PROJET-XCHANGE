@@ -1,28 +1,51 @@
 import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { ChatMessage, ChatUser } from '../chat.model';
-import MESSAGES from './data';
+import { AuthenticationService } from 'src/app/core/service/auth.service';
+import { Discussion, Message } from '../chat.model';
+import { ChatService } from '../chat.service';
 
 @Component({
   selector: 'app-chat-area',
   templateUrl: './chat-area.component.html',
   styleUrls: ['./chat-area.component.scss']
 })
+
 export class ChatAreaComponent implements OnInit {
 
-  @Input() selectedUser!: ChatUser;
+  @Input() selectedDiscu!: Discussion;
 
   loading: boolean = false;
-  messages: ChatMessage[] = [];
-  toUser!: ChatUser;
+  messages: Message[] = [];
+  toUser: any = {};
   newMessage: string = '';
 
   @ViewChild('chatForm', { static: true }) chatForm: any;
 
-  constructor () { }
+  constructor (private authserv : AuthenticationService, private chatService: ChatService) { }
 
   ngOnInit(): void {
-    // initialiize data
-    this.initData();
+    this.toUser = this.authserv.currentUser();
+    console.log('edf')
+    console.log(this.toUser)
+    this.selectedDiscu={
+      _id: "0",
+      sender: { id:1000,
+        email: "",
+        password: "",
+        username: "",
+        avatar: "",
+        role: "",
+        nombreDeNotes: 0,
+        noteMoyenne: 0,},
+      desti: { id:1000,
+        email: "",
+        password: "",
+        username: "",
+        avatar: "",
+        role: "",
+        nombreDeNotes: 0,
+        noteMoyenne: 0,},
+      discussion: [], 
+    };
   }
 
   /**
@@ -30,43 +53,38 @@ export class ChatAreaComponent implements OnInit {
    * @param changes chat user change
    */
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.selectedUser.currentValue !== changes.selectedUser.previousValue) {
-      this.loading = true;
-      setTimeout(() => {
-        this.messages = [...MESSAGES].filter(m => (m.to.id === this.toUser.id && m.from.id === this.selectedUser.id) || (this.toUser.id === m.from.id && m.to.id === this.selectedUser.id));
-        this.loading = false;
+    this.loading = true;
+    setTimeout(() => {
+      this.messages = this.selectedDiscu.discussion;
+      console.log(this.messages)
+      this.loading = false;
 
-      }, 750);
-
-    }
-  }
-
-
-  /**
-   * set user
-   */
-  initData(): void {
-    this.toUser = {
-      id: 9,
-      name: 'Geneva Kennedy',
-      avatar: 'assets/images/users/user-1.jpg',
-      groups: [{ id: 1, groupName: 'App Development', variant: 'success' }, { id: 2, groupName: 'Office Work', variant: 'warning' }]
-    }
+    }, 750);
   }
 
   /** 
    * add new message 
    */
   sendChatMessage(): void {
-    const modifiedMessages = [...this.messages];
-    modifiedMessages.push({
-      id: this.messages.length + 1,
-      from: this.toUser,
-      to: this.selectedUser,
-      message: [{ type: 'text', value: this.newMessage }],
-      sendOn: new Date().getHours() + ':' + new Date().getMinutes()
+    this.chatService.send(""+this.selectedDiscu.desti.id,this.newMessage).subscribe( {
+      error: (err: any) => {
+        console.error('Erreur lors de la récupération de l\'objet:', err);
+      },
+      complete: () => {
+        console.log('Message sent');
+        this.chatService.get(""+this.selectedDiscu.desti.id).subscribe({
+          next: (response: any) => {
+            this.selectedDiscu= response;
+          },
+          error: (err: any) => {
+            console.error('Erreur lors de la récupération de l\'objet:', err);
+          },
+          complete: () => {
+            console.log('oke')
+          }
+        });
+      }
     });
-    this.messages = modifiedMessages;
-    this.chatForm.resetForm();
+    
   }
 }

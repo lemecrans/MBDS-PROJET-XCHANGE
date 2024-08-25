@@ -2,7 +2,7 @@ import { ChatUser } from "./chat.model";
 
 //list of chat users
 const USERS: ChatUser[] = [
-    {
+    /*{
         id: 1,
         name: 'Brandon Smith',
         avatar: 'assets/images/users/user-2.jpg',
@@ -74,7 +74,7 @@ const USERS: ChatUser[] = [
         totalUnread: 28,
         lastMessageOn: 'Mon',
         groups: [{ id: 1, groupName: 'App Development', variant: 'success' }, { id: 2, groupName: 'Office Work', variant: 'primary' }]
-    }
+    }*/
 ];
 
 export { USERS };

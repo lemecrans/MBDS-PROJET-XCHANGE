@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BreadcrumbItem } from 'src/app/shared/page-title/page-title.model';
-import { ChatUser } from './chat.model';
+import { ChatUser, Discussion } from './chat.model';
 import { USERS } from './data';
 
 @Component({
@@ -12,23 +12,17 @@ export class ChatComponent implements OnInit {
 
   pageTitle: BreadcrumbItem[] = [];
 
-  selectedUser!: ChatUser;
+  selectedDiscu!: Discussion;
 
   constructor () { }
 
   ngOnInit(): void {
     this.pageTitle = [{ label: 'Apps', path: '/', }, { label: 'Chat', path: '/', active: true }];
 
-    // set initial user
-    this.selectedUser = USERS[3];
   }
-
-  /**
- * changes chat user
- * @param user selected user
- */
-  onSelectedUser(user: ChatUser): void {
-    this.selectedUser = user;
+  
+  onSelectedDiscu(discu: Discussion): void {
+    this.selectedDiscu = discu;
   }
 
 }
