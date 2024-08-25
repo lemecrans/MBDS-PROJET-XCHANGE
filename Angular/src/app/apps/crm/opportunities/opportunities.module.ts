@@ -6,7 +6,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { PageTitleModule } from 'src/app/shared/page-title/page-title.module';
 import { OpportunitiesRoutingModule } from './opportunities-routing.module';
 import { OpportunitiesComponent } from './opportunities.component';
-
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { OpportunitiesComponent } from './opportunities.component';
     NgbModalModule,
     NgApexchartsModule,
     PageTitleModule,
-    OpportunitiesRoutingModule
+    OpportunitiesRoutingModule,
+    QRCodeModule
   ]
 })
 export class OpportunitiesModule { }
