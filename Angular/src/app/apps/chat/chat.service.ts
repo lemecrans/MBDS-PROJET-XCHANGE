@@ -49,11 +49,8 @@ export class ChatService {
       console.log({"message":message})
       return this.http.post<any>(URL_BASE+`send?sender=`+this.user?.id+`&desti=`+desti, {"message":message});
     }
-    start(desti: String,message: String): any {
-      this.http.post<any>(URL_BASE+`/api/chat/start?sender=`+this.user?.id+`&desti=`+desti, { message})
-        .subscribe((data: any) => {
-          this.messages= data;
-        });
+    start(desti: number): any {
+      return this.http.post<any>(URL_BASE+`/api/chat/start?sender=`+this.user?.id+`&desti=`+desti, { })
     }
 
 }

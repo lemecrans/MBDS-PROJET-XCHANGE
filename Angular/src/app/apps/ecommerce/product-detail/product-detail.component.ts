@@ -5,6 +5,8 @@ import { Product } from '../shared/ecommerce.model';
 import { Objet } from 'src/app/shared/models/objet.model';
 import { ObjetService } from '../../../shared/services/objet.service';
 import { Location } from '@angular/common';
+import { ChatService } from '../../chat/chat.service';
+import { Discussion } from '../../chat/chat.model';
 
 @Component({
   selector: 'app-ecommerce-product-detail',
@@ -20,7 +22,7 @@ export class ProductDetailComponent implements OnInit {
 
   isLoading : boolean = true
 
-  constructor (private route: ActivatedRoute,private objetService : ObjetService, private router: Router) { }
+  constructor (private route: ActivatedRoute,private objetService : ObjetService, private router: Router, private chatService: ChatService) { }
 
   ngOnInit(): void {
     this.pageTitle = [{ label: 'Objets', path: '/' }, { label: 'Détails', path: '/', active: true }];
@@ -41,6 +43,30 @@ export class ProductDetailComponent implements OnInit {
       });
     });
     
+  }
+  discuter(id: number | undefined){
+    if (id !== undefined) {
+      var discu:Discussion;
+      this.chatService.start(id).subscribe( {
+        error: (err: any) => {
+          console.error('Erreur lors de la récupération de l\'objet:', err);
+        },
+        complete: () => {
+          this.chatService.get(""+id).subscribe({
+            next: (response: any) => {
+              discu= response;
+            },
+            error: (err: any) => {
+              console.error('Erreur lors de la récupération de l\'objet:', err);
+            },
+            complete: () => {
+              console.log('oke')
+            }
+          });
+          this.router.navigate(['chat'],{ state: { selectedDiscu: discu } });
+        }
+      });
+    }
   }
 
 }
