@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-auth-confirm-mail2',
@@ -8,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class ConfirmMail2Component implements OnInit {
 
   currentYear!: number;
-  constructor () { }
+  email:string = this.authenticationService.emailRegister;
+  constructor (private authenticationService: AuthenticationService,) { }
 
   ngOnInit(): void {
     this.currentYear = Date.now();
