@@ -100,7 +100,7 @@ public class ObjectsListActivity extends AppCompatActivity {
             }
         };
 
-        int socketTimeout = 60 * 1000;
+        int socketTimeout = 5 * 1000;
         RetryPolicy policy = new DefaultRetryPolicy(
                 socketTimeout,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

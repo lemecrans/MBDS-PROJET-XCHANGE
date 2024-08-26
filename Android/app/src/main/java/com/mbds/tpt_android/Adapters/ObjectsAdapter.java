@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import com.bumptech.glide.Glide;
 
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.mbds.tpt_android.Activities.Details_activity;
 import com.mbds.tpt_android.Domains.ObjectsDomain;
 import com.mbds.tpt_android.R;
@@ -53,6 +54,7 @@ public class ObjectsAdapter extends RecyclerView.Adapter<ObjectsAdapter.ViewHold
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             Glide.with(context)
                     .load(decodedByte)
+                    .transform(new RoundedCorners(40))
                     .into(holder.pic);
         }
 

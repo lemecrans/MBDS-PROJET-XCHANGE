@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.mbds.tpt_android.Adapters.ObjectsAdapter;
 import com.mbds.tpt_android.Domains.ObjectsDomain;
 import com.mbds.tpt_android.R;
@@ -92,6 +93,7 @@ public class Details_activity extends AppCompatActivity {
                                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                                     Glide.with(Details_activity.this)
                                             .load(decodedByte)
+                                            .transform(new RoundedCorners(40))
                                             .into(img);
                                 }
                             });
