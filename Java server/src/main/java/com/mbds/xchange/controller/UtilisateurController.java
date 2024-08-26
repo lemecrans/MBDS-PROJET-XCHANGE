@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
@@ -20,6 +21,20 @@ public class UtilisateurController {
     public ResponseEntity<?> getUser(@RequestParam  int id) {
         try {
             Utilisateur currentUser = userServ.getUser(id);
+            if(currentUser!=null){
+                return ResponseEntity.ok(currentUser);
+            }else{
+                throw new ResourceNotFoundException("Aucun Utilisateur trouvé");
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+        }
+    }
+    @GetMapping("/users")
+    public ResponseEntity<?> getUsers() {
+        try {
+            List<Utilisateur> currentUser = userServ.getUsers();
             if(currentUser!=null){
                 return ResponseEntity.ok(currentUser);
             }else{

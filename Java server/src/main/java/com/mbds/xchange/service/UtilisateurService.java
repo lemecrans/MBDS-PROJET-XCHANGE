@@ -4,6 +4,7 @@ import com.mbds.xchange.model.Utilisateur;
 import com.mbds.xchange.repository.UtilisateurRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -14,6 +15,13 @@ public class UtilisateurService {
     public Utilisateur getUser(int id) throws Exception{
         try{
             return utilisateurRepository.findById(id);
+        }catch(Exception e){
+            throw new Exception("Une erreur s'est produit : "+e);
+        }
+    }
+    public List<Utilisateur> getUsers() throws Exception{
+        try{
+            return utilisateurRepository.findAll();
         }catch(Exception e){
             throw new Exception("Une erreur s'est produit : "+e);
         }
