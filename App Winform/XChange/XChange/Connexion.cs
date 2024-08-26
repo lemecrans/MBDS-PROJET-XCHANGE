@@ -16,6 +16,7 @@ namespace XChange
         {
             try
             {
+                //string apiUrl = "https://xchange-server.onrender.com/api/auth/login";
                 string apiUrl = "http://referentiel.intranet.oma/api/auth/login";
                 string email = textBox1.Text; 
                 string password = textBox2.Text;

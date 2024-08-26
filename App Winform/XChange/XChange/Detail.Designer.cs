@@ -50,6 +50,7 @@
             pictureBox1.Size = new Size(315, 215);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             // 
             // label1
             // 
@@ -93,7 +94,7 @@
             label4.Name = "label4";
             label4.Size = new Size(180, 25);
             label4.TabIndex = 4;
-            label4.Text = " ";
+            label4.Text = "Appartement Ambatobe";
             // 
             // label5
             // 
@@ -104,7 +105,7 @@
             label5.Name = "label5";
             label5.Size = new Size(180, 25);
             label5.TabIndex = 5;
-            label5.Text = " ";
+            label5.Text = "Rakoto";
             // 
             // label6
             // 
@@ -115,7 +116,7 @@
             label6.Name = "label6";
             label6.Size = new Size(180, 25);
             label6.TabIndex = 6;
-            label6.Text = " ";
+            label6.Text = "Mathieu";
             // 
             // label7
             // 
@@ -148,7 +149,7 @@
             label9.Name = "label9";
             label9.Size = new Size(180, 100);
             label9.TabIndex = 9;
-            label9.Text = " ";
+            label9.Text = "BMW CR5";
             // 
             // button1
             // 
@@ -187,17 +188,17 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 12F);
-            label10.Location = new Point(623, 19);
+            label10.Location = new Point(565, 18);
             label10.Name = "label10";
-            label10.Size = new Size(59, 21);
+            label10.Size = new Size(121, 21);
             label10.TabIndex = 3;
-            label10.Text = "Rakoto";
+            label10.Text = "vali@gmail.com";
             label10.Click += label10_Click;
             // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(584, 10);
+            pictureBox2.Location = new Point(526, 10);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(33, 30);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;

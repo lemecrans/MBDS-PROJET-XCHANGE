@@ -10,7 +10,7 @@ namespace XChange
             InitializeComponent();
             try
             {
-                string apiUrl = "http://referentiel.intranet.oma/api/objet/" + data;
+                string apiUrl = "https://xchange-server.onrender.com/api/objet/" + data;
 
                 using (HttpClient client = new HttpClient())
                 {

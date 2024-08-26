@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Microsoft.VisualBasic.ApplicationServices;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using XChange.Model;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace XChange
 {
@@ -21,6 +10,7 @@ namespace XChange
         {
             try
             {
+                //string apiUrl = "https://xchange-server.onrender.com/api/objet";
                 string apiUrl = "http://referentiel.intranet.oma/api/objet";
                 InitializeComponent();
                 using (HttpClient client = new HttpClient())
@@ -31,7 +21,7 @@ namespace XChange
                     {
                         string apiResponse = response.Content.ReadAsStringAsync().Result;
                         List<Objet> objets = JsonConvert.DeserializeObject<List<Objet>>(apiResponse);
-                        ListeObjet.Items.Add("Id\t| Nom\t| Proprietaire\t| Disponibilité");
+                        ListeObjet.Items.Add("Id\t| Nom\t\t\t| Proprietaire");
                         for (int i = 0; i < objets.Count; i++)
                         {
                             string id = objets[i].Id.ToString();
@@ -39,7 +29,7 @@ namespace XChange
                             string proprietaire = objets[i].proprietaire.Username;
                             string disponible = objets[i].disponible.ToString();
 
-                            ListeObjet.Items.Add($"{id}\t| {nom}\t| {proprietaire}\t| {disponible}");
+                            ListeObjet.Items.Add($"{id}\t| {nom}\t| {proprietaire}");
                         }
                     }
                     else
@@ -49,6 +39,7 @@ namespace XChange
                         Console.WriteLine($"Erreur de l'API : {response.StatusCode}");
                     }
                 }
+                //apiUrl = "https://xchange-server.onrender.com/api/user/users";
                 apiUrl = "http://referentiel.intranet.oma/api/user";
                 using (HttpClient client = new HttpClient())
                 {
@@ -59,7 +50,7 @@ namespace XChange
                         string apiResponse = response.Content.ReadAsStringAsync().Result;
                         List<Utilisateur> users = JsonConvert.DeserializeObject<List<Utilisateur>>(apiResponse);
 
-                        ListeUtilisateur.Items.Add("Id\t| Nom\t| Role\t| Note");
+                        ListeUtilisateur.Items.Add("Id\t| Nom");
                         for (int i = 0; i < users.Count; i++)
                         {
                             string id = users[i].Id.ToString();
@@ -67,7 +58,7 @@ namespace XChange
                             string role = users[i].Role;
                             string note = users[i].NoteMoyenne.ToString();
 
-                            ListeUtilisateur.Items.Add($"{id}\t| {username}\t| {role}\t| {note}");
+                            ListeUtilisateur.Items.Add($"{id}\t| {username}/{role}");
                         }
                     }
                     else
@@ -77,6 +68,7 @@ namespace XChange
                         Console.WriteLine($"Erreur de l'API : {response.StatusCode}");
                     }
                 }
+                //apiUrl = "https://xchange-server.onrender.com/api/propositions";
                 apiUrl = "http://referentiel.intranet.oma/api/echange";
                 using (HttpClient client = new HttpClient())
                 {
@@ -151,6 +143,7 @@ namespace XChange
             non.Size = new Size(93, 29);
             non.TabIndex = 5;
             non.Text = "Non";
+            non.Text = "Non";
             non.UseVisualStyleBackColor = false;
             non.Click += (s, e) => { dialog.DialogResult = DialogResult.Cancel; dialog.Close(); };
             dialog.Controls.Add(non);
@@ -159,6 +152,7 @@ namespace XChange
 
             if (result == DialogResult.OK)
             {
+                //String apiUrl = "https://xchange-server.onrender.com/api/user/" + ListeUtilisateur.SelectedItem.ToString().Split("|")[0];
                 String apiUrl = "http://referentiel.intranet.oma/api/user/" + ListeUtilisateur.SelectedItem.ToString().Split("|")[0];
                 using (HttpClient client = new HttpClient())
                 {
@@ -167,6 +161,7 @@ namespace XChange
                     if (response.IsSuccessStatusCode)
                     {
                         ListeUtilisateur.Items.Clear();
+                        //apiUrl = "https://xchange-server.onrender.com/api/user";
                         apiUrl = "http://referentiel.intranet.oma/api/user";
                         using (HttpClient client2 = new HttpClient())
                         {
@@ -201,7 +196,7 @@ namespace XChange
 
         private void ListeEchange_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Detail form3 = new Detail(ListeObjet.SelectedItem.ToString().Split("|")[0]);
+            Detail form3 = new Detail(ListeEchange.SelectedItem.ToString().Split("|")[0]);
             form3.Show();
             this.Hide();
         }
@@ -249,5 +244,6 @@ namespace XChange
             }
 
         }
+
     }
 }
