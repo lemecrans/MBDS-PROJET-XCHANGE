@@ -37,7 +37,7 @@ export class OrdersComponent implements OnInit {
 
   constructor (private router: Router, private route: ActivatedRoute, private sanitizer: DomSanitizer,private propositionEchangeService: PropositionEchangeService,private authenticationService: AuthenticationService) { }
   ngOnInit(): void {
-    this.pageTitle = [{ label: 'Ecommerce', path: '/' }, { label: 'Liste des propositions', path: '/', active: true }];
+    this.pageTitle = [{ label: 'Proposition', path: '/' }, { label: 'Liste des propositions', path: '/', active: true }];
 
     this.getAllPropositions()
   }

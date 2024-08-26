@@ -32,7 +32,7 @@ export class ContactsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.pageTitle = [{ label: 'CRM', path: '/' }, { label: 'Contacts', path: '/', active: true }];
+    this.pageTitle = [{ label: 'Objet', path: '/' }, { label: 'Modifier', path: '/', active: true }];
     this.updateObjetFormGroup = this.fb.group({
       nom: ['', Validators.required],
       description: [''],

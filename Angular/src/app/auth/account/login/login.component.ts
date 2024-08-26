@@ -30,15 +30,15 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['andrianmattax@gmail.com', [Validators.required, Validators.email]],
-      password: ['1234', Validators.required]
+      email: ['polyphia@yopmail.com', [Validators.required, Validators.email]],
+      password: ['password', Validators.required]
     });
 
     // reset login status
     this.authenticationService.logout();
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard-1';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/apps/objet/liste-objets';
   }
 
   /**

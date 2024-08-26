@@ -1,3 +1,3 @@
 export const environment = {
-    host: 'http://localhost:8080/api/' //serveur
+    host: 'https://xchange-server-rep-latest.onrender.com/api/' //serveur
 };

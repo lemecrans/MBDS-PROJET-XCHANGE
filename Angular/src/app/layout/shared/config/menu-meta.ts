@@ -35,46 +35,12 @@ const MENU_ITEMS: MenuItem[] = [
         link: '/apps/objet/proposition',
         icon: 'list',
     },
-    
     {
-        key: 'apps-crm',
-        label: 'CRM',
-        isTitle: false,
-        icon: 'users',
-        collapsed: true,
-        children: [
-            {
-                key: 'crm-dashboard',
-                label: 'Dashboard',
-                link: '/apps/crm/dashboard',
-                parentKey: 'apps-crm',
-            },
-            {
-                key: 'crm-contacts',
-                label: 'Contacts',
-                link: '/apps/crm/contacts',
-                parentKey: 'apps-crm',
-            },
-            {
-                key: 'crm-opportunities',
-                label: 'Opportunities',
-                link: '/apps/crm/opportunities',
-                parentKey: 'apps-crm',
-            },
-            {
-                key: 'crm-leads',
-                label: 'Leads',
-                link: '/apps/crm/leads',
-                parentKey: 'apps-crm',
-            },
-            {
-                key: 'crm-customers',
-                label: 'Customers',
-                link: '/apps/crm/customers',
-                parentKey: 'apps-crm',
-            },
-        ],
-    },
+        key: 'crm-opportunities',
+        label: 'Mes objets',
+        link: '/apps/crm/opportunities',
+        icon: 'list'
+    }
     
     
 

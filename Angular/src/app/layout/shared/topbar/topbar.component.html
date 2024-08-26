@@ -29,15 +29,15 @@
                             aria-label="Recipient's username">
                     </form>
                 </div>
+                
             </li>
 
             <!-- full screen button -->
-            <li class="dropdown d-none d-lg-inline-block">
-                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light maximize-icon"
-                    href="javascript:void(0)" (click)="toggleFullScreen()">
-                    <i class="fe-maximize noti-icon"></i>
-                </a>
-            </li>
+            
+            <button class="btn btn-info navbar-btn" [routerLink]="['/auth/login']" *ngIf="!loggedInUser">Login</button>
+            <button class="btn btn-info navbar-btn" [routerLink]="['/auth/logout']" *ngIf="loggedInUser">Logout</button>
+        
+            
 
             <!-- brands menu -->
             
