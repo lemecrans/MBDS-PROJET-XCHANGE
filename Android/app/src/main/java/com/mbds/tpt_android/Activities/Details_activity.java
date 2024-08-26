@@ -61,7 +61,7 @@ public class Details_activity extends AppCompatActivity {
     }
 
     private void fetchObjectDetails(String objectId) {
-        String url = "http://192.168.88.7:8080/api/objet/"+objectId;
+        String url = "https://xchange-server-rep-latest.onrender.com/api/objet/"+objectId;
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

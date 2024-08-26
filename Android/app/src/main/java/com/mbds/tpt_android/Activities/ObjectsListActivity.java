@@ -51,9 +51,8 @@ public class ObjectsListActivity extends AppCompatActivity {
     private void initRecyclerView() {
         recyclerViewObject = findViewById(R.id.view);
         recyclerViewObject.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        System.out.println("---------------------------------------------------JE SUIS ICI");
         ArrayList<ObjectsDomain> items = new ArrayList<>();
-        String url = "http://192.168.88.7:8080/api/objet";
+        String url = "https://xchange-server-rep-latest.onrender.com/api/objet";
         RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
