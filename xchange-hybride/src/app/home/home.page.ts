@@ -19,8 +19,7 @@ import {
   IonSearchbar,
   IonImg,
   IonBadge,
-  IonSkeletonText,
-} from '@ionic/angular/standalone';
+  IonSkeletonText, IonLoading, IonSpinner } from '@ionic/angular/standalone';
 import { ObjetItemComponent } from '../page/objet-item/objet-item.component';
 import { Objet } from '../models/objet.model';
 import { ObjetService } from '../services/objet.service';
@@ -34,7 +33,7 @@ import { DatabasesService } from '../services/databases.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonSpinner,  
     IonSkeletonText,
     IonBadge,
     IonImg,
@@ -60,6 +59,7 @@ import { DatabasesService } from '../services/databases.service';
     IonSearchbar,
     ObjetItemComponent,
     RouterModule,
+    
   ],
 })
 export class HomePage implements OnInit, OnDestroy {
@@ -67,6 +67,7 @@ export class HomePage implements OnInit, OnDestroy {
   objetsSub!: Subscription;
   filteredObjets: Objet[] | null = [];
   totalHistorique:number = 0;
+  isLoading = true; 
   constructor(
     private objetservice: ObjetService,
     private router: Router,
@@ -80,6 +81,7 @@ export class HomePage implements OnInit, OnDestroy {
         console.log(liste);
         this.objets = liste;
         this.filteredObjets = liste;
+        this.isLoading = false;
       },
     });
     const temp = this.dbService.getHistorique()

@@ -11,11 +11,11 @@ export class ObjetService {
 
   private _listeObjets = new BehaviorSubject<Objet[]| null>(null);
   private _objet  = new BehaviorSubject<Objet| null>(null);
-  uri = "http://192.168.43.96:8080/"
+  uri = "https://xchange-server-rep-latest.onrender.com/"
  
   constructor(private http: HttpClient){
-    this.getAllObjet();
-    //this.getListObjet();
+    //this.getAllObjet();
+    this.getListObjet();
   }
   get listeObjets() {
     return this._listeObjets.asObservable();
@@ -51,9 +51,7 @@ export class ObjetService {
  
     const url = this.uri+'api/objet';
     console.log(url)
-    const headers = {'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaWFubWF0dGF4QGdtYWlsLmNvbSIsImlhdCI6MTcyMzk3MDM1NiwiZXhwIjoxNzIzOTczOTU2fQ.DZA5Mu1GaE2I_guwvImq_PlYYxNXa29V4h1MSr2r948'}
-    console.log(headers)
-    this.http.get<Objet[]>(url, { headers }).subscribe({
+    this.http.get<Objet[]>(url).subscribe({
       next: (response) => {
         const objets = response.map((objet:any) => ({
           id: objet.id,
@@ -62,8 +60,10 @@ export class ObjetService {
           valeur: objet.valeur,
           disponible: objet.disponible,
           proprietaire_id: objet.proprietaire.id,
-          img: this.transformerChaine(objet.nom)+".jpg"
+          // img: this.transformerChaine(objet.nom)+".jpg"
+          img: `data:image/png;base64,${objet.image}`
         }));
+        console.log(objets)
         this._listeObjets.next(objets);
       },
       error: (error) => {
@@ -93,7 +93,7 @@ export class ObjetService {
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, in eveniet. Eius, veniam doloremque. Deserunt assumenda asperiores laudantium et eius ipsam quos ipsa sed dolorum. Nesciunt nostrum vero libero assumenda.',
         disponible: true,
         proprietaire_id: 0,
-        img: 'bag.jpg',
+        img: 'sac_a_main.jpg',
       },
       {
         id: 2,
@@ -102,7 +102,7 @@ export class ObjetService {
         description: 'Trousse de très bonne qualité',
         disponible: true,
         proprietaire_id: 0,
-        img: 'pencil.jpg',
+        img: 'trousse.jpg',
       },
       {
         id: 3,
@@ -111,7 +111,7 @@ export class ObjetService {
         description: 'Samsung de très bonne qualité',
         disponible: true,
         proprietaire_id: 0,
-        img: 'phone.jpg',
+        img: 'telephone_s24.jpg',
       },
       {
         id: 4,
@@ -120,7 +120,7 @@ export class ObjetService {
         description: 'Cadre photo de très bonne qualité',
         disponible: true,
         proprietaire_id: 0,
-        img: 'bag.jpg',
+        img: 'cadre_photo.jpg',
       },
       {
         id: 5,
@@ -129,7 +129,7 @@ export class ObjetService {
         description: 'Lunette de soleil, anti-UV',
         disponible: true,
         proprietaire_id: 0,
-        img: 'sunglass.jpg',
+        img: 'lunette_de_soleil.jpg',
       },
     ];
 

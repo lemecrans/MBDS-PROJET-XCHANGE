@@ -171,4 +171,14 @@ ion-col {
   justify-content: space-between;
 }
 
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+}
 
+ion-spinner {
+  width: 100px;
+  height: 100px;
+}
