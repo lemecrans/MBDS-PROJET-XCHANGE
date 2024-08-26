@@ -63,173 +63,34 @@ export class TopbarComponent implements OnInit {
    * fetches menu options
    */
   _fetchMenus(): void {
-    this.createMenuOptions = [{
-      id: 1,
-      label: 'New Projects',
-      icon: 'fe-briefcase',
-    },
-    {
-      id: 2,
-      label: 'Create Users',
-      icon: 'fe-user',
-    },
-    {
-      id: 3,
-      label: 'Revenue Report',
-      icon: 'fe-bar-chart-line-',
-    },
-    {
-      id: 4,
-      label: 'Settings',
-      icon: 'fe-settings',
-    },
-    {
-      id: 4,
-      label: 'Help & Support',
-      icon: 'fe-headphones',
-    }];
+    this.createMenuOptions = [];
 
-    this.megaMenuItems = [
-      {
-        id: 1,
-        menuTitle: 'UI Components',
-        menuItems: [
-          'Widgets',
-          'Nestable List',
-          'Range Sliders',
-          'Masonry Items',
-          'Sweet Alerts',
-          'Treeview Page',
-          'Tour Page',
-        ],
-      },
-      {
-        id: 2,
-        menuTitle: 'Applications',
-        menuItems: [
-          'eCommerce Pages',
-          'CRM Pages',
-          'Email',
-          'Calendar',
-          'Team Contacts',
-          'Task Board',
-          'Email Templates',
-        ],
-      },
-      {
-        id: 3,
-        menuTitle: 'Extra Pages',
-        menuItems: [
-          'Left Sidebar with User',
-          'Menu Collapsed',
-          'Small Left Sidebar',
-          'New Header Style',
-          'Search Result',
-          'Gallery Pages',
-          'Maintenance & Coming Soon',
-        ],
-      },
-    ];
+    this.megaMenuItems = [];
   }
 
   /**
    * Fetches notifications
    */
   _fetchNotifications(): void {
-    this.notificationList = [{
-      text: 'Caleb Flakelar commented on Admin',
-      isActive: true,
-      subText: '1 min ago',
-      icon: 'mdi mdi-comment-account-outline',
-      bgColor: 'primary',
-      redirectTo: '/dashboard-1'
-    },
-    {
-      text: 'New user registered.',
-      subText: '5 min ago',
-      icon: 'mdi mdi-account-plus',
-      bgColor: 'info',
-      redirectTo: '/dashboard-1'
-    },
-    {
-      text: 'Cristina Pride',
-      subText: 'Hi, How are you? What about our next meeting',
-      avatar: 'assets/images/users/user-4.jpg',
-      bgColor: 'success',
-      redirectTo: '/dashboard-1'
-    },
-    {
+    this.notificationList = [
+    /*{
       text: 'Caleb Flakelar commented on Admin',
       subText: '2 days ago',
       icon: 'mdi mdi-comment-account-outline',
       bgColor: 'danger',
       redirectTo: '/dashboard-1'
-    },
-    {
-      text: 'Caleb Flakelar commented on Admin',
-      subText: '1 min ago',
-      icon: 'mdi mdi-comment-account-outline',
-      bgColor: 'primary',
-      redirectTo: '/dashboard-1'
-    },
-    {
-      text: 'New user registered.',
-      subText: '5 min ago',
-      icon: 'mdi mdi-account-plus',
-      bgColor: 'info',
-      redirectTo: '/dashboard-1'
-    },
-    {
-      text: 'Cristina Pride',
-      subText: 'Hi, How are you? What about our next meeting',
-      avatar: 'assets/images/users/user-1.jpg',
-      bgColor: 'success',
-      redirectTo: '/dashboard-1'
-    },
-    {
-      text: 'Caleb Flakelar commented on Admin',
-      subText: '2 days ago',
-      icon: 'mdi mdi-comment-account-outline',
-      bgColor: 'danger',
-      redirectTo: '/dashboard-1'
-    }];
+    }*/];
   }
 
-  /**
-   * Fetches supported languages
-   */
   _fetchLanguages(): void {
     this.languages = [{
       id: 1,
       name: 'English',
       flag: 'assets/images/flags/us.jpg',
-    },
-    {
-      id: 2,
-      name: 'German',
-      flag: 'assets/images/flags/germany.jpg',
-    },
-    {
-      id: 3,
-      name: 'Italian',
-      flag: 'assets/images/flags/italy.jpg',
-    },
-    {
-      id: 4,
-      name: 'Spanish',
-      flag: 'assets/images/flags/spain.jpg',
-    },
-    {
-      id: 5,
-      name: 'Russian',
-      flag: 'assets/images/flags/russia.jpg',
-    }];
+    },];
     this.selectedLanguage = this.languages[0];
   }
 
-  /**
-   * Fetches brands
-   */
   _fetchBrands(): void {
     this.brands = [{
       id: 1,
@@ -263,9 +124,6 @@ export class TopbarComponent implements OnInit {
     }];
   }
 
-  /**
-   * Fetches profile options
-   */
   _fetchProfileOptions(): void {
     this.profileOptions = [
       {
@@ -292,44 +150,10 @@ export class TopbarComponent implements OnInit {
 
   }
 
-  /**
-   * Fetches search results
-   */
   _fetchSearchData(): void {
-    this.searchResults = [{
-      id: 1,
-      text: 'Analytics Report',
-      icon: 'fe-home',
-    },
-    {
-      id: 2,
-      text: 'How can I help you?',
-      icon: 'fe-aperture',
-    },
-    {
-      id: 3,
-      text: 'User profile settings',
-      icon: 'fe-settings',
-    }];
-
-    this.searchUsers = [{
-      id: 1,
-      name: 'Erwin Brown',
-      position: 'UI Designer',
-      profile: 'assets/images/users/user-2.jpg'
-    },
-    {
-      id: 2,
-      name: 'Jacob Deo',
-      position: 'Developer',
-      profile: 'assets/images/users/user-5.jpg'
-    }]
+    this.searchResults = []
 
   }
-
-  /**
-   * changes left sidebar width 
-   */
   changeSidebarWidth(): void {
     if (document.body.hasAttribute('data-leftbar-size') && document.body.getAttribute('data-leftbar-size') === "condensed") {
       this.eventService.broadcast('changeLeftSidebarType', LEFT_SIDEBAR_TYPE_DEFAULT);
@@ -388,18 +212,10 @@ export class TopbarComponent implements OnInit {
     }
   }
 
-
-
-  /**
-  * Toggles the right sidebar
-  */
   toggleRightSidebar() {
     this.settingsButtonClicked.emit();
   }
 
-  /**
- * Toggle the menu bar when having mobile screen
- */
   toggleMobileMenu(event: any) {
     this.topnavCollapsed = !this.topnavCollapsed;
     event.preventDefault();
