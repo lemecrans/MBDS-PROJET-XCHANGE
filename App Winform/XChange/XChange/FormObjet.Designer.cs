@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormObjet));
             panel1 = new Panel();
             label11 = new Label();
-            label1 = new Label();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
@@ -57,7 +56,6 @@
             // 
             panel1.BackColor = SystemColors.Window;
             panel1.Controls.Add(label11);
-            panel1.Controls.Add(label1);
             panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(pictureBox1);
             panel1.Location = new Point(3, 2);
@@ -76,20 +74,10 @@
             label11.Text = "Se deconnecter";
             label11.Click += label11_Click;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(612, 19);
-            label1.Name = "label1";
-            label1.Size = new Size(59, 21);
-            label1.TabIndex = 3;
-            label1.Text = "Rakoto";
-            // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(573, 10);
+            pictureBox2.Location = new Point(638, 9);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(33, 30);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -250,7 +238,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "FormObjet";
-            Text = "FormUtilisateur";
+            Text = "Modification Objet";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -265,7 +253,6 @@
         private Panel panel1;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
-        private Label label1;
         private Panel panel2;
         private Label label2;
         private Button button1;

@@ -31,7 +31,6 @@
             button1 = new Button();
             panel1 = new Panel();
             label11 = new Label();
-            label10 = new Label();
             pictureBox2 = new PictureBox();
             pictureBox3 = new PictureBox();
             panel2 = new Panel();
@@ -48,9 +47,9 @@
             pictureBox1.Location = new Point(458, 140);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(315, 215);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             // 
             // label1
             // 
@@ -92,7 +91,7 @@
             label4.Location = new Point(180, 147);
             label4.MinimumSize = new Size(180, 0);
             label4.Name = "label4";
-            label4.Size = new Size(180, 25);
+            label4.Size = new Size(214, 25);
             label4.TabIndex = 4;
             label4.Text = "Appartement Ambatobe";
             // 
@@ -165,7 +164,6 @@
             // 
             panel1.BackColor = SystemColors.Window;
             panel1.Controls.Add(label11);
-            panel1.Controls.Add(label10);
             panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(pictureBox3);
             panel1.Location = new Point(9, 2);
@@ -184,21 +182,10 @@
             label11.Text = "Se deconnecter";
             label11.Click += label11_Click;
             // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 12F);
-            label10.Location = new Point(565, 18);
-            label10.Name = "label10";
-            label10.Size = new Size(121, 21);
-            label10.TabIndex = 3;
-            label10.Text = "vali@gmail.com";
-            label10.Click += label10_Click;
-            // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(526, 10);
+            pictureBox2.Location = new Point(649, 10);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(33, 30);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -266,7 +253,6 @@
         private Label label9;
         private Button button1;
         private Panel panel1;
-        private Label label10;
         private PictureBox pictureBox2;
         private PictureBox pictureBox3;
         private Panel panel2;

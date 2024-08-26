@@ -1,20 +1,26 @@
 ﻿using Newtonsoft.Json;
 using XChange.Model;
 using System.Windows.Forms.DataVisualization.Charting;
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 
 namespace XChange
 {
     public partial class Home : Form
     {
-        public Home()
+        string token = "";
+        public Home( string token)
         {
+            this.token= token;
+            InitializeComponent();
             try
             {
-                //string apiUrl = "https://xchange-server.onrender.com/api/objet";
-                string apiUrl = "http://referentiel.intranet.oma/api/objet";
-                InitializeComponent();
+                string apiUrl = "https://xchange-server-rep-latest.onrender.com/api/objet";
+                //string apiUrl = "http://referentiel.intranet.oma/api/objet";
+                
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                     HttpResponseMessage response = client.GetAsync(apiUrl).Result;
 
                     if (response.IsSuccessStatusCode)
@@ -32,17 +38,13 @@ namespace XChange
                             ListeObjet.Items.Add($"{id}\t| {nom}\t| {proprietaire}");
                         }
                     }
-                    else
-                    {
-                        InitializeComponent();
-                        ListeObjet.Items.Add(response.StatusCode);
-                        Console.WriteLine($"Erreur de l'API : {response.StatusCode}");
-                    }
+
                 }
-                //apiUrl = "https://xchange-server.onrender.com/api/user/users";
-                apiUrl = "http://referentiel.intranet.oma/api/user";
+                apiUrl = "https://xchange-server-rep-latest.onrender.com/api/user/users";
+                //apiUrl = "http://referentiel.intranet.oma/api/user";
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                     HttpResponseMessage response = client.GetAsync(apiUrl).Result;
 
                     if (response.IsSuccessStatusCode)
@@ -61,17 +63,12 @@ namespace XChange
                             ListeUtilisateur.Items.Add($"{id}\t| {username}/{role}");
                         }
                     }
-                    else
-                    {
-                        InitializeComponent();
-                        ListeObjet.Items.Add(response.StatusCode);
-                        Console.WriteLine($"Erreur de l'API : {response.StatusCode}");
-                    }
                 }
-                //apiUrl = "https://xchange-server.onrender.com/api/propositions";
-                apiUrl = "http://referentiel.intranet.oma/api/echange";
+                apiUrl = "https://xchange-server-rep-latest.onrender.com/api/propositions";
+                //apiUrl = "http://referentiel.intranet.oma/api/echange";
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                     HttpResponseMessage response = client.GetAsync(apiUrl).Result;
 
                     if (response.IsSuccessStatusCode)
@@ -89,11 +86,44 @@ namespace XChange
 
                         }
                     }
-                    else
+                }
+                apiUrl = "https://xchange-server-rep-latest.onrender.com/api/stat/objet";
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    HttpResponseMessage response = client.GetAsync(apiUrl).Result;
+
+                    if (response.IsSuccessStatusCode)
                     {
-                        InitializeComponent();
-                        ListeObjet.Items.Add(response.StatusCode);
-                        Console.WriteLine($"Erreur de l'API : {response.StatusCode}");
+                        string apiResponse = response.Content.ReadAsStringAsync().Result;
+                        Statistique change = JsonConvert.DeserializeObject<Statistique>(apiResponse);
+                        label8.Text =""+change.getValue();
+                    }
+                }
+                apiUrl = "https://xchange-server-rep-latest.onrender.com/api/stat/user";
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    HttpResponseMessage response = client.GetAsync(apiUrl).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string apiResponse = response.Content.ReadAsStringAsync().Result;
+                        Statistique change = JsonConvert.DeserializeObject<Statistique>(apiResponse);
+                        label11.Text = "" + change.getValue();
+                    }
+                }
+                apiUrl = "https://xchange-server-rep-latest.onrender.com/api/stat/proposition";
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    HttpResponseMessage response = client.GetAsync(apiUrl).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string apiResponse = response.Content.ReadAsStringAsync().Result;
+                        Statistique change = JsonConvert.DeserializeObject<Statistique>(apiResponse);
+                        label13.Text = "" + change.getValue();
                     }
                 }
 
@@ -102,12 +132,11 @@ namespace XChange
             {
                 Console.WriteLine($"Erreur : {ex.Message}");
             }
-
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FormObjet form3 = new FormObjet(ListeObjet.SelectedItem.ToString().Split("|")[0]);
+            FormObjet form3 = new FormObjet(ListeObjet.SelectedItem.ToString().Split("|")[0],this.token);
             form3.Show();
             this.Hide();
         }
@@ -152,19 +181,21 @@ namespace XChange
 
             if (result == DialogResult.OK)
             {
-                //String apiUrl = "https://xchange-server.onrender.com/api/user/" + ListeUtilisateur.SelectedItem.ToString().Split("|")[0];
-                String apiUrl = "http://referentiel.intranet.oma/api/user/" + ListeUtilisateur.SelectedItem.ToString().Split("|")[0];
+                String apiUrl = "https://xchange-server-rep-latest.onrender.com/api/user/" + ListeUtilisateur.SelectedItem.ToString().Split("|")[0];
+                //String apiUrl = "http://referentiel.intranet.oma/api/user/" + ListeUtilisateur.SelectedItem.ToString().Split("|")[0];
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                     HttpResponseMessage response = client.DeleteAsync(apiUrl).Result;
 
                     if (response.IsSuccessStatusCode)
                     {
                         ListeUtilisateur.Items.Clear();
-                        //apiUrl = "https://xchange-server.onrender.com/api/user";
-                        apiUrl = "http://referentiel.intranet.oma/api/user";
+                        apiUrl = "https://xchange-server-rep-latest.onrender.com/api/user";
+                        //apiUrl = "http://referentiel.intranet.oma/api/user";
                         using (HttpClient client2 = new HttpClient())
                         {
+                            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                             HttpResponseMessage response2 = client2.GetAsync(apiUrl).Result;
 
                             if (response2.IsSuccessStatusCode)
@@ -178,7 +209,7 @@ namespace XChange
                             }
                             else
                             {
-                                InitializeComponent();
+                                
                                 ListeObjet.Items.Add(response.StatusCode);
                                 Console.WriteLine($"Erreur de l'API : {response.StatusCode}");
                             }
@@ -186,7 +217,7 @@ namespace XChange
                     }
                     else
                     {
-                        InitializeComponent();
+                        
                         ListeObjet.Items.Add(response.StatusCode);
                         Console.WriteLine($"Erreur de l'API : {response.StatusCode}");
                     }
@@ -196,7 +227,7 @@ namespace XChange
 
         private void ListeEchange_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Detail form3 = new Detail(ListeEchange.SelectedItem.ToString().Split("|")[0]);
+            Detail form3 = new Detail(ListeEchange.SelectedItem.ToString().Split("|")[0],token);
             form3.Show();
             this.Hide();
         }

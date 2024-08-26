@@ -4,10 +4,10 @@
     <_LastSelectedProfileId>C:\Users\VNO\Documents\GitHub\MBDS-PROJET-XCHANGE\App Winform\XChange\XChange\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Detail.cs">
+    <Compile Update="Connexion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Connexion.cs">
+    <Compile Update="Detail.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FormObjet.cs">

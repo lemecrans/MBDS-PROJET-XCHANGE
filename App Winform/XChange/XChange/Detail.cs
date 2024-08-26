@@ -15,13 +15,14 @@ namespace XChange
 {
     public partial class Detail : Form
     {
-        public Detail(string data)
+        string token = "";
+        public Detail(string data,string token)
         {
             InitializeComponent();
             try
             {
-                //string apiUrl = "https://xchange-server.onrender.com/api/objet/" + data;
-                string apiUrl = "http://referentiel.intranet.oma/api/objet/3";
+                string apiUrl = "https://xchange-server-rep-latest.onrender.com/api/objet/" + data;
+                //string apiUrl = "http://referentiel.intranet.oma/api/objet/3";
                 using (HttpClient client = new HttpClient())
                 {
                     HttpResponseMessage response = client.GetAsync(apiUrl).Result;
@@ -52,7 +53,7 @@ namespace XChange
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Home form2 = new Home();
+            Home form2 = new Home(this.token);
             form2.Show();
             this.Hide();
         }

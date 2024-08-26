@@ -5,12 +5,14 @@ namespace XChange
 {
     public partial class FormObjet : Form
     {
-        public FormObjet(string data)
+        string token = "";
+        public FormObjet(string data,string token)
         {
+            this.token = token;
             InitializeComponent();
             try
             {
-                string apiUrl = "https://xchange-server.onrender.com/api/objet/" + data;
+                string apiUrl = "https://xchange-server-rep-latest.onrender.com/api/objet/" + data;
 
                 using (HttpClient client = new HttpClient())
                 {
@@ -42,7 +44,7 @@ namespace XChange
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Home form2 = new Home();
+            Home form2 = new Home(this.token);
             form2.Show();
             this.Hide();
         }

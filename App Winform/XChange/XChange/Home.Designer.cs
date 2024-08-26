@@ -22,7 +22,6 @@ namespace XChange
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             panel1 = new Panel();
             label7 = new Label();
-            label1 = new Label();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
@@ -60,7 +59,6 @@ namespace XChange
             // 
             panel1.BackColor = SystemColors.ButtonHighlight;
             panel1.Controls.Add(label7);
-            panel1.Controls.Add(label1);
             panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(pictureBox1);
             panel1.Location = new Point(12, 0);
@@ -79,20 +77,10 @@ namespace XChange
             label7.Text = "Se deconnecter";
             label7.Click += label7_Click;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(687, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(121, 21);
-            label1.TabIndex = 2;
-            label1.Text = "vali@gmail.com";
-            // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(648, 3);
+            pictureBox2.Location = new Point(764, 0);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(33, 30);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -181,9 +169,8 @@ namespace XChange
             label13.ForeColor = Color.Green;
             label13.Location = new Point(318, 72);
             label13.Name = "label13";
-            label13.Size = new Size(77, 62);
+            label13.Size = new Size(0, 62);
             label13.TabIndex = 4;
-            label13.Text = "20";
             // 
             // label10
             // 
@@ -201,9 +188,8 @@ namespace XChange
             label11.ForeColor = Color.FromArgb(0, 64, 64);
             label11.Location = new Point(191, 72);
             label11.Name = "label11";
-            label11.Size = new Size(52, 62);
+            label11.Size = new Size(0, 62);
             label11.TabIndex = 2;
-            label11.Text = "5";
             // 
             // label9
             // 
@@ -221,9 +207,8 @@ namespace XChange
             label8.ForeColor = Color.FromArgb(0, 192, 192);
             label8.Location = new Point(31, 72);
             label8.Name = "label8";
-            label8.Size = new Size(77, 62);
+            label8.Size = new Size(0, 62);
             label8.TabIndex = 0;
-            label8.Text = "16";
             // 
             // groupBox2
             // 
@@ -345,7 +330,6 @@ namespace XChange
         private Panel panel1;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
-        private Label label1;
         private Panel panel2;
         private Label label2;
         private TableLayoutPanel tableLayoutPanel1;
